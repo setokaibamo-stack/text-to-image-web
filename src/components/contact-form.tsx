@@ -32,6 +32,7 @@ export function ContactForm({ dict }: { dict: Dict }) {
       await new Promise((r) => setTimeout(r, 900));
       setStatus("success");
       form.reset();
+      setTimeout(() => setStatus("idle"), 3500);
     } catch {
       setStatus("error");
     }

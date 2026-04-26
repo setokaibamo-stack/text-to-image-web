@@ -89,14 +89,16 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
+          {/* Plain <a> — forces full reload so the root layout re-runs and html lang/dir update */}
+          <a
             href={localeHref}
             className="hidden sm:inline-flex items-center gap-1.5 text-body-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-2 rounded-[var(--radius-sm)] hover:bg-[var(--bg-subtle)] transition-colors"
             aria-label={`Switch to ${localeLabel}`}
+            hrefLang={otherLocale}
           >
             <GlobeIcon width={16} height={16} />
             <span>{localeLabel}</span>
-          </Link>
+          </a>
           <Button
             href={`/${locale}/contact`}
             size="md"
@@ -129,13 +131,14 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
               </Link>
             ))}
             <div className="flex items-center justify-between pt-4">
-              <Link
+              <a
                 href={localeHref}
                 className="inline-flex items-center gap-1.5 text-body-sm text-[var(--text-secondary)]"
+                hrefLang={otherLocale}
               >
                 <GlobeIcon width={16} height={16} />
                 <span>{localeLabel}</span>
-              </Link>
+              </a>
               <Button href={`/${locale}/contact`} size="md" onClick={() => setOpen(false)}>
                 {dict.nav.startProject}
               </Button>

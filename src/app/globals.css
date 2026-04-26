@@ -159,6 +159,12 @@ html[dir="rtl"] body {
   font-weight: 700;
   letter-spacing: -0.025em;
 }
+.text-display-md {
+  font-size: clamp(26px, 3.5vw, 36px);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
 .text-heading-lg {
   font-size: clamp(22px, 3vw, 28px);
   line-height: 1.2;

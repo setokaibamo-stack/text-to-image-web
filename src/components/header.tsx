@@ -47,20 +47,21 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full transition-colors duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+      className={`sticky top-0 z-40 w-full transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         scrolled
-          ? "bg-[var(--bg-base)]/90 backdrop-blur border-b border-[var(--border)]"
-          : "bg-transparent border-b border-transparent"
+          ? "border-b border-[var(--border)] bg-[var(--bg-glass-strong)] backdrop-blur-xl backdrop-saturate-150"
+          : "border-b border-transparent bg-[var(--bg-glass)] backdrop-blur-md"
       }`}
     >
       <div className="container-page flex h-16 items-center justify-between gap-4">
         <Link
           href={`/${locale}`}
-          className="flex items-center gap-2 font-semibold tracking-tight text-[15px]"
+          className="group flex items-center gap-2.5 font-semibold tracking-tight text-[15px]"
         >
           <span
             aria-hidden
-            className="inline-flex h-7 w-7 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--accent)] text-[var(--accent-fg)] text-[12px] font-bold"
+            className="relative inline-flex h-8 w-8 items-center justify-center rounded-[10px] text-[12px] font-bold text-white shadow-[var(--shadow-glow-purple)] transition-transform group-hover:scale-105"
+            style={{ background: "var(--gradient-brand)" }}
           >
             t→i
           </span>
@@ -69,15 +70,16 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
 
         <nav className="hidden md:flex items-center gap-1">
           {links.map((l) => {
-            const active = pathname === l.href || pathname.startsWith(l.href + "/");
+            const active =
+              pathname === l.href || pathname.startsWith(l.href + "/");
             return (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`text-body-sm px-3 py-2 rounded-[var(--radius-sm)] transition-colors ${
+                className={`text-body-sm px-3 py-2 rounded-full transition-colors ${
                   active
-                    ? "text-[var(--text-primary)] bg-[var(--bg-subtle)]"
-                    : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-subtle)]"
+                    ? "text-[var(--text-primary)] bg-white/8"
+                    : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/5"
                 }`}
               >
                 {l.label}
@@ -87,10 +89,9 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
         </nav>
 
         <div className="flex items-center gap-2">
-          {/* Plain <a> — forces full reload so the root layout re-runs and html lang/dir update */}
           <a
             href={localeHref}
-            className="hidden sm:inline-flex items-center gap-1.5 text-body-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-2 rounded-[var(--radius-sm)] hover:bg-[var(--bg-subtle)] transition-colors"
+            className="hidden sm:inline-flex items-center gap-1.5 text-body-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-2 rounded-full hover:bg-white/5 transition-colors"
             aria-label={`Switch to ${localeLabel}`}
             hrefLang={otherLocale}
           >
@@ -106,7 +107,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
           </Button>
           <button
             onClick={() => setOpen((v) => !v)}
-            className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-full)] hover:bg-[var(--bg-subtle)] text-[var(--text-primary)]"
+            className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-white/8 text-[var(--text-primary)]"
             aria-label={open ? dict.nav.close : dict.nav.menu}
             aria-expanded={open}
           >
@@ -116,7 +117,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
       </div>
 
       {open ? (
-        <div className="md:hidden fixed inset-0 top-16 z-30 bg-[var(--bg-base)] border-t border-[var(--border)] animate-[fadeIn_200ms_ease]">
+        <div className="md:hidden fixed inset-0 top-16 z-30 bg-[var(--bg-glass-strong)] backdrop-blur-xl backdrop-saturate-150 border-t border-[var(--border)] animate-[fadeIn_200ms_ease]">
           <div className="container-page py-6 flex flex-col gap-1">
             {links.map((l) => (
               <Link
@@ -137,17 +138,14 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
                 <GlobeIcon width={16} height={16} />
                 <span>{localeLabel}</span>
               </a>
-              <Button href={`/${locale}/launch`} size="md" onClick={() => setOpen(false)}>
+              <Button
+                href={`/${locale}/launch`}
+                size="md"
+                onClick={() => setOpen(false)}
+              >
                 {dict.nav.startProject}
               </Button>
             </div>
-            <button
-              onClick={() => setOpen(false)}
-              className="mt-6 self-end inline-flex items-center gap-1.5 text-body-sm text-[var(--text-muted)]"
-            >
-              <CloseIcon width={16} height={16} />
-              {dict.nav.close}
-            </button>
           </div>
         </div>
       ) : null}

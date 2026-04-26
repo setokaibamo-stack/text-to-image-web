@@ -37,12 +37,23 @@ export function PromptInput({ dict, locale }: { dict: Dict; locale?: Locale }) {
         e.preventDefault();
         setDragging(false);
       }}
-      className={`relative w-full max-w-2xl rounded-[var(--radius-xl)] border ${
-        dragging
-          ? "border-dashed border-[var(--text-muted)] bg-[var(--bg-subtle)]"
-          : "border-[var(--border)] bg-[var(--bg-elevated)]"
-      } shadow-[var(--shadow-md)] transition-colors`}
+      className={`relative w-full max-w-2xl rounded-[var(--radius-xl)] glass-strong shadow-[var(--shadow-glow-mix)] transition-colors ${
+        dragging ? "ring-2 ring-[var(--brand-violet)]/60" : ""
+      }`}
     >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -inset-px rounded-[inherit] opacity-60"
+        style={{
+          background: "var(--gradient-brand)",
+          WebkitMask:
+            "linear-gradient(#000, #000) content-box, linear-gradient(#000, #000)",
+          mask: "linear-gradient(#000, #000) content-box, linear-gradient(#000, #000)",
+          WebkitMaskComposite: "xor",
+          maskComposite: "exclude",
+          padding: "1px",
+        }}
+      />
       <label htmlFor="prompt" className="sr-only">
         {dict.hero.promptPlaceholder}
       </label>
@@ -65,11 +76,11 @@ export function PromptInput({ dict, locale }: { dict: Dict; locale?: Locale }) {
           <button
             type="button"
             aria-label={dict.hero.promptAttach}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-full)] text-[var(--text-secondary)] hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] transition-colors"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-[var(--text-secondary)] hover:bg-white/8 hover:text-[var(--text-primary)] transition-colors"
           >
             <PaperclipIcon width={18} height={18} />
           </button>
-          <span className="hidden sm:inline-flex items-center gap-1.5 text-caption text-[var(--text-muted)] bg-[var(--bg-subtle)] border border-[var(--border)] rounded-[var(--radius-full)] px-3 py-1">
+          <span className="hidden sm:inline-flex items-center gap-1.5 text-caption text-[var(--text-muted)] bg-white/[0.04] border border-[var(--border-strong)] rounded-full px-3 py-1">
             <SparkleIcon width={12} height={12} />
             {dict.hero.forPlatform}
           </span>
@@ -77,7 +88,11 @@ export function PromptInput({ dict, locale }: { dict: Dict; locale?: Locale }) {
         <button
           type="submit"
           disabled={!value.trim() || state === "loading"}
-          className="inline-flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--accent)] text-[var(--accent-fg)] px-4 py-2.5 text-body-sm font-semibold transition-all hover:-translate-y-px hover:shadow-[var(--shadow-sm)] disabled:opacity-40 disabled:pointer-events-none"
+          className="inline-flex items-center gap-2 rounded-[var(--radius-md)] text-white px-4 py-2.5 text-body-sm font-semibold transition-all hover:-translate-y-px disabled:opacity-40 disabled:pointer-events-none"
+          style={{
+            background: "var(--gradient-brand)",
+            boxShadow: "var(--shadow-glow-purple)",
+          }}
         >
           {state === "loading"
             ? dict.common.loading

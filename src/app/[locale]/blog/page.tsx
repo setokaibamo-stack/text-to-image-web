@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Background } from "@/components/background";
 import { CTASection } from "@/components/cta";
 import { ArrowRightIcon } from "@/components/icons";
+import { Reveal } from "@/components/reveal";
 import { Card, Section, SectionHeader } from "@/components/section";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -32,15 +34,19 @@ export default async function BlogPage({
 
   return (
     <>
-      <Section>
-        <SectionHeader
-          eyebrow={d.blog.eyebrow}
-          title={d.blog.title}
-          subtitle={d.blog.subtitle}
-        />
+      <Section className="overflow-hidden">
+        <Background variant="section" />
+        <Reveal>
+          <SectionHeader
+            eyebrow={d.blog.eyebrow}
+            title={d.blog.title}
+            subtitle={d.blog.subtitle}
+          />
+        </Reveal>
+        <Reveal delay={1}>
         <Link
           href={`/${l}/blog/${featured.slug}`}
-          className="mt-10 sm:mt-12 block group rounded-[var(--radius-xl)] border border-[var(--border)] bg-[var(--bg-elevated)] p-6 sm:p-8 md:p-10"
+          className="mt-12 block group card-glow p-6 sm:p-8 md:p-10"
         >
           <div className="grid gap-6 md:grid-cols-[1.3fr_1fr] md:items-end">
             <div>
@@ -68,10 +74,12 @@ export default async function BlogPage({
             </div>
           </div>
         </Link>
+        </Reveal>
 
-        <ul className="mt-8 sm:mt-10 grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {rest.map((p) => (
-            <Card as="li" key={p.slug} interactive>
+        <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {rest.map((p, i) => (
+            <Reveal as="li" key={p.slug} delay={((i % 3) + 1) as 1 | 2 | 3}>
+            <Card interactive className="h-full">
               <Link href={`/${l}/blog/${p.slug}`} className="flex flex-col gap-3">
                 <div className="text-caption text-[var(--text-muted)]">
                   <span className="ltr-nums">{p.date}</span> · {p.author}
@@ -87,6 +95,7 @@ export default async function BlogPage({
                 </div>
               </Link>
             </Card>
+            </Reveal>
           ))}
         </ul>
       </Section>

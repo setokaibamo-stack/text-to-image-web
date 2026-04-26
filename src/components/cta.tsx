@@ -5,13 +5,20 @@ import { ArrowRightIcon } from "./icons";
 
 export function CTASection({ locale, dict }: { locale: Locale; dict: Dict }) {
   return (
-    <section className="bg-[var(--bg-base)]">
-      <div className="container-page py-20 md:py-24">
-        <div className="relative overflow-hidden rounded-[var(--radius-xl)] border border-[var(--border)] bg-[var(--bg-elevated)] px-6 sm:px-8 py-12 sm:py-16 md:px-14 md:py-20 text-center">
+    <section className="relative">
+      <div className="container-page py-20 md:py-28">
+        <div className="relative overflow-hidden rounded-[var(--radius-2xl)] border border-[var(--border-strong)] glass-strong px-6 sm:px-8 py-14 sm:py-18 md:px-14 md:py-24 text-center glow-pulse">
+          {/* Decorative orbs */}
           <div
             aria-hidden
-            className="absolute inset-0 grid-dots opacity-40 pointer-events-none"
+            className="orb orb-purple orb-anim-1 -top-24 left-[10%] h-[360px] w-[360px] opacity-50"
           />
+          <div
+            aria-hidden
+            className="orb orb-blue orb-anim-2 -bottom-24 right-[10%] h-[360px] w-[360px] opacity-50"
+          />
+          <div aria-hidden className="bg-grid-overlay opacity-60" />
+
           <div className="relative">
             <h2 className="text-display-lg text-[var(--text-primary)] mx-auto max-w-[22ch] text-balance">
               {dict.cta.title}
@@ -20,10 +27,18 @@ export function CTASection({ locale, dict }: { locale: Locale; dict: Dict }) {
               {dict.cta.body}
             </p>
             <div className="mt-8 flex items-center justify-center gap-3 flex-wrap">
-              <Button href={`/${locale}/launch`} size="lg" iconRight={<ArrowRightIcon width={16} height={16} />}>
+              <Button
+                href={`/${locale}/launch`}
+                size="lg"
+                iconRight={<ArrowRightIcon width={16} height={16} />}
+              >
                 {dict.cta.primary}
               </Button>
-              <Button href={`/${locale}#faq`} variant="secondary" size="lg">
+              <Button
+                href={`/${locale}#faq`}
+                variant="secondary"
+                size="lg"
+              >
                 {dict.cta.secondary}
               </Button>
             </div>

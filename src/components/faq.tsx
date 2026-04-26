@@ -25,11 +25,14 @@ export function FAQAccordion({
                 {item.q}
               </span>
               <span
-                className={`mt-1 shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-[var(--radius-full)] border border-[var(--border)] transition-colors ${
+                className={`mt-1 shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-full border transition-all ${
                   open
-                    ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)]"
-                    : "text-[var(--text-secondary)]"
+                    ? "text-white border-transparent shadow-[var(--shadow-glow-purple)]"
+                    : "text-[var(--text-secondary)] border-[var(--border-strong)]"
                 }`}
+                style={
+                  open ? { background: "var(--gradient-brand)" } : undefined
+                }
               >
                 {open ? <MinusIcon width={16} height={16} /> : <PlusIcon width={16} height={16} />}
               </span>

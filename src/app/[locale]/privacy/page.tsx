@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Background } from "@/components/background";
 import { Section } from "@/components/section";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -25,8 +26,9 @@ export default async function PrivacyPage({
   const d = getDictionary(locale);
 
   return (
-    <Section>
-      <div className="max-w-3xl">
+    <Section className="overflow-hidden">
+      <Background variant="section" />
+      <div className="relative max-w-3xl">
         <h1 className="text-display-lg text-[var(--text-primary)]">
           {d.legal.privacy.title}
         </h1>

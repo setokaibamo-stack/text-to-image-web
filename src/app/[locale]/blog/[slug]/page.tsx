@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Background } from "@/components/background";
 import { CTASection } from "@/components/cta";
 import { Section } from "@/components/section";
 import { isLocale, locales, type Locale } from "@/i18n/config";
@@ -39,8 +40,9 @@ export default async function BlogPostPage({
 
   return (
     <>
-      <Section>
-        <article className="max-w-3xl mx-auto">
+      <Section className="overflow-hidden">
+        <Background variant="section" />
+        <article className="relative max-w-3xl mx-auto">
           <Link
             href={`/${l}/blog`}
             className="inline-flex items-center gap-2 text-body-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)]"

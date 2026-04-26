@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Background } from "@/components/background";
 import { CTASection } from "@/components/cta";
+import { Reveal } from "@/components/reveal";
 import { Card, Section, SectionHeader } from "@/components/section";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -28,68 +30,81 @@ export default async function AboutPage({
 
   return (
     <>
-      <Section>
-        <div className="max-w-3xl">
-          <span className="text-caption uppercase tracking-[0.14em] text-[var(--text-muted)]">
-            {d.about.eyebrow}
-          </span>
-          <h1 className="mt-3 text-display-lg text-[var(--text-primary)]">
-            {d.about.title}
-          </h1>
-          <p className="mt-6 text-body-lg text-[var(--text-secondary)]">
-            {d.about.body}
-          </p>
-        </div>
+      <Section className="overflow-hidden">
+        <Background variant="section" />
+        <Reveal>
+          <div className="max-w-3xl">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-white/[0.04] px-3 py-1 text-caption uppercase tracking-[0.14em] text-[var(--text-secondary)] w-fit">
+              <span aria-hidden className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--gradient-brand)" }} />
+              {d.about.eyebrow}
+            </span>
+            <h1 className="mt-4 text-display-xl text-[var(--text-primary)] text-balance">
+              {d.about.title}
+            </h1>
+            <p className="mt-6 text-body-lg text-[var(--text-secondary)] text-pretty">
+              {d.about.body}
+            </p>
+          </div>
+        </Reveal>
 
-        <div className="mt-10 sm:mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {[
             { t: d.about.visionTitle, b: d.about.visionBody },
             { t: d.about.missionTitle, b: d.about.missionBody },
             { t: d.about.philosophyTitle, b: d.about.philosophyBody },
-          ].map((x) => (
-            <Card key={x.t}>
-              <h3 className="text-heading-md text-[var(--text-primary)]">
-                {x.t}
-              </h3>
-              <p className="mt-3 text-body-md text-[var(--text-secondary)]">
-                {x.b}
-              </p>
-            </Card>
+          ].map((x, i) => (
+            <Reveal key={x.t} delay={((i % 3) + 1) as 1 | 2 | 3}>
+              <Card interactive className="h-full">
+                <h3 className="text-heading-md text-[var(--text-primary)]">
+                  {x.t}
+                </h3>
+                <p className="mt-3 text-body-md text-[var(--text-secondary)]">
+                  {x.b}
+                </p>
+              </Card>
+            </Reveal>
           ))}
         </div>
       </Section>
 
-      <Section tone="subtle">
-        <SectionHeader
-          eyebrow={d.about.statsTitle}
-          title={d.about.methodTitle}
-          subtitle={d.about.methodBody}
-        />
-        <dl className="mt-10 sm:mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-          {d.about.stats.map((s) => (
-            <div
-              key={s.label}
-              className="p-5 sm:p-6 rounded-[var(--radius-lg)] bg-[var(--bg-elevated)] border border-[var(--border)]"
-            >
-              <dt className="text-caption uppercase tracking-[0.12em] text-[var(--text-muted)]">
-                {s.label}
-              </dt>
-              <dd className="mt-2 text-heading-lg sm:text-display-lg text-[var(--text-primary)] ltr-nums">
-                {s.value}
-              </dd>
-            </div>
+      <Section tone="subtle" className="overflow-hidden">
+        <Background variant="section" />
+        <Reveal>
+          <SectionHeader
+            eyebrow={d.about.statsTitle}
+            title={d.about.methodTitle}
+            subtitle={d.about.methodBody}
+          />
+        </Reveal>
+        <dl className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+          {d.about.stats.map((s, i) => (
+            <Reveal key={s.label} delay={((i % 4) + 1) as 1 | 2 | 3 | 4}>
+              <div className="card-glow p-5 sm:p-6 h-full">
+                <dt className="text-caption uppercase tracking-[0.12em] text-[var(--text-muted)]">
+                  {s.label}
+                </dt>
+                <dd className="mt-2 text-display-md text-gradient-brand font-bold ltr-nums">
+                  {s.value}
+                </dd>
+              </div>
+            </Reveal>
           ))}
         </dl>
       </Section>
 
-      <Section>
-        <SectionHeader title={d.about.teamTitle} />
-        <ul className="mt-8 sm:mt-10 grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
-          {d.about.team.map((p) => (
-            <Card as="li" key={p.name} className="text-center">
+      <Section className="overflow-hidden">
+        <Background variant="section" />
+        <Reveal>
+          <SectionHeader title={d.about.teamTitle} />
+        </Reveal>
+        <ul className="mt-10 grid gap-5 grid-cols-2 lg:grid-cols-4">
+          {d.about.team.map((p, i) => (
+            <Reveal as="li" key={p.name} delay={((i % 4) + 1) as 1 | 2 | 3 | 4}>
+            <Card interactive className="text-center h-full">
               <div
                 aria-hidden
-                className="mx-auto h-20 w-20 rounded-[var(--radius-full)] bg-[var(--bg-subtle)] border border-[var(--border)] flex items-center justify-center text-heading-md text-[var(--text-primary)]"
+                className="mx-auto h-20 w-20 rounded-full flex items-center justify-center text-heading-md text-white"
+                style={{ background: "var(--gradient-brand)", boxShadow: "var(--shadow-glow-purple)" }}
               >
                 {p.name
                   .split(" ")
@@ -104,6 +119,7 @@ export default async function AboutPage({
                 {p.role}
               </p>
             </Card>
+            </Reveal>
           ))}
         </ul>
       </Section>

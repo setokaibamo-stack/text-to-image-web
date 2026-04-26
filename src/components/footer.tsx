@@ -37,7 +37,8 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dict }) {
   ];
 
   return (
-    <footer className="border-t border-[var(--border)] bg-[var(--bg-base)] mt-24">
+    <footer className="relative border-t border-[var(--border)] mt-24">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--brand-violet)]/40 to-transparent" />
       <div className="container-page py-16">
         <div className="grid gap-12 md:gap-8 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div className="md:pr-6">
@@ -47,7 +48,8 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dict }) {
             >
               <span
                 aria-hidden
-                className="inline-flex h-7 w-7 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--accent)] text-[var(--accent-fg)] text-[12px] font-bold"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-[10px] text-white text-[12px] font-bold shadow-[var(--shadow-glow-purple)]"
+                style={{ background: "var(--gradient-brand)" }}
               >
                 t→i
               </span>
@@ -121,7 +123,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dict }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-full)] border border-[var(--border)] hover:border-[var(--border-strong)] hover:text-[var(--text-primary)] transition-colors"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border-strong)] bg-white/[0.03] hover:border-[var(--brand-violet)] hover:text-[var(--text-primary)] hover:bg-white/[0.06] transition-colors"
               >
                 {s.icon}
               </a>

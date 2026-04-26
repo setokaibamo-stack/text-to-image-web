@@ -14,11 +14,11 @@ export function Section({
   return (
     <section
       id={id}
-      className={`${
-        tone === "subtle" ? "bg-[var(--bg-subtle)]" : "bg-[var(--bg-base)]"
+      className={`relative ${
+        tone === "subtle" ? "bg-[var(--bg-subtle)]" : "bg-transparent"
       } ${className}`}
     >
-      <div className="container-page py-14 sm:py-20 md:py-24">{children}</div>
+      <div className="container-page relative py-16 sm:py-24 md:py-28">{children}</div>
     </section>
   );
 }
@@ -46,7 +46,15 @@ export function SectionHeader({
     >
       <div className={`flex flex-col gap-3 ${alignment}`}>
         {eyebrow ? (
-          <span className="text-caption uppercase tracking-[0.14em] text-[var(--text-muted)]">
+          <span
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-white/[0.03] px-3 py-1 text-caption uppercase tracking-[0.14em] text-[var(--text-secondary)] w-fit"
+            data-eyebrow
+          >
+            <span
+              aria-hidden
+              className="h-1.5 w-1.5 rounded-full"
+              style={{ background: "var(--gradient-brand)" }}
+            />
             {eyebrow}
           </span>
         ) : null}
@@ -73,11 +81,14 @@ export function Badge({
 }) {
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-[var(--radius-full)] px-2.5 py-1 text-body-sm ${
+      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-body-sm ${
         tone === "accent"
-          ? "bg-[var(--accent)] text-[var(--accent-fg)]"
-          : "bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border)]"
+          ? "text-white shadow-[var(--shadow-glow-purple)]"
+          : "bg-white/[0.04] text-[var(--text-secondary)] border border-[var(--border-strong)] backdrop-blur"
       }`}
+      style={
+        tone === "accent" ? { background: "var(--gradient-brand)" } : undefined
+      }
     >
       {children}
     </span>
@@ -95,10 +106,8 @@ export function Card({
   as?: "div" | "article" | "li";
   interactive?: boolean;
 }) {
-  const base =
-    "bg-[var(--bg-elevated)] border border-[var(--border)] rounded-[var(--radius-lg)] p-6";
-  const hover = interactive
-    ? "transition-[box-shadow,border-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:shadow-[var(--shadow-sm)] hover:border-[var(--border-strong)]"
-    : "";
-  return <Tag className={`${base} ${hover} ${className}`}>{children}</Tag>;
+  const base = interactive
+    ? "card-glow p-6"
+    : "card-surface p-6";
+  return <Tag className={`${base} ${className}`}>{children}</Tag>;
 }

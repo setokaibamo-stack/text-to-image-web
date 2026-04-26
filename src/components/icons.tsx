@@ -155,3 +155,56 @@ export function InstagramIcon(props: IconProps) {
     </svg>
   );
 }
+
+export function LightningIcon(props: IconProps) {
+  return (
+    <svg {...common} {...props}>
+      <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" />
+    </svg>
+  );
+}
+
+export function LockIcon(props: IconProps) {
+  return (
+    <svg {...common} {...props}>
+      <rect x={4} y={11} width={16} height={10} rx={2} />
+      <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+    </svg>
+  );
+}
+
+export function LayersIcon(props: IconProps) {
+  return (
+    <svg {...common} {...props}>
+      <path d="m12 2 9 5-9 5-9-5 9-5z" />
+      <path d="m3 12 9 5 9-5" />
+      <path d="m3 17 9 5 9-5" />
+    </svg>
+  );
+}
+
+export function WandIcon(props: IconProps) {
+  return (
+    <svg {...common} {...props}>
+      <path d="m15 4 1 2 2 1-2 1-1 2-1-2-2-1 2-1 1-2z" />
+      <path d="M4 20 14 10" />
+      <path d="m17 14 1 1.5L19.5 16 18 16.5 17 18l-1-1.5L14.5 16 16 15.5 17 14z" />
+    </svg>
+  );
+}
+
+export function PlayIcon(props: IconProps) {
+  return (
+    <svg {...common} {...props}>
+      <path d="M6 4 20 12 6 20Z" />
+    </svg>
+  );
+}
+
+export function ChevronDownIcon(props: IconProps) {
+  return (
+    <svg {...common} {...props}>
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}

@@ -157,6 +157,61 @@ export type Dict = {
     primary: string;
     secondary: string;
   };
+  home: {
+    examples: string[];
+    codeLines: string[];
+    metrics: { label: string; value: number; suffix?: string; decimals?: number }[];
+    features: { title: string; body: string; icon: "spark" | "lock" | "lightning" | "globe" | "layers" | "wand" }[];
+    featuresEyebrow: string;
+    featuresTitle: string;
+    featuresSubtitle: string;
+    phoneShowcaseEyebrow: string;
+    phoneShowcaseTitle: string;
+    phoneShowcaseSubtitle: string;
+    phoneLabels: {
+      promptLabel: string;
+      promptValue: string;
+      generate: string;
+      galleryTitle: string;
+      settingsTitle: string;
+      apiLabel: string;
+      quotaLabel: string;
+      quotaValue: string;
+      creditsLabel: string;
+      languageLabel: string;
+      languageValue: string;
+      galleryItems: string[];
+    };
+    pricing: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      monthly: string;
+      annual: string;
+      saveBadge: string;
+      perMonth: string;
+      billedAnnually: string;
+      popular: string;
+      tiers: {
+        name: string;
+        badge?: string;
+        monthly: number;
+        annual: number;
+        description: string;
+        features: string[];
+        cta: string;
+        highlighted?: boolean;
+      }[];
+    };
+    marquee: { quote: string; name: string; role: string }[];
+    finalCta: {
+      eyebrow: string;
+      title: string;
+      body: string;
+      primary: string;
+      secondary: string;
+    };
+  };
 };
 
 const en: Dict = {
@@ -610,6 +665,162 @@ const en: Dict = {
     primary: "Start your project",
     secondary: "Read FAQ",
   },
+  home: {
+    examples: [
+      "neon-lit cyberpunk street, 35mm",
+      "anime mountain shrine at dawn",
+      "isometric pastel greenhouse",
+      "studio portrait, soft rim light",
+      "brutalist concrete cathedral",
+      "watercolor flora botanical study",
+    ],
+    codeLines: [
+      "a cinematic wide shot of a neon-lit cyberpunk street at midnight, 35mm film grain, rain on asphalt, volumetric light",
+      "an editorial portrait of a chef in soft morning light, kodak portra 400, 50mm, shallow depth of field",
+      "an isometric illustration of a tiny greenhouse in a pastel forest, vector art, soft shadows",
+      "a moody anime mountain shrine at dawn, mist drifting through cedar trees, ghibli inspired",
+    ],
+    metrics: [
+      { label: "Images generated", value: 2.4, decimals: 1, suffix: "M+" },
+      { label: "Active creators", value: 48, suffix: "K+" },
+      { label: "Avg. quality score", value: 4.8, decimals: 1, suffix: "/5" },
+      { label: "Models supported", value: 12 },
+    ],
+    featuresEyebrow: "Built for serious creators",
+    featuresTitle: "Everything you need to ship visuals — fast.",
+    featuresSubtitle:
+      "A studio-grade pipeline in your pocket. Mobile-first, production-ready, designed to keep your creative momentum going.",
+    features: [
+      {
+        icon: "spark",
+        title: "12 frontier models",
+        body: "Flux, SDXL Turbo, Pollinations and more — swap them per prompt without losing your seed.",
+      },
+      {
+        icon: "lightning",
+        title: "Sub-3-second renders",
+        body: "Optimized inference pipeline with edge caching keeps your iteration loop tight.",
+      },
+      {
+        icon: "wand",
+        title: "Prompt library",
+        body: "Save winning prompts, branch variations, and rerun across styles in one tap.",
+      },
+      {
+        icon: "globe",
+        title: "Bilingual & RTL",
+        body: "Native English + Arabic with full right-to-left support — no compromises.",
+      },
+      {
+        icon: "layers",
+        title: "Local gallery",
+        body: "Up to 500 generations stored on-device. Private, fast, always available offline.",
+      },
+      {
+        icon: "lock",
+        title: "Bring your own key",
+        body: "Hardware-encrypted keychain. Your API credentials never leave the device.",
+      },
+    ],
+    phoneShowcaseEyebrow: "Live in your pocket",
+    phoneShowcaseTitle: "A studio that fits in one hand.",
+    phoneShowcaseSubtitle:
+      "Generate, browse, and tune — three taps from idea to final render. Same app, fully bilingual, production-ready today.",
+    phoneLabels: {
+      promptLabel: "Prompt",
+      promptValue: "neon-lit cyberpunk street at midnight, cinematic, 35mm",
+      generate: "Generate",
+      galleryTitle: "Gallery",
+      settingsTitle: "Settings",
+      apiLabel: "Pollinations API",
+      quotaLabel: "Daily quota",
+      quotaValue: "23 / 50",
+      creditsLabel: "Credits",
+      languageLabel: "Language",
+      languageValue: "English",
+      galleryItems: [
+        "Cyberpunk skyline",
+        "Anime shrine, dawn",
+        "Brutalist cathedral",
+        "Studio portrait",
+        "Pastel greenhouse",
+        "Watercolor botanical",
+      ],
+    },
+    pricing: {
+      eyebrow: "Pricing",
+      title: "Simple, scales with you.",
+      subtitle: "Start free. Upgrade only when you outgrow it.",
+      monthly: "Monthly",
+      annual: "Annual",
+      saveBadge: "Save 20%",
+      perMonth: "month",
+      billedAnnually: "billed annually",
+      popular: "Most popular",
+      tiers: [
+        {
+          name: "Starter",
+          monthly: 0,
+          annual: 0,
+          description: "For trying things out, hobby projects, and small explorations.",
+          features: [
+            "50 generations / month",
+            "All 12 models",
+            "Local gallery (up to 500 items)",
+            "Community support",
+          ],
+          cta: "Get started",
+        },
+        {
+          name: "Pro",
+          badge: "Best value",
+          monthly: 19,
+          annual: 15,
+          description: "For working creators who ship visuals every day.",
+          features: [
+            "1,500 generations / month",
+            "Priority queue (sub-3s)",
+            "Prompt library + variation graphs",
+            "Unlimited local gallery",
+            "Email support",
+          ],
+          cta: "Start Pro",
+          highlighted: true,
+        },
+        {
+          name: "Studio",
+          monthly: 49,
+          annual: 39,
+          description: "For teams shipping at scale across brands and clients.",
+          features: [
+            "Unlimited generations",
+            "Team workspaces (up to 10)",
+            "Brand kits & guard-rails",
+            "API access",
+            "Dedicated support",
+          ],
+          cta: "Start Studio",
+        },
+      ],
+    },
+    marquee: [
+      { quote: "Replaced our entire moodboard pipeline in a weekend.", name: "Maya Patel", role: "Creative Director" },
+      { quote: "The Arabic RTL support actually works. Rare.", name: "Yara Hadid", role: "Designer" },
+      { quote: "From idea to render in under 3 seconds. Magic.", name: "Marco Ricci", role: "Producer" },
+      { quote: "The prompt library alone pays for the subscription.", name: "Eden Park", role: "Illustrator" },
+      { quote: "Finally, a generator I can use on the train.", name: "Imran Yusuf", role: "Brand Strategist" },
+      { quote: "Best mobile-first AI tool I've shipped with.", name: "Lina Sørensen", role: "Product Lead" },
+      { quote: "The output quality is consistently editorial-grade.", name: "Sara Chen", role: "Photo Editor" },
+      { quote: "Variations are how I find ideas now.", name: "Hugo Almeida", role: "Art Director" },
+    ],
+    finalCta: {
+      eyebrow: "Ready when you are",
+      title: "Start generating in under a minute.",
+      body: "Free forever for 50 images a month. No credit card required, no waitlist.",
+      primary: "Launch the app",
+      secondary: "See pricing",
+    },
+  },
 };
 
 const ar: Dict = {
@@ -1062,6 +1273,162 @@ const ar: Dict = {
     body: "مكالمة ٤٥ دقيقة مع أحد المؤسسين هي أسرع طريقة لمعرفة إن كنا الشريك المناسب.",
     primary: "ابدأ مشروعك",
     secondary: "اقرأ الأسئلة الشائعة",
+  },
+  home: {
+    examples: [
+      "شارع سايبربانك بإضاءة نيون، 35مم",
+      "معبد جبلي على طراز الأنمي عند الفجر",
+      "صوبة زراعية أيزومترية بألوان باستيل",
+      "بورتريه استوديو بإضاءة جانبية ناعمة",
+      "كاتدرائية خرسانية بطراز بروتالي",
+      "دراسة نباتية بألوان مائية",
+    ],
+    codeLines: [
+      "لقطة عريضة سينمائية لشارع سايبربانك بإضاءة نيون منتصف الليل، حبيبات فيلم 35مم، مطر على الإسفلت، إضاءة حجمية",
+      "بورتريه تحريري لطاهٍ بإضاءة الصباح الناعمة، فيلم بورترا 400، عدسة 50مم، عمق ميدان ضحل",
+      "رسم أيزومتري لصوبة زراعية صغيرة في غابة باستيل، فن متجهي، ظلال ناعمة",
+      "معبد جبلي مزاجي على طراز الأنمي عند الفجر، ضباب يتسلل بين أشجار الأرز، مستوحى من غيبلي",
+    ],
+    metrics: [
+      { label: "صور تم إنشاؤها", value: 2.4, decimals: 1, suffix: "M+" },
+      { label: "مبدع نشط", value: 48, suffix: "K+" },
+      { label: "متوسط جودة الإخراج", value: 4.8, decimals: 1, suffix: "/5" },
+      { label: "نموذج مدعوم", value: 12 },
+    ],
+    featuresEyebrow: "مصمم للمحترفين",
+    featuresTitle: "كل ما تحتاجه لإنتاج الصور — بسرعة.",
+    featuresSubtitle:
+      "خط إنتاج بمستوى الاستوديو في جيبك. يعمل أولًا على الجوّال، جاهز للإنتاج، مصمم ليحافظ على إيقاعك الإبداعي.",
+    features: [
+      {
+        icon: "spark",
+        title: "١٢ نموذجًا متطورًا",
+        body: "Flux وSDXL Turbo وPollinations وغيرها — بدّل بينها لكل برومبت دون أن تفقد بذرتك.",
+      },
+      {
+        icon: "lightning",
+        title: "إخراج بأقل من ٣ ثوانٍ",
+        body: "خط استدلال محسَّن مع كاش حافة يبقي حلقة التكرار سريعة.",
+      },
+      {
+        icon: "wand",
+        title: "مكتبة برومبتات",
+        body: "احفظ البرومبتات الناجحة، أنشئ تنويعات، وأعد تشغيلها بأنماط مختلفة بنقرة.",
+      },
+      {
+        icon: "globe",
+        title: "ثنائي اللغة وRTL",
+        body: "دعم كامل للعربية والإنجليزية مع اتجاه من اليمين لليسار — دون تنازلات.",
+      },
+      {
+        icon: "layers",
+        title: "معرض محلي",
+        body: "حتى ٥٠٠ صورة محفوظة على الجهاز. خصوصية، سرعة، ومتاحة دون اتصال.",
+      },
+      {
+        icon: "lock",
+        title: "مفاتيحك الخاصة",
+        body: "تشفير عتادي للمفاتيح. بيانات اعتماد API لا تغادر جهازك أبدًا.",
+      },
+    ],
+    phoneShowcaseEyebrow: "في جيبك مباشرة",
+    phoneShowcaseTitle: "استوديو يتسع لكفّك.",
+    phoneShowcaseSubtitle:
+      "أنشئ، تصفّح، عدّل — ثلاث نقرات من الفكرة إلى الإخراج. التطبيق نفسه، ثنائي اللغة بالكامل، جاهز للإنتاج اليوم.",
+    phoneLabels: {
+      promptLabel: "البرومبت",
+      promptValue: "شارع سايبربانك بإضاءة نيون، سينمائي، 35مم",
+      generate: "إنشاء",
+      galleryTitle: "المعرض",
+      settingsTitle: "الإعدادات",
+      apiLabel: "Pollinations API",
+      quotaLabel: "الحصة اليومية",
+      quotaValue: "٢٣ / ٥٠",
+      creditsLabel: "الرصيد",
+      languageLabel: "اللغة",
+      languageValue: "العربية",
+      galleryItems: [
+        "أفق سايبربانك",
+        "معبد عند الفجر",
+        "كاتدرائية بروتالية",
+        "بورتريه استوديو",
+        "صوبة باستيل",
+        "نبات مائي",
+      ],
+    },
+    pricing: {
+      eyebrow: "الأسعار",
+      title: "بسيط، يكبر معك.",
+      subtitle: "ابدأ مجانًا. ارقَ فقط حين تتخطى الحدّ.",
+      monthly: "شهري",
+      annual: "سنوي",
+      saveBadge: "وفّر ٢٠٪",
+      perMonth: "شهر",
+      billedAnnually: "محاسبة سنوية",
+      popular: "الأكثر طلبًا",
+      tiers: [
+        {
+          name: "البداية",
+          monthly: 0,
+          annual: 0,
+          description: "للتجربة، المشاريع الجانبية، والاستكشاف الخفيف.",
+          features: [
+            "٥٠ صورة شهريًا",
+            "كل النماذج الـ١٢",
+            "معرض محلي (حتى ٥٠٠ عنصر)",
+            "دعم المجتمع",
+          ],
+          cta: "ابدأ مجانًا",
+        },
+        {
+          name: "المحترف",
+          badge: "الأفضل قيمة",
+          monthly: 19,
+          annual: 15,
+          description: "للمبدعين الذين ينتجون يوميًا.",
+          features: [
+            "١٥٠٠ صورة شهريًا",
+            "طابور أولوية (أقل من ٣ ثوانٍ)",
+            "مكتبة برومبتات + رسم تنويعات",
+            "معرض محلي بلا حدود",
+            "دعم بريدي",
+          ],
+          cta: "ابدأ المحترف",
+          highlighted: true,
+        },
+        {
+          name: "الاستوديو",
+          monthly: 49,
+          annual: 39,
+          description: "للفرق التي تنتج على مستوى الوكالات والعلامات.",
+          features: [
+            "صور بلا حدود",
+            "مساحات عمل (حتى ١٠ أعضاء)",
+            "أدلة علامات تجارية",
+            "وصول API",
+            "دعم مخصص",
+          ],
+          cta: "ابدأ الاستوديو",
+        },
+      ],
+    },
+    marquee: [
+      { quote: "استبدلت كل خط إنتاج لوحات الإلهام في عطلة أسبوع.", name: "مايا باتيل", role: "مديرة إبداعية" },
+      { quote: "دعم الـ RTL يعمل فعلًا. نادر جدًا.", name: "يارا حديد", role: "مصممة" },
+      { quote: "من الفكرة إلى الإخراج في أقل من ٣ ثوانٍ. سحر.", name: "ماركو ريتشي", role: "منتج" },
+      { quote: "مكتبة البرومبتات وحدها تستحق الاشتراك.", name: "إيدن بارك", role: "رسّامة" },
+      { quote: "أخيرًا مولّد أستطيع استخدامه في القطار.", name: "عمران يوسف", role: "خبير علامات" },
+      { quote: "أفضل أداة AI ركّبتها على الجوال.", name: "لينا سورنسن", role: "قائدة منتج" },
+      { quote: "جودة الإخراج بمستوى تحريري دائمًا.", name: "سارة تشن", role: "محررة صور" },
+      { quote: "التنويعات هي طريقتي لإيجاد الأفكار الآن.", name: "هوغو ألميدا", role: "مدير فني" },
+    ],
+    finalCta: {
+      eyebrow: "حين تكون جاهزًا",
+      title: "ابدأ الإنتاج خلال أقل من دقيقة.",
+      body: "مجاني للأبد لخمسين صورة شهريًا. لا بطاقة ائتمان، لا قائمة انتظار.",
+      primary: "افتح التطبيق",
+      secondary: "شاهد الأسعار",
+    },
   },
 };
 

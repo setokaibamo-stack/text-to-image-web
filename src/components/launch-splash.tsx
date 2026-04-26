@@ -88,10 +88,12 @@ export function LaunchSplash({
       aria-live="polite"
       aria-label={dict.launch.loadingLabel}
     >
-      {/* Animated drifting points background */}
-      <div aria-hidden className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_40%,rgba(127,90,240,0.18),transparent_60%),radial-gradient(60%_50%_at_80%_85%,rgba(14,165,233,0.12),transparent_60%),radial-gradient(50%_50%_at_15%_90%,rgba(236,72,153,0.10),transparent_60%)]" />
-        <div className="absolute inset-0 grid-dots opacity-40" />
+      {/* Animated orb + grid + drifting points background */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="orb orb-purple orb-anim-1 -top-32 -left-24 h-[560px] w-[560px]" />
+        <div className="orb orb-blue orb-anim-2 -bottom-32 -right-24 h-[520px] w-[520px]" />
+        <div className="orb orb-indigo orb-anim-3 top-[30%] left-[40%] h-[420px] w-[420px] opacity-40" />
+        <div className="bg-grid-overlay" />
         <div className="absolute inset-0">
           {points.map((p, i) => (
             <span
@@ -119,11 +121,12 @@ export function LaunchSplash({
           <div className="launch-logo flex items-center gap-3">
             <span
               aria-hidden
-              className="inline-flex h-12 w-12 items-center justify-center rounded-[var(--radius-md)] bg-[var(--accent)] text-[var(--accent-fg)] text-[18px] font-bold shadow-[var(--shadow-md)]"
+              className="inline-flex h-14 w-14 items-center justify-center rounded-2xl text-[20px] font-bold text-white shadow-[var(--shadow-glow-mix)]"
+              style={{ background: "var(--gradient-brand)" }}
             >
               t→i
             </span>
-            <span className="text-heading-xl font-semibold tracking-tight">
+            <span className="text-display-lg font-semibold tracking-tight">
               {dict.brand.name}
             </span>
           </div>
@@ -133,7 +136,7 @@ export function LaunchSplash({
           </p>
 
           <div
-            className="launch-bar w-full max-w-sm h-[3px] rounded-full bg-[var(--border)] overflow-hidden"
+            className="launch-bar w-full max-w-sm h-1 rounded-full bg-white/10 overflow-hidden"
             role="progressbar"
             aria-valuemin={0}
             aria-valuemax={100}
@@ -141,8 +144,12 @@ export function LaunchSplash({
             aria-label={dict.launch.loadingLabel}
           >
             <div
-              className="h-full bg-[var(--text-primary)] transition-[width] duration-150 ease-linear"
-              style={{ width: `${pct}%` }}
+              className="h-full transition-[width] duration-150 ease-linear"
+              style={{
+                width: `${pct}%`,
+                background: "var(--gradient-brand)",
+                boxShadow: "var(--shadow-glow-purple)",
+              }}
             />
           </div>
 

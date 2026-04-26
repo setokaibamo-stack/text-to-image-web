@@ -1,4 +1,5 @@
 import { headers } from "next/headers";
+import { Background } from "@/components/background";
 import { Button } from "@/components/button";
 import { ArrowRightIcon } from "@/components/icons";
 import { Section } from "@/components/section";
@@ -13,15 +14,16 @@ export default async function LocaleNotFound() {
   const d = getDictionary(l);
 
   return (
-    <Section>
-      <div className="max-w-xl mx-auto text-center">
-        <div className="text-[clamp(80px,12vw,140px)] font-semibold tracking-[-0.04em] text-[var(--text-primary)] leading-none ltr-nums">
+    <Section className="overflow-hidden">
+      <Background variant="hero" />
+      <div className="relative max-w-xl mx-auto text-center">
+        <div className="text-[clamp(80px,14vw,180px)] font-bold tracking-[-0.04em] leading-none ltr-nums text-gradient-brand">
           {d.notFound.code}
         </div>
-        <h1 className="mt-4 text-heading-lg text-[var(--text-primary)]">
+        <h1 className="mt-6 text-display-lg text-[var(--text-primary)]">
           {d.notFound.title}
         </h1>
-        <p className="mt-4 text-body-lg text-[var(--text-secondary)]">
+        <p className="mt-4 text-body-lg text-[var(--text-secondary)] text-pretty">
           {d.notFound.body}
         </p>
         <div className="mt-8 flex items-center justify-center gap-3 flex-wrap">

@@ -303,7 +303,7 @@ const en: Dict = {
       "Describe what you want to see. Be specific about mood, lighting, framing, and medium.",
     promptPlaceholder:
       "e.g. 'a neon-lit cyberpunk street at midnight, cinematic wide shot, 35mm film grain, rain on asphalt'",
-    promptHelper: "Press ⏎ to generate · 1 credit per image · Upgrade for priority queue",
+    promptHelper: "Press ⌘⏎ / Ctrl+⏎ to generate · 1 credit per image · Upgrade for priority queue",
     promptSubmit: "Generate",
     promptSending: "Generating…",
     promptSuccess: "Queued. We'll surface it in Recent runs.",
@@ -912,7 +912,7 @@ const ar: Dict = {
       "صف ما تريد رؤيته. كن دقيقًا في المزاج، الإضاءة، الإطار، والأسلوب.",
     promptPlaceholder:
       "مثال: «شارع سايبربانك بأضواء نيون عند منتصف الليل، لقطة سينمائية عريضة، فيلم ٣٥ ملم، مطر على الإسفلت»",
-    promptHelper: "اضغط ⏎ للتوليد · رصيد واحد لكل صورة · رقِّ اشتراكك للطابور المتقدم",
+    promptHelper: "اضغط ⌘⏎ / Ctrl+⏎ للتوليد · رصيد واحد لكل صورة · رقِّ اشتراكك للطابور المتقدم",
     promptSubmit: "ولِّد",
     promptSending: "جارٍ التوليد…",
     promptSuccess: "تمت الإضافة إلى الطابور. ستظهر في التشغيلات الأخيرة.",

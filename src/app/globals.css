@@ -1,26 +1,251 @@
 @import "tailwindcss";
 
+/* =========================================================
+   Design tokens — rork.com-style minimal system
+   ========================================================= */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Core palette — light */
+  --bg-base: #ffffff;
+  --bg-subtle: #f7f7f8;
+  --bg-elevated: #ffffff;
+  --border: #e5e5e7;
+  --border-strong: #d4d4d8;
+  --text-primary: #0a0a0a;
+  --text-secondary: #5c5c66;
+  --text-muted: #8a8a94;
+  --accent: #0a0a0a;
+  --accent-fg: #ffffff;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Semantic */
+  --success: #16a34a;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --info: #2563eb;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(10, 10, 10, 0.04);
+  --shadow-sm: 0 2px 8px rgba(10, 10, 10, 0.06);
+  --shadow-md: 0 8px 24px rgba(10, 10, 10, 0.08);
+  --shadow-lg: 0 16px 40px rgba(10, 10, 10, 0.12);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-micro: 120ms;
+  --dur-default: 200ms;
+  --dur-emph: 320ms;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-base: #0a0a0a;
+    --bg-subtle: #141416;
+    --bg-elevated: #1b1b1f;
+    --border: #26262b;
+    --border-strong: #3a3a40;
+    --text-primary: #fafafa;
+    --text-secondary: #9a9aa3;
+    --text-muted: #6b6b73;
+    --accent: #ffffff;
+    --accent-fg: #0a0a0a;
+
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #60a5fa;
+
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.45);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
   }
 }
 
+@theme inline {
+  --color-bg-base: var(--bg-base);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+
+  --font-sans: var(--font-inter), "SF Pro Display", system-ui, sans-serif;
+  --font-arabic: var(--font-ibm-arabic), "Segoe UI", Tahoma, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "SF Mono", ui-monospace, monospace;
+}
+
+/* =========================================================
+   Base
+   ========================================================= */
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html[dir="rtl"] body {
+  font-family: var(--font-arabic), var(--font-sans);
+}
+
+::selection {
+  background: var(--text-primary);
+  color: var(--bg-base);
+}
+
+/* Focus ring — 2px solid accent, 2px offset */
+*:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Scrollbar polish */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+/* Type scale utilities */
+.text-display-xl {
+  font-size: clamp(40px, 6vw, 56px);
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.text-display-lg {
+  font-size: clamp(32px, 4.5vw, 40px);
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.text-heading-lg {
+  font-size: clamp(22px, 3vw, 28px);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.text-heading-md {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.text-body-lg {
+  font-size: 17px;
+  line-height: 26px;
+  font-weight: 400;
+}
+.text-body-md {
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+}
+.text-body-sm {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+}
+.text-caption {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Container helper */
+.container-page {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+@media (min-width: 768px) {
+  .container-page {
+    padding-inline: 48px;
+  }
+}
+
+/* Soft grid background for hero */
+.grid-dots {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    color-mix(in oklab, var(--text-primary) 12%, transparent) 1px,
+    transparent 0
+  );
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+}
+
+/* Shimmer for loading */
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--bg-subtle) 0%,
+    color-mix(in oklab, var(--bg-subtle) 70%, var(--border) 30%) 50%,
+    var(--bg-subtle) 100%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* Gentle float for hero art */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.floaty {
+  animation: floaty 6s var(--ease-out) infinite;
+}
+
+/* Keep RTL numerals LTR where appropriate */
+.ltr-nums {
+  direction: ltr;
+  unicode-bidi: isolate;
 }

@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# text to image — marketing web
 
-## Getting Started
+Marketing website for the **text to image** AI image studio.
 
-First, run the development server:
+Built with **Next.js 15 (App Router)**, **TypeScript**, and **Tailwind CSS v4**. Bilingual (English / Arabic with full RTL), fully responsive, and statically-rendered.
+
+## Pages
+
+- `/` — redirects to the user's preferred locale (English by default)
+- `/en` · `/ar` — home (hero, why us, portfolio, about preview, process, testimonials, FAQ, contact)
+- `/en/services` · `/en/services/[slug]` — services list + detail
+- `/en/portfolio` · `/en/portfolio/[slug]` — case studies
+- `/en/about` — team, vision, mission, stats
+- `/en/blog` · `/en/blog/[slug]` — field notes
+- `/en/contact` — enquiry form
+- `/en/privacy` · `/en/terms` — legal
+- Custom 404 with on-brand error state
+
+Arabic mirrors every route under `/ar/…` with full RTL layout and Arabic numerals.
+
+## Design system
+
+The design tokens, typography scale, spacing, radii, and motion values are defined in `src/app/globals.css` and implement the rork.com-style minimal system from the brief:
+
+- Light and dark palettes via CSS custom properties
+- Inter (Latin) + IBM Plex Sans Arabic (RTL) + JetBrains Mono
+- 4px spacing base, 8/12/16/24px radii scale, 4-step shadow scale
+- WCAG AA focus ring on every interactive element
+- `prefers-reduced-motion` respected
+
+## Dev
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run lint
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+├── app/
+│   ├── [locale]/         # locale-aware pages
+│   ├── layout.tsx        # sets html lang/dir from middleware header
+│   ├── sitemap.ts        # sitemap for both locales
+│   └── robots.ts
+├── components/           # header, footer, prompt-input, faq, contact-form, cta, icons…
+├── i18n/
+│   ├── config.ts         # locales + direction helpers
+│   └── dictionaries.ts   # EN + AR content
+└── middleware.ts         # locale detection + redirect from /
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Adding content
 
-## Learn More
+All strings live in `src/i18n/dictionaries.ts`. Add or edit keys on the `en` object and mirror them on `ar` — the type is enforced.
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All rights reserved.

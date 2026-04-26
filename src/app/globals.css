@@ -95,6 +95,16 @@ html,
 body {
   background: var(--bg-base);
   color: var(--text-primary);
+  /* Prevent horizontal pan-scroll on mobile/tablet caused by off-canvas
+     decoratives (drifting splash points, dotted grid masks) or wide
+     decorative flex rails. `clip` is preferred over `hidden` so the body
+     scroll container isn't introduced as a secondary scrolling context. */
+  overflow-x: clip;
+}
+
+html,
+body {
+  max-width: 100%;
 }
 
 body {

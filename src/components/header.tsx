@@ -110,7 +110,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
             aria-label={open ? dict.nav.close : dict.nav.menu}
             aria-expanded={open}
           >
-            {open ? <MenuIcon /> : <MenuIcon />}
+            {open ? <CloseIcon /> : <MenuIcon />}
           </button>
         </div>
       </div>

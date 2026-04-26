@@ -12,7 +12,8 @@ export function ContactForm({ dict }: { dict: Dict }) {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     const name = (fd.get("name") as string | null)?.trim() ?? "";
     const email = (fd.get("email") as string | null)?.trim() ?? "";
     const description = (fd.get("description") as string | null)?.trim() ?? "";
@@ -30,7 +31,7 @@ export function ContactForm({ dict }: { dict: Dict }) {
     try {
       await new Promise((r) => setTimeout(r, 900));
       setStatus("success");
-      (e.currentTarget as HTMLFormElement).reset();
+      form.reset();
     } catch {
       setStatus("error");
     }

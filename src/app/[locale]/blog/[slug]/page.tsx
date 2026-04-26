@@ -47,16 +47,16 @@ export default async function BlogPostPage({
           >
             ← {d.blog.backToBlog}
           </Link>
-          <div className="mt-6 flex items-center gap-3 text-caption text-[var(--text-muted)]">
+          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-caption text-[var(--text-muted)]">
             <span className="ltr-nums">{post.date}</span>
-            <span>·</span>
+            <span aria-hidden>·</span>
             <span>
               <span className="ltr-nums">{post.minutes}</span> {d.blog.minutes}
             </span>
-            <span>·</span>
+            <span aria-hidden>·</span>
             <span>{post.author}</span>
           </div>
-          <h1 className="mt-4 text-display-lg text-[var(--text-primary)]">
+          <h1 className="mt-4 text-display-lg text-[var(--text-primary)] text-balance">
             {post.title}
           </h1>
           <p className="mt-6 text-body-lg text-[var(--text-secondary)]">

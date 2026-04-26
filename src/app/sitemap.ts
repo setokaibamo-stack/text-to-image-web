@@ -6,11 +6,17 @@ const BASE_URL = "https://texttoimage.studio";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const en = getDictionary("en");
-  const staticPaths = ["", "/services", "/portfolio", "/about", "/blog", "/contact", "/privacy", "/terms"];
-  const servicePaths = en.services.items.map((s) => `/services/${s.slug}`);
-  const projectPaths = en.portfolio.items.map((p) => `/portfolio/${p.slug}`);
+  const staticPaths = [
+    "",
+    "/about",
+    "/blog",
+    "/launch",
+    "/dashboard",
+    "/privacy",
+    "/terms",
+  ];
   const blogPaths = en.blog.posts.map((p) => `/blog/${p.slug}`);
-  const allPaths = [...staticPaths, ...servicePaths, ...projectPaths, ...blogPaths];
+  const allPaths = [...staticPaths, ...blogPaths];
 
   return locales.flatMap((locale) =>
     allPaths.map((p) => ({

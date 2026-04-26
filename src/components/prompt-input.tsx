@@ -1,10 +1,13 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
+import type { Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dictionaries";
 import { ArrowRightIcon, PaperclipIcon, SparkleIcon } from "./icons";
 
-export function PromptInput({ dict }: { dict: Dict }) {
+export function PromptInput({ dict, locale }: { dict: Dict; locale?: Locale }) {
+  const router = useRouter();
   const [value, setValue] = useState("");
   const [state, setState] = useState<"idle" | "loading" | "sent">("idle");
   const [dragging, setDragging] = useState(false);
@@ -13,6 +16,10 @@ export function PromptInput({ dict }: { dict: Dict }) {
     e.preventDefault();
     if (!value.trim() || state === "loading") return;
     setState("loading");
+    if (locale) {
+      router.push(`/${locale}/launch`);
+      return;
+    }
     await new Promise((r) => setTimeout(r, 900));
     setState("sent");
     setTimeout(() => setState("idle"), 1400);

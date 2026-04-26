@@ -4,11 +4,9 @@ export type Dict = {
   brand: { name: string; tagline: string };
   nav: {
     home: string;
-    services: string;
-    portfolio: string;
     about: string;
     blog: string;
-    contact: string;
+    dashboard: string;
     startProject: string;
     menu: string;
     close: string;
@@ -31,53 +29,33 @@ export type Dict = {
     subtitle: string;
     items: { title: string; body: string }[];
   };
-  services: {
-    eyebrow: string;
-    title: string;
-    subtitle: string;
-    viewAll: string;
-    viewDetails: string;
-    cta: string;
-    detail: {
-      deliverables: string;
-      timeline: string;
-      stack: string;
-      nextStep: string;
-    };
-    items: {
-      slug: string;
-      title: string;
-      tagline: string;
-      body: string;
-      deliverables: string[];
-      timeline: string;
-      stack: string[];
-    }[];
+  launch: {
+    tagline: string;
+    loadingLabel: string;
+    continueLabel: string;
   };
-  portfolio: {
+  dashboard: {
     eyebrow: string;
-    title: string;
-    subtitle: string;
-    viewAll: string;
-    viewCase: string;
-    categoryLabel: string;
-    allCategories: string;
-    overview: string;
-    highlights: string;
-    outcomes: string;
-    stack: string;
-    nextProject: string;
-    items: {
-      slug: string;
-      name: string;
-      category: string;
-      tagline: string;
-      body: string;
-      highlights: string[];
-      outcomes: string[];
-      stack: string[];
-      color: string;
-    }[];
+    welcomeTitle: string;
+    welcomeSubtitle: string;
+    stats: { label: string; value: string; hint: string }[];
+    promptTitle: string;
+    promptSubtitle: string;
+    promptPlaceholder: string;
+    promptHelper: string;
+    promptSubmit: string;
+    promptSending: string;
+    promptSuccess: string;
+    promptAttach: string;
+    aspectLabel: string;
+    aspects: { value: string; label: string }[];
+    styleLabel: string;
+    styles: { value: string; label: string }[];
+    recentTitle: string;
+    recentEmpty: string;
+    recentItems: { prompt: string; time: string; style: string }[];
+    tipsTitle: string;
+    tips: string[];
   };
   about: {
     eyebrow: string;
@@ -114,40 +92,7 @@ export type Dict = {
     subtitle: string;
     items: { q: string; a: string }[];
   };
-  contact: {
-    eyebrow: string;
-    title: string;
-    subtitle: string;
-    form: {
-      name: string;
-      namePh: string;
-      email: string;
-      emailPh: string;
-      phone: string;
-      phonePh: string;
-      service: string;
-      servicePlaceholder: string;
-      description: string;
-      descriptionPh: string;
-      submit: string;
-      sending: string;
-      success: string;
-      error: string;
-      required: string;
-      invalidEmail: string;
-    };
-    info: {
-      email: string;
-      phone: string;
-      address: string;
-      hours: string;
-      emailLabel: string;
-      phoneLabel: string;
-      addressLabel: string;
-      hoursLabel: string;
-    };
-    social: { twitter: string; linkedin: string; github: string; instagram: string };
-  };
+  social: { twitter: string; linkedin: string; github: string; instagram: string };
   blog: {
     eyebrow: string;
     title: string;
@@ -221,12 +166,10 @@ const en: Dict = {
   },
   nav: {
     home: "Home",
-    services: "Services",
-    portfolio: "Portfolio",
     about: "About",
     blog: "Blog",
-    contact: "Contact",
-    startProject: "Start your project",
+    dashboard: "Dashboard",
+    startProject: "Launch app",
     menu: "Menu",
     close: "Close",
   },
@@ -284,230 +227,70 @@ const en: Dict = {
       },
     ],
   },
-  services: {
-    eyebrow: "What we build",
-    title: "Services",
-    subtitle: "Everything you need to ship a modern AI product.",
-    viewAll: "All services",
-    viewDetails: "View details",
-    cta: "Talk to an engineer",
-    detail: {
-      deliverables: "Deliverables",
-      timeline: "Typical timeline",
-      stack: "Preferred stack",
-      nextStep: "Start a conversation",
-    },
-    items: [
+  launch: {
+    tagline: "AI image studio",
+    loadingLabel: "Warming up the canvas",
+    continueLabel: "Enter",
+  },
+  dashboard: {
+    eyebrow: "Workspace",
+    welcomeTitle: "Welcome back, creator.",
+    welcomeSubtitle:
+      "Your studio at a glance — generate new imagery, review your latest runs, and track the creative budget.",
+    stats: [
+      { label: "Images generated", value: "127", hint: "+18 this week" },
+      { label: "Credits remaining", value: "373", hint: "of 500 monthly" },
+      { label: "Avg. quality", value: "4.8★", hint: "across 42 runs" },
+      { label: "Streak", value: "6 days", hint: "keep it going" },
+    ],
+    promptTitle: "Generate an image",
+    promptSubtitle:
+      "Describe what you want to see. Be specific about mood, lighting, framing, and medium.",
+    promptPlaceholder:
+      "e.g. 'a neon-lit cyberpunk street at midnight, cinematic wide shot, 35mm film grain, rain on asphalt'",
+    promptHelper: "Press ⏎ to generate · 1 credit per image · Upgrade for priority queue",
+    promptSubmit: "Generate",
+    promptSending: "Generating…",
+    promptSuccess: "Queued. We'll surface it in Recent runs.",
+    promptAttach: "Attach reference image",
+    aspectLabel: "Aspect",
+    aspects: [
+      { value: "1:1", label: "Square 1:1" },
+      { value: "3:2", label: "Landscape 3:2" },
+      { value: "2:3", label: "Portrait 2:3" },
+      { value: "16:9", label: "Widescreen 16:9" },
+    ],
+    styleLabel: "Style",
+    styles: [
+      { value: "cinematic", label: "Cinematic" },
+      { value: "photoreal", label: "Photoreal" },
+      { value: "editorial", label: "Editorial" },
+      { value: "illustration", label: "Illustration" },
+    ],
+    recentTitle: "Recent runs",
+    recentEmpty: "Nothing here yet. Your generated images will show up here.",
+    recentItems: [
       {
-        slug: "ai-product-engineering",
-        title: "AI product engineering",
-        tagline: "End-to-end builds — from prompt to production.",
-        body: "We design, build and operate text-to-image products from the model layer up. Pollinations, SDXL, Flux, proprietary — we pick what fits.",
-        deliverables: [
-          "Prompt pipeline architecture",
-          "Moderation + safety layer",
-          "Generation cache + storage",
-          "Usage metering and billing hooks",
-        ],
-        timeline: "6–10 weeks",
-        stack: ["TypeScript", "Next.js", "Python", "Postgres", "Redis"],
+        prompt: "A neon-lit cyberpunk street at midnight, cinematic wide shot",
+        time: "2 min ago",
+        style: "Cinematic · 16:9",
       },
       {
-        slug: "mobile-apps",
-        title: "Mobile apps",
-        tagline: "Flutter and native iOS / Android, done properly.",
-        body: "Production-grade mobile clients with offline galleries, push, widgets, and camera-roll integration. Published to the stores, not just the simulator.",
-        deliverables: [
-          "Flutter or native client",
-          "Store submission + review support",
-          "Crashlytics + analytics",
-          "Offline-first local store",
-        ],
-        timeline: "8–12 weeks",
-        stack: ["Flutter", "Swift", "Kotlin", "Riverpod", "GoRouter"],
+        prompt: "Editorial portrait of a chef in soft morning light, 50mm",
+        time: "1 h ago",
+        style: "Editorial · 2:3",
       },
       {
-        slug: "design-systems",
-        title: "Design systems",
-        tagline: "Tokens, components, docs — ready for your team.",
-        body: "A product-grade design system with Figma libraries, React primitives, and a governance model so your team stays on-brand at speed.",
-        deliverables: [
-          "Figma component library",
-          "Code tokens + primitives",
-          "Storybook + docs site",
-          "Contribution guidelines",
-        ],
-        timeline: "4–6 weeks",
-        stack: ["Figma", "React", "Tailwind", "Storybook"],
-      },
-      {
-        slug: "marketing-sites",
-        title: "Marketing sites",
-        tagline: "High-converting sites that load in under a second.",
-        body: "Editor-friendly marketing sites built on Next.js with a headless CMS — indexed, accessible, and RTL-ready on day one.",
-        deliverables: [
-          "Next.js + MDX setup",
-          "CMS integration",
-          "SEO + analytics",
-          "Arabic / English RTL support",
-        ],
-        timeline: "3–5 weeks",
-        stack: ["Next.js", "Sanity", "Tailwind", "Vercel"],
-      },
-      {
-        slug: "scale-and-devops",
-        title: "Scale & DevOps",
-        tagline: "Ship to millions without waking up at 3am.",
-        body: "Infra, CI/CD, observability and cost controls for teams crossing the 100k-user mark.",
-        deliverables: [
-          "Infrastructure as code",
-          "CI/CD pipelines",
-          "Monitoring + alerting",
-          "Cost dashboards",
-        ],
-        timeline: "Ongoing retainer",
-        stack: ["Terraform", "GitHub Actions", "Grafana", "Cloudflare"],
-      },
-      {
-        slug: "support-retainers",
-        title: "Support retainers",
-        tagline: "A senior team on call, month to month.",
-        body: "Fractional engineering for companies who need steady momentum without hiring full-time.",
-        deliverables: [
-          "Weekly planning rituals",
-          "Shared Slack channel",
-          "24h response SLA",
-          "Quarterly architecture review",
-        ],
-        timeline: "Rolling monthly",
-        stack: ["Your stack"],
+        prompt: "Isometric illustration of a tiny greenhouse, pastel palette",
+        time: "Yesterday",
+        style: "Illustration · 1:1",
       },
     ],
-  },
-  portfolio: {
-    eyebrow: "Selected work",
-    title: "Portfolio",
-    subtitle: "A few recent builds — app stores, agencies, indie founders.",
-    viewAll: "View all work",
-    viewCase: "Open case study",
-    categoryLabel: "Category",
-    allCategories: "All",
-    overview: "Overview",
-    highlights: "Highlights",
-    outcomes: "Outcomes",
-    stack: "Stack",
-    nextProject: "Next project",
-    items: [
-      {
-        slug: "pollinate",
-        name: "Pollinate",
-        category: "Mobile app",
-        tagline: "On-device prompt-to-picture, powered by Pollinations.",
-        body: "A Flutter client with offline gallery, secure API keys, and a 500-entry local store. Arabic and English, fully RTL.",
-        highlights: [
-          "Sub-2s generation time",
-          "500-entry local gallery",
-          "Hardware-backed secret storage",
-          "Full RTL Arabic support",
-        ],
-        outcomes: [
-          "4.8★ average on TestFlight",
-          "30% week-over-week retention",
-        ],
-        stack: ["Flutter", "Riverpod", "GoRouter", "Pollinations API"],
-        color: "#1b1b1f",
-      },
-      {
-        slug: "studio-cloud",
-        name: "Studio Cloud",
-        category: "Web platform",
-        tagline: "Creative team workspace with shared boards and billing.",
-        body: "A multi-tenant workspace for agencies to brief, generate and ship brand imagery — with approval flows and usage-based billing.",
-        highlights: [
-          "Multi-tenant workspaces",
-          "Role-based approval flows",
-          "Stripe metered billing",
-          "Realtime collaboration",
-        ],
-        outcomes: [
-          "$1.2M ARR in year one",
-          "12 agency tenants onboarded",
-        ],
-        stack: ["Next.js", "Postgres", "Stripe", "tRPC"],
-        color: "#0e1a2b",
-      },
-      {
-        slug: "halo-brand",
-        name: "Halo Brand",
-        category: "Design system",
-        tagline: "Figma + React system for a regional e-commerce group.",
-        body: "A token-first design system with Arabic / English glyphs, governance docs, and a Storybook that doubles as product training material.",
-        highlights: [
-          "180+ Figma components",
-          "Tokens in CSS, Swift, Kotlin",
-          "Bilingual typographic scale",
-        ],
-        outcomes: [
-          "70% faster screen delivery",
-          "3 product teams unified",
-        ],
-        stack: ["Figma", "Storybook", "Tailwind"],
-        color: "#24212b",
-      },
-      {
-        slug: "lumen-lab",
-        name: "Lumen Lab",
-        category: "Marketing site",
-        tagline: "Editor-friendly marketing site for an AI research lab.",
-        body: "Next.js + Sanity site with MDX docs, RTL landing pages, and sub-second LCP across the catalogue.",
-        highlights: [
-          "0.9s LCP on 3G",
-          "Sanity-powered authoring",
-          "Full Arabic translations",
-        ],
-        outcomes: [
-          "+220% organic signups",
-          "Lighthouse 100 across the board",
-        ],
-        stack: ["Next.js", "Sanity", "Vercel"],
-        color: "#151515",
-      },
-      {
-        slug: "caravan-ops",
-        name: "Caravan Ops",
-        category: "Internal tools",
-        tagline: "A logistics dashboard for a regional delivery network.",
-        body: "An internal ops tool replacing seven spreadsheets — live fleet map, SLA monitoring and a driver mobile companion.",
-        highlights: [
-          "Live fleet map",
-          "Custom SLA engine",
-          "Driver companion app",
-        ],
-        outcomes: [
-          "25% fewer missed SLAs",
-          "4h/day saved per ops lead",
-        ],
-        stack: ["Next.js", "Postgres", "Flutter"],
-        color: "#1a1f1a",
-      },
-      {
-        slug: "inkwell",
-        name: "Inkwell",
-        category: "Mobile app",
-        tagline: "An AI storybook generator for bilingual kids.",
-        body: "A tablet-first reader that generates illustrated storybooks in Arabic and English, with parental controls and offline packs.",
-        highlights: [
-          "Bilingual on-device generation",
-          "Offline packs under 50MB",
-          "Parental content controls",
-        ],
-        outcomes: [
-          "Featured by App Store MENA",
-          "60k downloads in 8 weeks",
-        ],
-        stack: ["Flutter", "On-device ML", "Firebase"],
-        color: "#1f1b14",
-      },
+    tipsTitle: "Pro tips",
+    tips: [
+      "Name the medium — '35mm film', 'oil on canvas', 'isometric vector' — to nudge the model hard.",
+      "Lighting words like 'rim light', 'golden hour', 'chiaroscuro' change the whole mood.",
+      "Save strong prompts to your library so you can rerun them with variations.",
     ],
   },
   about: {
@@ -657,45 +440,11 @@ const en: Dict = {
       },
     ],
   },
-  contact: {
-    eyebrow: "Contact",
-    title: "Tell us about your project.",
-    subtitle:
-      "A principal replies within one business day. No pitch decks required.",
-    form: {
-      name: "Your name",
-      namePh: "Jane Appleseed",
-      email: "Email",
-      emailPh: "jane@company.com",
-      phone: "Phone (optional)",
-      phonePh: "+1 555 010 2030",
-      service: "Service",
-      servicePlaceholder: "Pick a service",
-      description: "Project description",
-      descriptionPh: "A few sentences on the problem, the audience, and any deadlines.",
-      submit: "Send message",
-      sending: "Sending...",
-      success: "Thanks — we'll be in touch within one business day.",
-      error: "Something went wrong. Please email us at hello@texttoimage.studio.",
-      required: "Required",
-      invalidEmail: "Enter a valid email.",
-    },
-    info: {
-      email: "hello@texttoimage.studio",
-      phone: "+44 20 4586 2100",
-      address: "London · Dubai · Riyadh",
-      hours: "Mon–Fri · 09:00–18:00 GMT",
-      emailLabel: "Email",
-      phoneLabel: "Phone",
-      addressLabel: "Office",
-      hoursLabel: "Hours",
-    },
-    social: {
-      twitter: "Twitter",
-      linkedin: "LinkedIn",
-      github: "GitHub",
-      instagram: "Instagram",
-    },
+  social: {
+    twitter: "Twitter",
+    linkedin: "LinkedIn",
+    github: "GitHub",
+    instagram: "Instagram",
   },
   blog: {
     eyebrow: "Writing",
@@ -775,7 +524,7 @@ const en: Dict = {
       sections: [
         {
           h: "What we collect",
-          p: "We collect only what's needed to operate the site and respond to enquiries — the name, email and project description you submit through the contact form, and standard server logs.",
+          p: "We collect only what's needed to operate the product — the name, email and prompts you submit through the app, and standard server logs.",
         },
         {
           h: "How we use it",
@@ -870,12 +619,10 @@ const ar: Dict = {
   },
   nav: {
     home: "الرئيسية",
-    services: "الخدمات",
-    portfolio: "الأعمال",
     about: "من نحن",
     blog: "المقالات",
-    contact: "تواصل",
-    startProject: "ابدأ مشروعك",
+    dashboard: "لوحة التحكم",
+    startProject: "افتح التطبيق",
     menu: "القائمة",
     close: "إغلاق",
   },
@@ -933,230 +680,70 @@ const ar: Dict = {
       },
     ],
   },
-  services: {
-    eyebrow: "ما نبنيه",
-    title: "الخدمات",
-    subtitle: "كل ما تحتاجه لإطلاق منتج ذكاء اصطناعي حديث.",
-    viewAll: "كل الخدمات",
-    viewDetails: "عرض التفاصيل",
-    cta: "تحدّث مع مهندس",
-    detail: {
-      deliverables: "المخرجات",
-      timeline: "الجدول الزمني المعتاد",
-      stack: "التقنيات المفضّلة",
-      nextStep: "ابدأ المحادثة",
-    },
-    items: [
+  launch: {
+    tagline: "استوديو الصور الذكي",
+    loadingLabel: "جارٍ تجهيز اللوحة",
+    continueLabel: "دخول",
+  },
+  dashboard: {
+    eyebrow: "مساحة العمل",
+    welcomeTitle: "أهلًا بعودتك.",
+    welcomeSubtitle:
+      "لوحة استوديوك في لمحة — ولِّد صورًا جديدة، راجع أحدث تشغيلاتك، وتابع رصيدك الإبداعي.",
+    stats: [
+      { label: "صور مولَّدة", value: "١٢٧", hint: "+١٨ هذا الأسبوع" },
+      { label: "رصيد متبقٍّ", value: "٣٧٣", hint: "من أصل ٥٠٠ شهريًا" },
+      { label: "متوسط الجودة", value: "٤٫٨★", hint: "عبر ٤٢ تشغيلًا" },
+      { label: "سلسلة الاستخدام", value: "٦ أيام", hint: "حافظ عليها" },
+    ],
+    promptTitle: "ولِّد صورة",
+    promptSubtitle:
+      "صف ما تريد رؤيته. كن دقيقًا في المزاج، الإضاءة، الإطار، والأسلوب.",
+    promptPlaceholder:
+      "مثال: «شارع سايبربانك بأضواء نيون عند منتصف الليل، لقطة سينمائية عريضة، فيلم ٣٥ ملم، مطر على الإسفلت»",
+    promptHelper: "اضغط ⏎ للتوليد · رصيد واحد لكل صورة · رقِّ اشتراكك للطابور المتقدم",
+    promptSubmit: "ولِّد",
+    promptSending: "جارٍ التوليد…",
+    promptSuccess: "تمت الإضافة إلى الطابور. ستظهر في التشغيلات الأخيرة.",
+    promptAttach: "إرفاق صورة مرجعية",
+    aspectLabel: "نسبة الإطار",
+    aspects: [
+      { value: "1:1", label: "مربع ١:١" },
+      { value: "3:2", label: "أفقي ٣:٢" },
+      { value: "2:3", label: "عمودي ٢:٣" },
+      { value: "16:9", label: "عريض ١٦:٩" },
+    ],
+    styleLabel: "الأسلوب",
+    styles: [
+      { value: "cinematic", label: "سينمائي" },
+      { value: "photoreal", label: "واقعي فوتوغرافي" },
+      { value: "editorial", label: "تحريري" },
+      { value: "illustration", label: "رسم تصويري" },
+    ],
+    recentTitle: "التشغيلات الأخيرة",
+    recentEmpty: "لا شيء هنا بعد. ستظهر صورك المولَّدة هنا.",
+    recentItems: [
       {
-        slug: "ai-product-engineering",
-        title: "هندسة منتجات الذكاء الاصطناعي",
-        tagline: "بناء شامل — من المحرر إلى الإنتاج.",
-        body: "نصمم، نبني، ونشغّل منتجات تحويل النص إلى صورة من طبقة النموذج إلى واجهة المستخدم. نختار من بين Pollinations وSDXL وFlux والنماذج الخاصة بما يناسبك.",
-        deliverables: [
-          "بنية خط معالجة المحررات",
-          "طبقة الفلترة والسلامة",
-          "تخزين وذاكرة نتائج التوليد",
-          "قياس الاستخدام وخطافات الفوترة",
-        ],
-        timeline: "٦–١٠ أسابيع",
-        stack: ["TypeScript", "Next.js", "Python", "Postgres", "Redis"],
+        prompt: "شارع سايبربانك بأضواء نيون عند منتصف الليل، لقطة سينمائية عريضة",
+        time: "قبل دقيقتين",
+        style: "سينمائي · ١٦:٩",
       },
       {
-        slug: "mobile-apps",
-        title: "تطبيقات الجوال",
-        tagline: "Flutter وiOS/Android الأصلية، بإتقان.",
-        body: "عملاء جوال بمستوى الإنتاج، مع معرض غير متصل، إشعارات، ودجت، وتكامل مع ذاكرة الصور. منشورة في المتاجر لا في المحاكي فقط.",
-        deliverables: [
-          "عميل Flutter أو أصلي",
-          "تقديم للمتاجر ودعم المراجعة",
-          "تحليلات وتقارير أعطال",
-          "متجر محلي يعمل دون اتصال",
-        ],
-        timeline: "٨–١٢ أسبوعًا",
-        stack: ["Flutter", "Swift", "Kotlin", "Riverpod", "GoRouter"],
+        prompt: "بورتريه تحريري لطاهٍ في إضاءة صباحية ناعمة، ٥٠ ملم",
+        time: "قبل ساعة",
+        style: "تحريري · ٢:٣",
       },
       {
-        slug: "design-systems",
-        title: "أنظمة التصميم",
-        tagline: "رموز، مكونات، توثيق — جاهزة لفريقك.",
-        body: "نظام تصميم بجودة منتج، مع مكتبة Figma، أساسيات React، ونموذج حوكمة يبقي فريقك على هوية موحدة بسرعة.",
-        deliverables: [
-          "مكتبة مكونات Figma",
-          "رموز وأساسيات في الكود",
-          "موقع توثيق Storybook",
-          "دليل المساهمة",
-        ],
-        timeline: "٤–٦ أسابيع",
-        stack: ["Figma", "React", "Tailwind", "Storybook"],
-      },
-      {
-        slug: "marketing-sites",
-        title: "مواقع تسويقية",
-        tagline: "مواقع عالية التحويل تعمل في أقل من ثانية.",
-        body: "مواقع تسويقية سهلة التحرير على Next.js مع نظام محتوى headless — مفهرسة، متاحة للجميع، وداعمة للعربية من اليوم الأول.",
-        deliverables: [
-          "إعداد Next.js + MDX",
-          "تكامل مع CMS",
-          "SEO وتحليلات",
-          "دعم كامل للعربية والإنجليزية",
-        ],
-        timeline: "٣–٥ أسابيع",
-        stack: ["Next.js", "Sanity", "Tailwind", "Vercel"],
-      },
-      {
-        slug: "scale-and-devops",
-        title: "التوسع وDevOps",
-        tagline: "اشحن إلى الملايين دون سهر الليالي.",
-        body: "بنية تحتية، خطوط CI/CD، مراقبة، وضبط للتكاليف للفرق التي تتجاوز مئة ألف مستخدم.",
-        deliverables: [
-          "بنية تحتية ككود",
-          "خطوط CI/CD",
-          "مراقبة وتنبيهات",
-          "لوحات تحكم للتكاليف",
-        ],
-        timeline: "عقد شهري متجدد",
-        stack: ["Terraform", "GitHub Actions", "Grafana", "Cloudflare"],
-      },
-      {
-        slug: "support-retainers",
-        title: "عقود دعم شهرية",
-        tagline: "فريق أول بطلب — شهرًا فشهر.",
-        body: "هندسة بدوام جزئي للشركات التي تحتاج زخمًا مستمرًا دون توظيف دائم.",
-        deliverables: [
-          "اجتماعات تخطيط أسبوعية",
-          "قناة سلاك مشتركة",
-          "استجابة خلال ٢٤ ساعة",
-          "مراجعة معمارية كل ربع",
-        ],
-        timeline: "شهري متجدد",
-        stack: ["حزمتك التقنية"],
+        prompt: "رسم إيزومتري لبيت زجاجي صغير، ألوان باستيل",
+        time: "أمس",
+        style: "رسم تصويري · ١:١",
       },
     ],
-  },
-  portfolio: {
-    eyebrow: "أعمال مختارة",
-    title: "الأعمال",
-    subtitle: "أحدث ما أطلقناه — متاجر تطبيقات، وكالات، ومؤسسون مستقلون.",
-    viewAll: "كل الأعمال",
-    viewCase: "افتح دراسة الحالة",
-    categoryLabel: "الفئة",
-    allCategories: "الكل",
-    overview: "نظرة عامة",
-    highlights: "أبرز ما فيه",
-    outcomes: "النتائج",
-    stack: "التقنيات",
-    nextProject: "المشروع التالي",
-    items: [
-      {
-        slug: "pollinate",
-        name: "Pollinate",
-        category: "تطبيق جوال",
-        tagline: "تحويل النص إلى صورة على الجهاز، بتقنية Pollinations.",
-        body: "عميل Flutter بمعرض يعمل دون اتصال، تخزين آمن للمفاتيح، ومخزن محلي بسعة ٥٠٠ عنصر. إنجليزي وعربي، بدعم RTL كامل.",
-        highlights: [
-          "زمن توليد أقل من ثانيتين",
-          "معرض محلي بسعة ٥٠٠ عنصر",
-          "تخزين أسرار بدعم العتاد",
-          "دعم عربي RTL كامل",
-        ],
-        outcomes: [
-          "متوسط ٤٫٨ نجوم في TestFlight",
-          "معدل احتفاظ أسبوعي ٣٠٪",
-        ],
-        stack: ["Flutter", "Riverpod", "GoRouter", "Pollinations API"],
-        color: "#1b1b1f",
-      },
-      {
-        slug: "studio-cloud",
-        name: "Studio Cloud",
-        category: "منصة ويب",
-        tagline: "مساحة عمل للفرق الإبداعية مع لوحات مشتركة وفوترة.",
-        body: "مساحة عمل متعددة المستأجرين للوكالات لإعداد الإيجازات، التوليد، وتسليم صور العلامة — مع مسارات موافقة وفوترة حسب الاستخدام.",
-        highlights: [
-          "مساحات عمل متعددة المستأجرين",
-          "مسارات موافقة حسب الدور",
-          "فوترة مقيسة عبر Stripe",
-          "تعاون فوري",
-        ],
-        outcomes: [
-          "١٫٢ مليون دولار إيرادات سنوية في العام الأول",
-          "١٢ وكالة منضمّة",
-        ],
-        stack: ["Next.js", "Postgres", "Stripe", "tRPC"],
-        color: "#0e1a2b",
-      },
-      {
-        slug: "halo-brand",
-        name: "Halo Brand",
-        category: "نظام تصميم",
-        tagline: "نظام Figma + React لمجموعة تجارة إلكترونية إقليمية.",
-        body: "نظام تصميم قائم على الرموز، يدعم الحروف العربية والإنجليزية، بتوثيق حوكمة وStorybook يعمل كمواد تدريب للفرق.",
-        highlights: [
-          "أكثر من ١٨٠ مكونًا في Figma",
-          "رموز في CSS وSwift وKotlin",
-          "سلم طباعي ثنائي اللغة",
-        ],
-        outcomes: [
-          "تسريع تسليم الشاشات ٧٠٪",
-          "توحيد ثلاث فرق منتج",
-        ],
-        stack: ["Figma", "Storybook", "Tailwind"],
-        color: "#24212b",
-      },
-      {
-        slug: "lumen-lab",
-        name: "Lumen Lab",
-        category: "موقع تسويقي",
-        tagline: "موقع تسويقي سهل التحرير لمختبر أبحاث ذكاء اصطناعي.",
-        body: "موقع Next.js + Sanity بصفحات هبوط عربية، ومستندات MDX، وLCP أقل من ثانية عبر الكاتالوج.",
-        highlights: [
-          "LCP ٠٫٩ ثانية على شبكة 3G",
-          "تحرير مدعوم بـ Sanity",
-          "ترجمات عربية كاملة",
-        ],
-        outcomes: [
-          "زيادة ٢٢٠٪ في التسجيلات العضوية",
-          "١٠٠ على مؤشرات Lighthouse",
-        ],
-        stack: ["Next.js", "Sanity", "Vercel"],
-        color: "#151515",
-      },
-      {
-        slug: "caravan-ops",
-        name: "Caravan Ops",
-        category: "أدوات داخلية",
-        tagline: "لوحة لوجستية لشبكة توصيل إقليمية.",
-        body: "أداة عمليات داخلية تستبدل سبع جداول بيانات — خريطة أسطول فورية، مراقبة SLA، وتطبيق مرافق للسائقين.",
-        highlights: [
-          "خريطة أسطول حيّة",
-          "محرك SLA مخصص",
-          "تطبيق مرافق للسائقين",
-        ],
-        outcomes: [
-          "انخفاض ٢٥٪ في SLA الفائتة",
-          "توفير ٤ ساعات يوميًا لقائد العمليات",
-        ],
-        stack: ["Next.js", "Postgres", "Flutter"],
-        color: "#1a1f1a",
-      },
-      {
-        slug: "inkwell",
-        name: "Inkwell",
-        category: "تطبيق جوال",
-        tagline: "مولّد قصص مصوّرة بالذكاء الاصطناعي للأطفال ثنائيي اللغة.",
-        body: "قارئ بصيغة الجهاز اللوحي يولّد قصصًا مصوّرة بالعربية والإنجليزية، مع رقابة أبوية وحزم تعمل دون اتصال.",
-        highlights: [
-          "توليد ثنائي اللغة على الجهاز",
-          "حزم دون اتصال أقل من ٥٠ ميغابايت",
-          "رقابة أبوية للمحتوى",
-        ],
-        outcomes: [
-          "تم عرضه في متجر تطبيقات MENA",
-          "٦٠ ألف تنزيل في ٨ أسابيع",
-        ],
-        stack: ["Flutter", "ML على الجهاز", "Firebase"],
-        color: "#1f1b14",
-      },
+    tipsTitle: "نصائح",
+    tips: [
+      "سمِّ الوسيلة — «فيلم ٣٥ ملم»، «زيت على قماش»، «رسم متجهي إيزومتري» — لتوجيه النموذج بقوة.",
+      "كلمات الإضاءة مثل «إضاءة خلفية»، «ساعة ذهبية»، «ظل وضوء»، تغيّر المزاج بالكامل.",
+      "احفظ الموجهات القوية في مكتبتك لتعيد تشغيلها بتنويعات.",
     ],
   },
   about: {
@@ -1306,45 +893,11 @@ const ar: Dict = {
       },
     ],
   },
-  contact: {
-    eyebrow: "تواصل",
-    title: "حدّثنا عن مشروعك.",
-    subtitle:
-      "يردّ أحد المؤسسين خلال يوم عمل واحد. لا حاجة لعروض تقديمية.",
-    form: {
-      name: "اسمك",
-      namePh: "مثلاً: سارة أحمد",
-      email: "البريد الإلكتروني",
-      emailPh: "sara@company.com",
-      phone: "الهاتف (اختياري)",
-      phonePh: "٠٥٠ ١٢٣ ٤٥٦٧",
-      service: "الخدمة",
-      servicePlaceholder: "اختر خدمة",
-      description: "وصف المشروع",
-      descriptionPh: "جمل قليلة عن المشكلة، الجمهور، وأي مواعيد نهائية.",
-      submit: "أرسل الرسالة",
-      sending: "جارٍ الإرسال...",
-      success: "شكراً — سنتواصل خلال يوم عمل واحد.",
-      error: "حدث خطأ ما. راسلنا على hello@texttoimage.studio.",
-      required: "حقل مطلوب",
-      invalidEmail: "أدخل بريدًا إلكترونيًا صالحًا.",
-    },
-    info: {
-      email: "hello@texttoimage.studio",
-      phone: "+44 20 4586 2100",
-      address: "لندن · دبي · الرياض",
-      hours: "الاثنين–الجمعة · ٠٩:٠٠–١٨:٠٠ غرينتش",
-      emailLabel: "البريد",
-      phoneLabel: "الهاتف",
-      addressLabel: "المكتب",
-      hoursLabel: "أوقات العمل",
-    },
-    social: {
-      twitter: "تويتر",
-      linkedin: "لينكدإن",
-      github: "جيت هاب",
-      instagram: "إنستغرام",
-    },
+  social: {
+    twitter: "تويتر",
+    linkedin: "لينكدإن",
+    github: "جيت هاب",
+    instagram: "إنستغرام",
   },
   blog: {
     eyebrow: "مقالات",

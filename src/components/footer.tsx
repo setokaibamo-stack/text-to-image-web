@@ -16,27 +16,15 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dict }) {
     {
       title: dict.footer.product,
       links: [
-        { href: `/${locale}/services`, label: dict.nav.services },
-        { href: `/${locale}/portfolio`, label: dict.nav.portfolio },
-        { href: `/${locale}/blog`, label: dict.nav.blog },
+        { href: `/${locale}/dashboard`, label: dict.nav.dashboard },
+        { href: `/${locale}/launch`, label: dict.nav.startProject },
       ],
     },
     {
       title: dict.footer.company,
       links: [
         { href: `/${locale}/about`, label: dict.nav.about },
-        { href: `/${locale}/contact`, label: dict.nav.contact },
-        {
-          href: `/${locale}/services/ai-product-engineering`,
-          label: dict.services.items[0].title,
-        },
-      ],
-    },
-    {
-      title: dict.footer.resources,
-      links: [
         { href: `/${locale}/blog`, label: dict.nav.blog },
-        { href: `/${locale}/contact`, label: dict.contact.info.email },
       ],
     },
     {
@@ -51,7 +39,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dict }) {
   return (
     <footer className="border-t border-[var(--border)] bg-[var(--bg-base)] mt-24">
       <div className="container-page py-16">
-        <div className="grid gap-12 md:gap-8 md:grid-cols-[1.2fr_1fr_1fr_1fr_1fr]">
+        <div className="grid gap-12 md:gap-8 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div className="md:pr-6">
             <Link
               href={`/${locale}`}
@@ -107,22 +95,22 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dict }) {
           <div className="flex items-center gap-2 text-[var(--text-secondary)]">
             {[
               {
-                label: dict.contact.social.twitter,
+                label: dict.social.twitter,
                 href: "https://twitter.com",
                 icon: <TwitterIcon width={16} height={16} />,
               },
               {
-                label: dict.contact.social.linkedin,
+                label: dict.social.linkedin,
                 href: "https://linkedin.com",
                 icon: <LinkedInIcon width={16} height={16} />,
               },
               {
-                label: dict.contact.social.github,
+                label: dict.social.github,
                 href: "https://github.com",
                 icon: <GitHubIcon width={16} height={16} />,
               },
               {
-                label: dict.contact.social.instagram,
+                label: dict.social.instagram,
                 href: "https://instagram.com",
                 icon: <InstagramIcon width={16} height={16} />,
               },

@@ -24,7 +24,7 @@ export default function LocaleNotFound() {
           <Button href={`/${l}`} iconRight={<ArrowRightIcon width={16} height={16} />}>
             {d.notFound.cta}
           </Button>
-          <Button href={`/${l}/portfolio`} variant="secondary">
+          <Button href={`/${l}/dashboard`} variant="secondary">
             {d.notFound.secondary}
           </Button>
         </div>

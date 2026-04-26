@@ -24,7 +24,7 @@ export default function NotFound() {
             {d.notFound.cta}
           </Link>
           <Link
-            href={`/${defaultLocale}/portfolio`}
+            href={`/${defaultLocale}/dashboard`}
             className="inline-flex items-center gap-2 rounded-[var(--radius-md)] border border-[var(--border)] px-5 py-3 text-body-sm font-semibold text-[var(--text-primary)]"
           >
             {d.notFound.secondary}

@@ -41,7 +41,7 @@ export default async function AboutPage({
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 sm:mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {[
             { t: d.about.visionTitle, b: d.about.visionBody },
             { t: d.about.missionTitle, b: d.about.missionBody },
@@ -65,16 +65,16 @@ export default async function AboutPage({
           title={d.about.methodTitle}
           subtitle={d.about.methodBody}
         />
-        <dl className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
+        <dl className="mt-10 sm:mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           {d.about.stats.map((s) => (
             <div
               key={s.label}
-              className="p-6 rounded-[var(--radius-lg)] bg-[var(--bg-elevated)] border border-[var(--border)]"
+              className="p-5 sm:p-6 rounded-[var(--radius-lg)] bg-[var(--bg-elevated)] border border-[var(--border)]"
             >
               <dt className="text-caption uppercase tracking-[0.12em] text-[var(--text-muted)]">
                 {s.label}
               </dt>
-              <dd className="mt-2 text-display-lg text-[var(--text-primary)]">
+              <dd className="mt-2 text-heading-lg sm:text-display-lg text-[var(--text-primary)] ltr-nums">
                 {s.value}
               </dd>
             </div>
@@ -84,7 +84,7 @@ export default async function AboutPage({
 
       <Section>
         <SectionHeader title={d.about.teamTitle} />
-        <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-8 sm:mt-10 grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
           {d.about.team.map((p) => (
             <Card as="li" key={p.name} className="text-center">
               <div

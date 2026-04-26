@@ -18,7 +18,7 @@ export function Section({
         tone === "subtle" ? "bg-[var(--bg-subtle)]" : "bg-[var(--bg-base)]"
       } ${className}`}
     >
-      <div className="container-page py-20 md:py-24">{children}</div>
+      <div className="container-page py-14 sm:py-20 md:py-24">{children}</div>
     </section>
   );
 }
@@ -50,11 +50,11 @@ export function SectionHeader({
             {eyebrow}
           </span>
         ) : null}
-        <h2 className="text-display-lg text-[var(--text-primary)] max-w-[22ch]">
+        <h2 className="text-display-lg text-[var(--text-primary)] max-w-[22ch] text-balance">
           {title}
         </h2>
         {subtitle ? (
-          <p className="text-body-lg text-[var(--text-secondary)] max-w-[60ch]">
+          <p className="text-body-lg text-[var(--text-secondary)] max-w-[60ch] text-pretty">
             {subtitle}
           </p>
         ) : null}

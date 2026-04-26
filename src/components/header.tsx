@@ -36,11 +36,9 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
   }, [open]);
 
   const links = [
-    { href: `/${locale}/services`, label: dict.nav.services },
-    { href: `/${locale}/portfolio`, label: dict.nav.portfolio },
     { href: `/${locale}/about`, label: dict.nav.about },
     { href: `/${locale}/blog`, label: dict.nav.blog },
-    { href: `/${locale}/contact`, label: dict.nav.contact },
+    { href: `/${locale}/dashboard`, label: dict.nav.dashboard },
   ];
 
   const otherLocale: Locale = locale === "en" ? "ar" : "en";
@@ -100,7 +98,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
             <span>{localeLabel}</span>
           </a>
           <Button
-            href={`/${locale}/contact`}
+            href={`/${locale}/launch`}
             size="md"
             className="hidden md:inline-flex"
           >
@@ -139,7 +137,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
                 <GlobeIcon width={16} height={16} />
                 <span>{localeLabel}</span>
               </a>
-              <Button href={`/${locale}/contact`} size="md" onClick={() => setOpen(false)}>
+              <Button href={`/${locale}/launch`} size="md" onClick={() => setOpen(false)}>
                 {dict.nav.startProject}
               </Button>
             </div>

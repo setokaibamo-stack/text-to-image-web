@@ -249,3 +249,85 @@ html[dir="rtl"] body {
   direction: ltr;
   unicode-bidi: isolate;
 }
+
+/* =========================================================
+   Launch / splash animations
+   ========================================================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes launchLogoIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+.launch-logo {
+  opacity: 0;
+  animation: launchLogoIn 700ms var(--ease-out) 80ms forwards;
+}
+
+@keyframes launchTaglineIn {
+  from {
+    opacity: 0;
+    letter-spacing: 0.6em;
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 0.32em;
+  }
+}
+.launch-tagline {
+  opacity: 0;
+  animation: launchTaglineIn 900ms var(--ease-out) 260ms forwards;
+}
+
+.launch-bar {
+  opacity: 0;
+  animation: fadeIn 400ms var(--ease-out) 420ms forwards;
+}
+
+@keyframes launchDrift {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate3d(var(--dx, 0), var(--dy, 0), 0);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.35;
+  }
+}
+.launch-point {
+  position: absolute;
+  border-radius: 9999px;
+  background: color-mix(in oklab, var(--text-primary) 70%, transparent);
+  box-shadow: 0 0 12px color-mix(in oklab, var(--text-primary) 35%, transparent);
+  animation: launchDrift 10s var(--ease-out) infinite;
+  will-change: transform, opacity;
+}
+
+/* Dashboard background shimmer for stat values */
+.stat-card {
+  background-image: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--bg-elevated) 100%, transparent) 0%,
+    color-mix(in oklab, var(--bg-subtle) 100%, transparent) 100%
+  );
+}
+

@@ -40,17 +40,17 @@ export default async function BlogPage({
         />
         <Link
           href={`/${l}/blog/${featured.slug}`}
-          className="mt-12 block group rounded-[var(--radius-xl)] border border-[var(--border)] bg-[var(--bg-elevated)] p-6 md:p-10"
+          className="mt-10 sm:mt-12 block group rounded-[var(--radius-xl)] border border-[var(--border)] bg-[var(--bg-elevated)] p-6 sm:p-8 md:p-10"
         >
           <div className="grid gap-6 md:grid-cols-[1.3fr_1fr] md:items-end">
             <div>
-              <div className="flex items-center gap-3 text-caption text-[var(--text-muted)]">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-caption text-[var(--text-muted)]">
                 <span className="ltr-nums">{featured.date}</span>
-                <span>·</span>
+                <span aria-hidden>·</span>
                 <span>
                   <span className="ltr-nums">{featured.minutes}</span> {d.blog.minutes}
                 </span>
-                <span>·</span>
+                <span aria-hidden>·</span>
                 <span>{featured.author}</span>
               </div>
               <h2 className="mt-3 text-display-lg text-[var(--text-primary)] group-hover:underline underline-offset-4 decoration-[var(--border-strong)]">
@@ -69,7 +69,7 @@ export default async function BlogPage({
           </div>
         </Link>
 
-        <ul className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-8 sm:mt-10 grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {rest.map((p) => (
             <Card as="li" key={p.slug} interactive>
               <Link href={`/${l}/blog/${p.slug}`} className="flex flex-col gap-3">

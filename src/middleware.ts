@@ -35,7 +35,14 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  const response = NextResponse.next();
+  // Forward the resolved locale + pathname to the server handler as *request*
+  // headers so server components (`headers()`) can read them — e.g. the
+  // [locale]/not-found.tsx page needs to resolve the current locale when the
+  // route params are unavailable.
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-pathname", pathname);
+  requestHeaders.set("x-locale", firstSegment);
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
   response.headers.set("x-pathname", pathname);
   response.headers.set("x-locale", firstSegment);
   return response;

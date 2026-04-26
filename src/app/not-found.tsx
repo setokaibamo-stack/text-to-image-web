@@ -1,9 +1,19 @@
+import { headers } from "next/headers";
 import Link from "next/link";
-import { defaultLocale } from "@/i18n/config";
+import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
-export default function NotFound() {
-  const d = getDictionary(defaultLocale);
+export default async function NotFound() {
+  // A completely unmatched path (e.g. /ar/<unknown>) falls back here rather
+  // than to [locale]/not-found.tsx, so resolve the active locale from the
+  // x-locale header that middleware sets. Fall back to defaultLocale only
+  // when the header is absent or invalid.
+  const h = await headers();
+  const headerLocale = h.get("x-locale");
+  const l: Locale =
+    headerLocale && isLocale(headerLocale) ? headerLocale : defaultLocale;
+  const d = getDictionary(l);
+
   return (
     <div className="min-h-screen flex items-center justify-center px-6">
       <div className="max-w-xl text-center">
@@ -18,13 +28,13 @@ export default function NotFound() {
         </p>
         <div className="mt-8 flex items-center justify-center gap-3 flex-wrap">
           <Link
-            href={`/${defaultLocale}`}
+            href={`/${l}`}
             className="inline-flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--accent)] text-[var(--accent-fg)] px-5 py-3 text-body-sm font-semibold"
           >
             {d.notFound.cta}
           </Link>
           <Link
-            href={`/${defaultLocale}/dashboard`}
+            href={`/${l}/dashboard`}
             className="inline-flex items-center gap-2 rounded-[var(--radius-md)] border border-[var(--border)] px-5 py-3 text-body-sm font-semibold text-[var(--text-primary)]"
           >
             {d.notFound.secondary}

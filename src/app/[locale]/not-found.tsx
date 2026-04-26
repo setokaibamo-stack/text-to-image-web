@@ -1,12 +1,16 @@
+import { headers } from "next/headers";
 import { Button } from "@/components/button";
 import { ArrowRightIcon } from "@/components/icons";
 import { Section } from "@/components/section";
-import { defaultLocale } from "@/i18n/config";
+import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
-export default function LocaleNotFound() {
-  const d = getDictionary(defaultLocale);
-  const l = defaultLocale;
+export default async function LocaleNotFound() {
+  const h = await headers();
+  const headerLocale = h.get("x-locale");
+  const l: Locale =
+    headerLocale && isLocale(headerLocale) ? headerLocale : defaultLocale;
+  const d = getDictionary(l);
 
   return (
     <Section>

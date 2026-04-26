@@ -43,9 +43,12 @@ export default async function BlogPostPage({
         <article className="max-w-3xl mx-auto">
           <Link
             href={`/${l}/blog`}
-            className="text-body-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+            className="inline-flex items-center gap-2 text-body-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
           >
-            ← {d.blog.backToBlog}
+            <span aria-hidden className="inline-block rtl:scale-x-[-1]">
+              ←
+            </span>
+            {d.blog.backToBlog}
           </Link>
           <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-caption text-[var(--text-muted)]">
             <span className="ltr-nums">{post.date}</span>

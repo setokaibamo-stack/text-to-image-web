@@ -238,10 +238,10 @@ export default async function HomePage({
             <Reveal as="li" key={s.n} delay={((i % 4) + 1) as 1 | 2 | 3 | 4}>
               <div className="card-glow p-6 h-full">
                 <div
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full text-white text-body-sm font-bold ltr-nums"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full text-white text-body-sm font-bold"
                   style={{ background: "var(--gradient-brand)" }}
                 >
-                  {String(i + 1).padStart(2, "0")}
+                  {s.n}
                 </div>
                 <h3 className="mt-4 text-heading-md text-[var(--text-primary)]">
                   {s.title}

@@ -42,6 +42,7 @@ export function Counter({
       setValue(to);
       return;
     }
+    let rafId = 0;
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
@@ -52,9 +53,9 @@ export function Counter({
               const t = Math.min(1, (now - start) / duration);
               const eased = 1 - Math.pow(1 - t, 3);
               setValue(eased * to);
-              if (t < 1) requestAnimationFrame(tick);
+              if (t < 1) rafId = requestAnimationFrame(tick);
             };
-            requestAnimationFrame(tick);
+            rafId = requestAnimationFrame(tick);
             io.unobserve(e.target);
           }
         }
@@ -62,7 +63,10 @@ export function Counter({
       { threshold: 0.4 },
     );
     io.observe(node);
-    return () => io.disconnect();
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      io.disconnect();
+    };
   }, [to, duration]);
 
   const display = value.toLocaleString(undefined, {

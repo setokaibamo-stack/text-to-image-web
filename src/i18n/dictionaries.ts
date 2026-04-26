@@ -22,6 +22,7 @@ export type Dict = {
     promptPlaceholder: string;
     promptHelper: string;
     promptSubmit: string;
+    promptAttach: string;
     forPlatform: string;
   };
   why: {
@@ -240,6 +241,7 @@ const en: Dict = {
       "Describe your next campaign — e.g. 'a neon-lit cyberpunk street at midnight, cinematic, 35mm'",
     promptHelper: "Press ⏎ to generate · Max 10MB · Upgrade for up to 5GB uploads",
     promptSubmit: "Generate",
+    promptAttach: "Attach reference image",
     forPlatform: "For iPhone",
   },
   why: {
@@ -888,6 +890,7 @@ const ar: Dict = {
       "صف حملتك القادمة — مثال: «شارع سايبربانك بأضواء نيون عند منتصف الليل، سينمائي، ٣٥ ملم»",
     promptHelper: "اضغط ⏎ للتوليد · بحد أقصى ١٠ ميغابايت · ارفع الحد إلى ٥ غيغابايت بالترقية",
     promptSubmit: "ولِّد",
+    promptAttach: "إرفاق صورة مرجعية",
     forPlatform: "لأجهزة iPhone",
   },
   why: {

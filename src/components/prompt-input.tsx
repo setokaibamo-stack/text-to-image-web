@@ -57,7 +57,7 @@ export function PromptInput({ dict }: { dict: Dict }) {
         <div className="flex items-center gap-1.5">
           <button
             type="button"
-            aria-label="Attach file"
+            aria-label={dict.hero.promptAttach}
             className="inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-full)] text-[var(--text-secondary)] hover:bg-[var(--bg-subtle)] hover:text-[var(--text-primary)] transition-colors"
           >
             <PaperclipIcon width={18} height={18} />

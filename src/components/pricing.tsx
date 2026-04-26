@@ -64,8 +64,8 @@ export function Pricing({
             aria-hidden
             className="absolute top-1 bottom-1 rounded-full transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
             style={{
-              left: annual ? "calc(50% + 2px)" : "4px",
-              right: annual ? "4px" : "calc(50% + 2px)",
+              insetInlineStart: annual ? "calc(50% + 2px)" : "4px",
+              insetInlineEnd: annual ? "4px" : "calc(50% + 2px)",
               background: "var(--gradient-brand)",
               boxShadow: "var(--shadow-glow-purple)",
             }}

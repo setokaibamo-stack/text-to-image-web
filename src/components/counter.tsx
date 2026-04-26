@@ -69,7 +69,7 @@ export function Counter({
     };
   }, [to, duration]);
 
-  const display = value.toLocaleString(undefined, {
+  const display = value.toLocaleString("en-US", {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });

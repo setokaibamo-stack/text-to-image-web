@@ -34,6 +34,42 @@ export type Dict = {
     loadingLabel: string;
     continueLabel: string;
   };
+  welcome: {
+    eyebrow: string;
+    title: string;
+    titleAccent: string;
+    subtitle: string;
+    codeLines: string[];
+    continueCta: string;
+    skipCta: string;
+    phoneCaption: string;
+    codeCaption: string;
+  };
+  auth: {
+    eyebrow: string;
+    title: string;
+    titleAccent: string;
+    subtitle: string;
+    googleCta: string;
+    pollinationsCta: string;
+    dividerOr: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    passwordLabel: string;
+    passwordPlaceholder: string;
+    submitSignIn: string;
+    submitSignUp: string;
+    toggleToSignUp: string;
+    toggleToSignIn: string;
+    quotaTitle: string;
+    quotaGoogle: string;
+    quotaPollinations: string;
+    quotaLink: string;
+    quotaLinkLabel: string;
+    backCta: string;
+    forgotCta: string;
+    termsNote: string;
+  };
   dashboard: {
     eyebrow: string;
     welcomeTitle: string;
@@ -286,6 +322,49 @@ const en: Dict = {
     tagline: "AI image studio",
     loadingLabel: "Warming up the canvas",
     continueLabel: "Enter",
+  },
+  welcome: {
+    eyebrow: "Welcome",
+    title: "Turn a sentence into",
+    titleAccent: "cinematic imagery.",
+    subtitle:
+      "A pocket studio that goes from prompt to picture in seconds. Continue to sign in and start generating.",
+    codeLines: [
+      "a cinematic wide shot of a neon-lit cyberpunk street at midnight, 35mm film grain, rain on asphalt",
+      "studio portrait of a chef in soft morning light, 50mm, editorial",
+      "isometric illustration of a tiny greenhouse, pastel palette, soft shadows",
+    ],
+    continueCta: "Continue",
+    skipCta: "Skip for now",
+    phoneCaption: "Generate",
+    codeCaption: "Prompt",
+  },
+  auth: {
+    eyebrow: "Sign in",
+    title: "Welcome to",
+    titleAccent: "text to image.",
+    subtitle:
+      "Pick a provider to start generating. Your account decides your daily image quota.",
+    googleCta: "Continue with Google",
+    pollinationsCta: "Continue with Pollinations.ai",
+    dividerOr: "or sign in with email",
+    emailLabel: "Email",
+    emailPlaceholder: "you@studio.com",
+    passwordLabel: "Password",
+    passwordPlaceholder: "At least 8 characters",
+    submitSignIn: "Sign in",
+    submitSignUp: "Create account",
+    toggleToSignUp: "Don't have an account? Sign up",
+    toggleToSignIn: "Already have an account? Sign in",
+    quotaTitle: "Daily image quota",
+    quotaGoogle: "Sign in with Google · 4 images per day",
+    quotaPollinations:
+      "Use a Pollinations API key · up to 20 images per day",
+    quotaLink: "https://pollinations.ai",
+    quotaLinkLabel: "Get a key on pollinations.ai",
+    backCta: "Back",
+    forgotCta: "Forgot password?",
+    termsNote: "By continuing you agree to our Terms and Privacy.",
   },
   dashboard: {
     eyebrow: "Workspace",
@@ -895,6 +974,49 @@ const ar: Dict = {
     tagline: "استوديو الصور الذكي",
     loadingLabel: "جارٍ تجهيز اللوحة",
     continueLabel: "دخول",
+  },
+  welcome: {
+    eyebrow: "أهلًا بك",
+    title: "حوِّل جملةً إلى",
+    titleAccent: "صورة سينمائية.",
+    subtitle:
+      "استوديو في جيبك ينتقل من الفكرة إلى الصورة في ثوانٍ. تابع لتسجيل الدخول وبدء التوليد.",
+    codeLines: [
+      "لقطة سينمائية واسعة لشارع سايبربانك مضاء بالنيون منتصف الليل، حبيبات فيلم 35mm، مطر على الإسفلت",
+      "بورتريه استوديو لطاهٍ في إضاءة صباحية ناعمة، 50mm، تحريري",
+      "رسم آيزومتريك لبيت زجاجي صغير، ألوان باستيل، ظلال ناعمة",
+    ],
+    continueCta: "متابعة",
+    skipCta: "تخطٍ الآن",
+    phoneCaption: "توليد",
+    codeCaption: "النص الموجِّه",
+  },
+  auth: {
+    eyebrow: "تسجيل الدخول",
+    title: "أهلًا بك في",
+    titleAccent: "تكست تو إيمج.",
+    subtitle:
+      "اختر مزوِّدًا لبدء التوليد. حسابك يحدِّد رصيدك اليومي من الصور.",
+    googleCta: "متابعة عبر Google",
+    pollinationsCta: "متابعة عبر Pollinations.ai",
+    dividerOr: "أو سجِّل دخولك بالبريد الإلكتروني",
+    emailLabel: "البريد الإلكتروني",
+    emailPlaceholder: "you@studio.com",
+    passwordLabel: "كلمة المرور",
+    passwordPlaceholder: "٨ أحرف على الأقل",
+    submitSignIn: "تسجيل الدخول",
+    submitSignUp: "إنشاء حساب",
+    toggleToSignUp: "ليس لديك حساب؟ سجِّل الآن",
+    toggleToSignIn: "لديك حساب؟ سجِّل الدخول",
+    quotaTitle: "الرصيد اليومي للصور",
+    quotaGoogle: "تسجيل عبر Google · ٤ صور يوميًا",
+    quotaPollinations:
+      "باستخدام مفتاح Pollinations API · حتى ٢٠ صورة يوميًا",
+    quotaLink: "https://pollinations.ai",
+    quotaLinkLabel: "احصل على مفتاحك من pollinations.ai",
+    backCta: "رجوع",
+    forgotCta: "نسيت كلمة المرور؟",
+    termsNote: "بمتابعتك فإنك توافق على شروطنا وسياسة الخصوصية.",
   },
   dashboard: {
     eyebrow: "مساحة العمل",

@@ -148,7 +148,7 @@ export function AuthForm({ locale, dict }: { locale: Locale; dict: Dict }) {
           className="mt-1 inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-[image:var(--gradient-brand)] px-5 py-3 text-body-md font-semibold text-white shadow-[var(--shadow-glow-purple)] transition-all hover:-translate-y-px hover:shadow-[var(--shadow-glow-mix)] disabled:opacity-50 disabled:pointer-events-none"
         >
           <span>{submitLabel}</span>
-          <ArrowRightIcon width={16} height={16} className="rtl:scale-x-[-1]" />
+          <ArrowRightIcon width={16} height={16} className="rtl-flip" />
         </button>
       </form>
 
@@ -183,7 +183,7 @@ export function AuthForm({ locale, dict }: { locale: Locale; dict: Dict }) {
               className="inline-flex items-center gap-1 text-body-sm font-semibold text-[var(--brand-violet)] hover:text-[var(--text-primary)] transition-colors"
             >
               <span>{dict.auth.quotaLinkLabel}</span>
-              <ArrowRightIcon width={14} height={14} className="rtl:scale-x-[-1]" />
+              <ArrowRightIcon width={14} height={14} className="rtl-flip" />
             </a>
           </div>
         </div>

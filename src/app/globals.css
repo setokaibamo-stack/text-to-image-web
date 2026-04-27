@@ -122,6 +122,14 @@ html[dir="rtl"] body {
   font-family: var(--font-arabic), var(--font-sans);
 }
 
+.rtl-flip {
+  display: inline-block;
+}
+html[dir="rtl"] .rtl-flip,
+[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
+
 ::selection {
   background: var(--brand-purple);
   color: var(--text-primary);

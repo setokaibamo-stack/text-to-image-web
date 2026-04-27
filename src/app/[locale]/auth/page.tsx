@@ -45,7 +45,7 @@ export default async function AuthPage({
             href={`/${l}/welcome`}
             className="inline-flex items-center gap-2 text-body-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
           >
-            <span aria-hidden className="inline-block rtl:scale-x-[-1]">←</span>
+            <span aria-hidden className="rtl-flip">←</span>
             {d.auth.backCta}
           </Link>
         </div>

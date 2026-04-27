@@ -47,7 +47,7 @@ export default async function BlogPostPage({
             href={`/${l}/blog`}
             className="inline-flex items-center gap-2 text-body-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
           >
-            <span aria-hidden className="inline-block rtl:scale-x-[-1]">
+            <span aria-hidden className="rtl-flip">
               ←
             </span>
             {d.blog.backToBlog}

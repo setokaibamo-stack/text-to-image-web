@@ -87,7 +87,7 @@ export default async function WelcomePage({
                 <ArrowRightIcon
                   width={16}
                   height={16}
-                  className="rtl:scale-x-[-1]"
+                  className="rtl-flip"
                 />
               }
             >

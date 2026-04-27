@@ -79,7 +79,7 @@ export function AuthForm({ locale, dict }: { locale: Locale; dict: Dict }) {
     setPollError(null);
     if (typeof window !== "undefined") {
       const existing = window.localStorage.getItem(POLLINATIONS_KEY_STORAGE);
-      if (existing) setPollKey(existing);
+      setPollKey(existing ?? "");
     }
     setPollOpen(true);
   }

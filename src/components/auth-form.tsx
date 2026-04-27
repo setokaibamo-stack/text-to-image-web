@@ -55,7 +55,7 @@ export function AuthForm({ locale, dict }: { locale: Locale; dict: Dict }) {
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (state === "loading") return;
-    if (!email.trim() || password.length < 4) return;
+    if (!email.trim() || password.length < 8) return;
     setState("loading");
     await new Promise((r) => setTimeout(r, 700));
     go();
@@ -134,7 +134,7 @@ export function AuthForm({ locale, dict }: { locale: Locale; dict: Dict }) {
             type="password"
             autoComplete={mode === "signin" ? "current-password" : "new-password"}
             required
-            minLength={4}
+            minLength={8}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder={dict.auth.passwordPlaceholder}
@@ -144,7 +144,7 @@ export function AuthForm({ locale, dict }: { locale: Locale; dict: Dict }) {
 
         <button
           type="submit"
-          disabled={disabled || !email.trim() || password.length < 4}
+          disabled={disabled || !email.trim() || password.length < 8}
           className="mt-1 inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-[image:var(--gradient-brand)] px-5 py-3 text-body-md font-semibold text-white shadow-[var(--shadow-glow-purple)] transition-all hover:-translate-y-px hover:shadow-[var(--shadow-glow-mix)] disabled:opacity-50 disabled:pointer-events-none"
         >
           <span>{submitLabel}</span>

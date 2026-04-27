@@ -163,7 +163,7 @@ export function AuthForm({ locale, dict }: { locale: Locale; dict: Dict }) {
             <SparkleIcon width={16} height={16} />
           </span>
           <div className="flex flex-col gap-2">
-            <div className="text-heading-sm text-[var(--text-primary)]">
+            <div className="text-heading-md text-[var(--text-primary)]">
               {dict.auth.quotaTitle}
             </div>
             <ul className="grid gap-1.5 text-body-sm text-[var(--text-secondary)]">

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { Suspense } from "react";
 import { AuthForm } from "@/components/auth-form";
 import { Background } from "@/components/background";
 import { SparkleIcon } from "@/components/icons";
@@ -37,7 +38,9 @@ export default async function AuthPage({
         </Reveal>
 
         <Reveal delay={1} className="mt-10 sm:mt-12">
-          <AuthForm locale={l} dict={d} />
+          <Suspense fallback={null}>
+            <AuthForm locale={l} dict={d} />
+          </Suspense>
         </Reveal>
 
         <div className="mt-10 flex justify-center">

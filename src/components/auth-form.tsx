@@ -1,12 +1,15 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import type { Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dictionaries";
+import {
+  POLLINATIONS_KEY_STORAGE,
+  POLLINATIONS_VALIDATED_FLAG,
+  validatePollinationsKey,
+} from "@/lib/pollinations";
 import { ArrowRightIcon, CloseIcon, SparkleIcon } from "./icons";
-
-const POLLINATIONS_KEY_STORAGE = "tti.pollinations.api_key";
 
 function GoogleGlyph({ size = 18 }: { size?: number }) {
   return (
@@ -45,6 +48,7 @@ type Mode = "signin" | "signup";
 
 export function AuthForm({ locale, dict }: { locale: Locale; dict: Dict }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [mode, setMode] = useState<Mode>("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,7 +56,15 @@ export function AuthForm({ locale, dict }: { locale: Locale; dict: Dict }) {
   const [pollOpen, setPollOpen] = useState(false);
   const [pollKey, setPollKey] = useState("");
   const [pollError, setPollError] = useState<string | null>(null);
+  const [pollValidating, setPollValidating] = useState(false);
+  const [keyInvalidNotice, setKeyInvalidNotice] = useState(false);
   const pollInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (searchParams?.get("keyInvalid") === "1") {
+      setKeyInvalidNotice(true);
+    }
+  }, [searchParams]);
 
   function go() {
     router.push(`/${locale}/dashboard`);
@@ -86,22 +98,37 @@ export function AuthForm({ locale, dict }: { locale: Locale; dict: Dict }) {
 
   async function onPollinationsSubmit(e: FormEvent) {
     e.preventDefault();
+    if (pollValidating) return;
     const trimmed = pollKey.trim();
     if (trimmed.length < 6) {
       setPollError(dict.auth.pollinationsKeyError);
       return;
     }
     setPollError(null);
+    setPollValidating(true);
+    const result = await validatePollinationsKey(trimmed);
+    setPollValidating(false);
+    if (!result.ok) {
+      setPollError(
+        result.reason === "invalid"
+          ? dict.auth.pollinationsKeyInvalidError
+          : result.reason === "timeout"
+            ? dict.auth.pollinationsKeyTimeoutError
+            : dict.auth.pollinationsKeyNetworkError,
+      );
+      return;
+    }
     if (typeof window !== "undefined") {
       try {
         window.localStorage.setItem(POLLINATIONS_KEY_STORAGE, trimmed);
+        window.sessionStorage.setItem(POLLINATIONS_VALIDATED_FLAG, "1");
       } catch {
         // ignore quota / privacy mode errors
       }
     }
+    setKeyInvalidNotice(false);
     setPollOpen(false);
     setState("loading");
-    await new Promise((r) => setTimeout(r, 500));
     go();
   }
 
@@ -109,14 +136,14 @@ export function AuthForm({ locale, dict }: { locale: Locale; dict: Dict }) {
     if (!pollOpen) return;
     const t = window.setTimeout(() => pollInputRef.current?.focus(), 30);
     function onKey(ev: KeyboardEvent) {
-      if (ev.key === "Escape") setPollOpen(false);
+      if (ev.key === "Escape" && !pollValidating) setPollOpen(false);
     }
     document.addEventListener("keydown", onKey);
     return () => {
       window.clearTimeout(t);
       document.removeEventListener("keydown", onKey);
     };
-  }, [pollOpen]);
+  }, [pollOpen, pollValidating]);
 
   useEffect(() => {
     if (pollOpen) {
@@ -136,6 +163,14 @@ export function AuthForm({ locale, dict }: { locale: Locale; dict: Dict }) {
 
   return (
     <div className="flex flex-col gap-5 w-full max-w-md mx-auto">
+      {keyInvalidNotice ? (
+        <div
+          role="status"
+          className="rounded-[var(--radius-md)] border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-body-sm text-amber-200"
+        >
+          {dict.auth.keyInvalidNotice}
+        </div>
+      ) : null}
       <div className="grid gap-3">
         <button
           type="button"
@@ -272,7 +307,9 @@ export function AuthForm({ locale, dict }: { locale: Locale; dict: Dict }) {
           <button
             type="button"
             aria-label={dict.auth.pollinationsKeyCancel}
-            onClick={() => setPollOpen(false)}
+            onClick={() => {
+              if (!pollValidating) setPollOpen(false);
+            }}
             className="absolute inset-0 bg-black/70 backdrop-blur-sm"
           />
           <form
@@ -282,8 +319,9 @@ export function AuthForm({ locale, dict }: { locale: Locale; dict: Dict }) {
             <button
               type="button"
               onClick={() => setPollOpen(false)}
+              disabled={pollValidating}
               aria-label={dict.auth.pollinationsKeyCancel}
-              className="absolute end-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full text-[var(--text-secondary)] hover:bg-white/8 hover:text-[var(--text-primary)] transition-colors"
+              className="absolute end-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full text-[var(--text-secondary)] hover:bg-white/8 hover:text-[var(--text-primary)] transition-colors disabled:opacity-50 disabled:pointer-events-none"
             >
               <CloseIcon width={16} height={16} />
             </button>
@@ -347,16 +385,30 @@ export function AuthForm({ locale, dict }: { locale: Locale; dict: Dict }) {
               <button
                 type="button"
                 onClick={() => setPollOpen(false)}
-                className="rounded-[var(--radius-md)] border border-[var(--border-strong)] bg-white/[0.03] px-4 py-2.5 text-body-md text-[var(--text-primary)] hover:bg-white/8 transition-colors"
+                disabled={pollValidating}
+                className="rounded-[var(--radius-md)] border border-[var(--border-strong)] bg-white/[0.03] px-4 py-2.5 text-body-md text-[var(--text-primary)] hover:bg-white/8 transition-colors disabled:opacity-50 disabled:pointer-events-none"
               >
                 {dict.auth.pollinationsKeyCancel}
               </button>
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-[image:var(--gradient-brand)] px-4 py-2.5 text-body-md font-semibold text-white shadow-[var(--shadow-glow-purple)] transition-all hover:-translate-y-px hover:shadow-[var(--shadow-glow-mix)]"
+                disabled={pollValidating}
+                className="inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-[image:var(--gradient-brand)] px-4 py-2.5 text-body-md font-semibold text-white shadow-[var(--shadow-glow-purple)] transition-all hover:-translate-y-px hover:shadow-[var(--shadow-glow-mix)] disabled:opacity-60 disabled:pointer-events-none"
               >
-                <span>{dict.auth.pollinationsKeyContinue}</span>
-                <ArrowRightIcon width={14} height={14} className="rtl-flip" />
+                {pollValidating ? (
+                  <>
+                    <span
+                      aria-hidden
+                      className="inline-block h-3.5 w-3.5 rounded-full border-2 border-white/40 border-t-white animate-spin"
+                    />
+                    <span>{dict.auth.pollinationsKeyValidating}</span>
+                  </>
+                ) : (
+                  <>
+                    <span>{dict.auth.pollinationsKeyContinue}</span>
+                    <ArrowRightIcon width={14} height={14} className="rtl-flip" />
+                  </>
+                )}
               </button>
             </div>
           </form>

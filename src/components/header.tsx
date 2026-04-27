@@ -16,7 +16,13 @@ function modeFor(pathname: string): Mode {
   const m = pathname.match(/^\/(?:en|ar)(\/.*)?$/);
   const rest = m ? m[1] || "/" : pathname || "/";
   if (CHROMELESS.has(rest)) return "hidden";
-  if (rest === "/dashboard" || rest.startsWith("/dashboard/")) return "app";
+  if (
+    rest === "/dashboard" ||
+    rest.startsWith("/dashboard/") ||
+    rest === "/settings" ||
+    rest.startsWith("/settings/")
+  )
+    return "app";
   return "marketing";
 }
 
@@ -139,13 +145,36 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
             </a>
 
             {mode === "app" ? (
-              <Link
-                href={`/${locale}/auth`}
-                className="flex items-center justify-between py-4 text-body-lg border-b border-[var(--border)] text-[var(--text-primary)] hover:text-[var(--brand-violet)] transition-colors"
-                onClick={() => setOpen(false)}
-              >
-                <span>{dict.nav.signOut}</span>
-              </Link>
+              <>
+                <Link
+                  href={`/${locale}/settings`}
+                  className="flex items-center justify-between py-4 text-body-lg border-b border-[var(--border)] text-[var(--text-primary)] hover:text-[var(--brand-violet)] transition-colors"
+                  onClick={() => setOpen(false)}
+                >
+                  <span>{dict.nav.settings}</span>
+                </Link>
+                <Link
+                  href={`/${locale}/auth`}
+                  className="flex items-center justify-between py-4 text-body-lg border-b border-[var(--border)] text-[var(--text-primary)] hover:text-[var(--brand-violet)] transition-colors"
+                  onClick={() => {
+                    if (typeof window !== "undefined") {
+                      try {
+                        window.localStorage.removeItem(
+                          "tti.pollinations.api_key",
+                        );
+                        window.sessionStorage.removeItem(
+                          "tti.pollinations.validated",
+                        );
+                      } catch {
+                        // ignore
+                      }
+                    }
+                    setOpen(false);
+                  }}
+                >
+                  <span>{dict.nav.signOut}</span>
+                </Link>
+              </>
             ) : (
               <div className="pt-4">
                 <Button

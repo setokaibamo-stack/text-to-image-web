@@ -17,7 +17,7 @@ export function PromptInput({ dict, locale }: { dict: Dict; locale?: Locale }) {
     if (!value.trim() || state === "loading") return;
     setState("loading");
     if (locale) {
-      router.push(`/${locale}/launch`);
+      router.push(`/${locale}/auth`);
       return;
     }
     await new Promise((r) => setTimeout(r, 900));

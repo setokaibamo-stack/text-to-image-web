@@ -28,7 +28,7 @@ export function CTASection({ locale, dict }: { locale: Locale; dict: Dict }) {
             </p>
             <div className="mt-8 flex items-center justify-center gap-3 flex-wrap">
               <Button
-                href={`/${locale}/launch`}
+                href={`/${locale}/auth`}
                 size="lg"
                 iconRight={<ArrowRightIcon width={16} height={16} />}
               >

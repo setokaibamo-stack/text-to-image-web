@@ -18,7 +18,7 @@ export default async function AuthPage({
   const d = getDictionary(l);
 
   return (
-    <section className="relative isolate min-h-[calc(100vh-4rem)] overflow-hidden">
+    <section className="relative isolate min-h-screen overflow-hidden">
       <Background variant="hero" />
 
       <div className="container-page relative pt-12 sm:pt-20 pb-20 sm:pb-28">

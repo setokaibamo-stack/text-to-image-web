@@ -8,6 +8,8 @@ export type Dict = {
     blog: string;
     dashboard: string;
     startProject: string;
+    signIn: string;
+    signOut: string;
     menu: string;
     close: string;
   };
@@ -69,6 +71,14 @@ export type Dict = {
     backCta: string;
     forgotCta: string;
     termsNote: string;
+    pollinationsKeyTitle: string;
+    pollinationsKeyDesc: string;
+    pollinationsKeyLabel: string;
+    pollinationsKeyPlaceholder: string;
+    pollinationsKeyHelp: string;
+    pollinationsKeyContinue: string;
+    pollinationsKeyCancel: string;
+    pollinationsKeyError: string;
   };
   dashboard: {
     eyebrow: string;
@@ -261,6 +271,8 @@ const en: Dict = {
     blog: "Blog",
     dashboard: "Dashboard",
     startProject: "Launch app",
+    signIn: "Sign in",
+    signOut: "Sign out",
     menu: "Menu",
     close: "Close",
   },
@@ -365,6 +377,15 @@ const en: Dict = {
     backCta: "Back",
     forgotCta: "Forgot password?",
     termsNote: "By continuing you agree to our Terms and Privacy.",
+    pollinationsKeyTitle: "Connect your Pollinations API",
+    pollinationsKeyDesc:
+      "Paste your Pollinations.ai API key. We store it on this device only — you can change or remove it any time from settings.",
+    pollinationsKeyLabel: "Pollinations API key",
+    pollinationsKeyPlaceholder: "poll_…",
+    pollinationsKeyHelp: "Don’t have a key yet? Get one on pollinations.ai.",
+    pollinationsKeyContinue: "Continue",
+    pollinationsKeyCancel: "Cancel",
+    pollinationsKeyError: "Please enter a valid API key.",
   },
   dashboard: {
     eyebrow: "Workspace",
@@ -913,6 +934,8 @@ const ar: Dict = {
     blog: "المقالات",
     dashboard: "لوحة التحكم",
     startProject: "افتح التطبيق",
+    signIn: "تسجيل الدخول",
+    signOut: "تسجيل الخروج",
     menu: "القائمة",
     close: "إغلاق",
   },
@@ -1017,6 +1040,15 @@ const ar: Dict = {
     backCta: "رجوع",
     forgotCta: "نسيت كلمة المرور؟",
     termsNote: "بمتابعتك فإنك توافق على شروطنا وسياسة الخصوصية.",
+    pollinationsKeyTitle: "اربط مفتاح Pollinations API",
+    pollinationsKeyDesc:
+      "الصق مفتاح API الخاص بك من Pollinations.ai. نحفظه على هذا الجهاز فقط — يمكنك تغييره أو إزالته في أي وقت من الإعدادات.",
+    pollinationsKeyLabel: "مفتاح Pollinations API",
+    pollinationsKeyPlaceholder: "poll_…",
+    pollinationsKeyHelp: "لا تملك مفتاحًا بعد؟ احصل عليه من pollinations.ai.",
+    pollinationsKeyContinue: "متابعة",
+    pollinationsKeyCancel: "إلغاء",
+    pollinationsKeyError: "يرجى إدخال مفتاح API صالح.",
   },
   dashboard: {
     eyebrow: "مساحة العمل",

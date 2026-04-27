@@ -69,6 +69,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
       : "hidden";
 
   return (
+    <>
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         scrolled
@@ -120,10 +121,11 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
           </button>
         </div>
       </div>
+    </header>
 
       {open ? (
         <div
-          className={`${drawerVisibility} fixed inset-x-0 top-16 bottom-0 z-30 bg-[var(--bg-base)] border-t border-[var(--border)] animate-[fadeIn_200ms_ease] overflow-y-auto`}
+          className={`${drawerVisibility} fixed inset-x-0 top-16 bottom-0 z-50 bg-[var(--bg-base)] border-t border-[var(--border)] animate-[fadeIn_200ms_ease] overflow-y-auto`}
         >
           <div className="container-page py-6 flex flex-col gap-1">
             <a
@@ -159,7 +161,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
           </div>
         </div>
       ) : null}
-    </header>
+    </>
   );
 }
 

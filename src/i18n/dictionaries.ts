@@ -123,6 +123,57 @@ export type Dict = {
     recentItems: { prompt: string; time: string; style: string }[];
     tipsTitle: string;
     tips: string[];
+    generationPending: string;
+    generationAlt: string;
+    downloadImage: string;
+    modePool: string;
+    modeByok: string;
+    errors: {
+      generic: string;
+      userQuotaTitle: string;
+      userQuotaBody: string;
+      userQuotaCta: string;
+      poolExhaustedTitle: string;
+      poolExhaustedBody: string;
+      poolExhaustedCta: string;
+      poolUnconfiguredTitle: string;
+      poolUnconfiguredBody: string;
+      byokInvalidTitle: string;
+      byokInvalidBody: string;
+      byokInvalidCta: string;
+      byokQuotaTitle: string;
+      byokQuotaBody: string;
+      timeoutTitle: string;
+      timeoutBody: string;
+      networkTitle: string;
+      networkBody: string;
+    };
+  };
+  admin: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    passwordLabel: string;
+    passwordPlaceholder: string;
+    signIn: string;
+    loading: string;
+    refresh: string;
+    poolTitle: string;
+    dayLabel: string;
+    imagesUsedToday: string;
+    remaining: string;
+    perKeyLimit: string;
+    perUserLimit: string;
+    poolFillLabel: string;
+    redisNotConfigured: string;
+    noKeysConfigured: string;
+    keyLabel: string;
+    healthy: string;
+    exhausted: string;
+    errorWrongPassword: string;
+    errorDisabled: string;
+    errorNetwork: string;
+    errorGeneric: string;
   };
   about: {
     eyebrow: string;
@@ -496,6 +547,67 @@ const en: Dict = {
       "Lighting words like 'rim light', 'golden hour', 'chiaroscuro' change the whole mood.",
       "Save strong prompts to your library so you can rerun them with variations.",
     ],
+    generationPending: "Generating your image — this usually takes 5–20 seconds.",
+    generationAlt: "Generated image",
+    downloadImage: "Download image",
+    modePool: "Generated with shared quota.",
+    modeByok: "Generated with your Pollinations key.",
+    errors: {
+      generic: "Something went wrong. Try again in a moment.",
+      userQuotaTitle: "You've used your daily images.",
+      userQuotaBody:
+        "You've reached your 5-image daily limit. Connect your own free Pollinations key to keep generating.",
+      userQuotaCta: "Connect your Pollinations key",
+      poolExhaustedTitle: "Shared quota is busy right now.",
+      poolExhaustedBody:
+        "Today's shared image budget is exhausted. Connect your own free Pollinations key for unlimited daily generations.",
+      poolExhaustedCta: "Get your free key",
+      poolUnconfiguredTitle: "Image generation isn't enabled yet.",
+      poolUnconfiguredBody:
+        "The shared image pool isn't configured on this server. Try again later or connect your own Pollinations key.",
+      byokInvalidTitle: "Your saved key was rejected.",
+      byokInvalidBody:
+        "Pollinations.ai rejected your saved API key. Re-enter a valid key to continue.",
+      byokInvalidCta: "Re-enter your key",
+      byokQuotaTitle: "Your Pollinations key hit its limit.",
+      byokQuotaBody:
+        "Your Pollinations account has hit its daily quota. Try again tomorrow.",
+      timeoutTitle: "Generation timed out.",
+      timeoutBody:
+        "The image took too long to generate. Try again with a shorter prompt or a smaller aspect.",
+      networkTitle: "Couldn't reach the image service.",
+      networkBody:
+        "Check your internet connection and try again.",
+    },
+  },
+  admin: {
+    eyebrow: "Admin",
+    title: "Image pool health",
+    subtitle:
+      "Live counters for the shared Pollinations key pool used by Google-flow users. Auto-resets at 00:00 UTC.",
+    passwordLabel: "Admin password",
+    passwordPlaceholder: "Paste the admin password",
+    signIn: "View pool",
+    loading: "Loading…",
+    refresh: "Refresh",
+    poolTitle: "Today's pool usage",
+    dayLabel: "Day",
+    imagesUsedToday: "images used today",
+    remaining: "remaining",
+    perKeyLimit: "Per-key daily limit",
+    perUserLimit: "Per-user daily limit",
+    poolFillLabel: "Pool usage",
+    redisNotConfigured:
+      "Heads up: UPSTASH_REDIS_REST_URL/TOKEN aren't set, so counters reset on every cold start. Set them in Vercel for accurate tracking.",
+    noKeysConfigured:
+      "No POLL_KEY_1..POLL_KEY_10 env vars are set. Add at least one to enable the pool.",
+    keyLabel: "Key",
+    healthy: "Healthy",
+    exhausted: "Exhausted",
+    errorWrongPassword: "Wrong password.",
+    errorDisabled: "Admin is disabled (set ADMIN_PASSWORD in Vercel env vars).",
+    errorNetwork: "Couldn't reach the admin API.",
+    errorGeneric: "Couldn't load pool health.",
   },
   about: {
     eyebrow: "About",
@@ -1187,6 +1299,66 @@ const ar: Dict = {
       "كلمات الإضاءة مثل «إضاءة خلفية»، «ساعة ذهبية»، «ظل وضوء»، تغيّر المزاج بالكامل.",
       "احفظ الموجهات القوية في مكتبتك لتعيد تشغيلها بتنويعات.",
     ],
+    generationPending: "جارٍ توليد صورتك — عادة تستغرق ٥ إلى ٢٠ ثانية.",
+    generationAlt: "صورة مولّدة",
+    downloadImage: "تنزيل الصورة",
+    modePool: "تم التوليد عبر الحصة المشتركة.",
+    modeByok: "تم التوليد عبر مفتاح Pollinations الخاص بك.",
+    errors: {
+      generic: "حدث خطأ. حاول مرة أخرى بعد لحظة.",
+      userQuotaTitle: "استنفدت صورك اليومية.",
+      userQuotaBody:
+        "وصلت إلى الحد اليومي وهو ٥ صور. اربط مفتاح Pollinations المجاني الخاص بك للمتابعة.",
+      userQuotaCta: "اربط مفتاح Pollinations",
+      poolExhaustedTitle: "الحصة المشتركة مشغولة الآن.",
+      poolExhaustedBody:
+        "تم استنفاد ميزانية الصور المشتركة لهذا اليوم. اربط مفتاح Pollinations المجاني الخاص بك للحصول على توليد يومي بلا حدود.",
+      poolExhaustedCta: "احصل على مفتاحك المجاني",
+      poolUnconfiguredTitle: "توليد الصور غير مفعل بعد.",
+      poolUnconfiguredBody:
+        "لم يتم إعداد مجمع الصور المشترك على هذا الخادم. حاول لاحقًا أو اربط مفتاح Pollinations الخاص بك.",
+      byokInvalidTitle: "تم رفض المفتاح المحفوظ.",
+      byokInvalidBody:
+        "رفضت Pollinations.ai مفتاح API المحفوظ. أعد إدخال مفتاح صالح للمتابعة.",
+      byokInvalidCta: "أعد إدخال مفتاحك",
+      byokQuotaTitle: "وصل مفتاح Pollinations إلى حده اليومي.",
+      byokQuotaBody:
+        "حسابك في Pollinations استنفد حصته اليومية. حاول غدًا.",
+      timeoutTitle: "انتهت مهلة التوليد.",
+      timeoutBody:
+        "استغرقت الصورة وقتًا طويلًا. جرّب موجهًا أقصر أو نسبة أصغر.",
+      networkTitle: "تعذر الوصول إلى خدمة الصور.",
+      networkBody: "تحقّق من اتصالك بالإنترنت وحاول مجددًا.",
+    },
+  },
+  admin: {
+    eyebrow: "الإدارة",
+    title: "صحة مجمع الصور",
+    subtitle:
+      "عدّادات حية لمجمع مفاتيح Pollinations المشترك المستخدم لمستخدمي مسار جوجل. يُعاد تعيينه تلقائيًا عند الساعة ٠٠:٠٠ بتوقيت UTC.",
+    passwordLabel: "كلمة مرور المسؤول",
+    passwordPlaceholder: "الصق كلمة مرور المسؤول",
+    signIn: "عرض المجمع",
+    loading: "جارٍ التحميل…",
+    refresh: "تحديث",
+    poolTitle: "استخدام المجمع اليوم",
+    dayLabel: "اليوم",
+    imagesUsedToday: "صورة مستخدمة اليوم",
+    remaining: "متبقي",
+    perKeyLimit: "الحد اليومي لكل مفتاح",
+    perUserLimit: "الحد اليومي لكل مستخدم",
+    poolFillLabel: "استخدام المجمع",
+    redisNotConfigured:
+      "تنبيه: لم يتم ضبط UPSTASH_REDIS_REST_URL/TOKEN، لذا تُعاد العدّادات عند كل بدء بارد. اضبطها في Vercel للحصول على تتبع دقيق.",
+    noKeysConfigured:
+      "لا توجد متغيرات POLL_KEY_1..POLL_KEY_10 مضبوطة. أضف واحدًا على الأقل لتفعيل المجمع.",
+    keyLabel: "مفتاح",
+    healthy: "سليم",
+    exhausted: "مستنفد",
+    errorWrongPassword: "كلمة مرور خاطئة.",
+    errorDisabled: "الإدارة معطلة (اضبط ADMIN_PASSWORD في متغيرات بيئة Vercel).",
+    errorNetwork: "تعذر الوصول إلى واجهة الإدارة.",
+    errorGeneric: "تعذر تحميل صحة المجمع.",
   },
   about: {
     eyebrow: "من نحن",

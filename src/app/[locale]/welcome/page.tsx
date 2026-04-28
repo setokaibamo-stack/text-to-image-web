@@ -20,7 +20,7 @@ export default async function WelcomePage({
   const isRtl = l === "ar";
 
   return (
-    <section className="relative isolate min-h-[calc(100vh-4rem)] overflow-hidden">
+    <section className="relative isolate min-h-screen overflow-hidden">
       <Background variant="hero" />
 
       <div className="container-page relative pt-12 sm:pt-20 pb-32 sm:pb-36">

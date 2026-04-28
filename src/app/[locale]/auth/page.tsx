@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { Suspense } from "react";
 import { AuthForm } from "@/components/auth-form";
 import { Background } from "@/components/background";
 import { SparkleIcon } from "@/components/icons";
@@ -18,7 +19,7 @@ export default async function AuthPage({
   const d = getDictionary(l);
 
   return (
-    <section className="relative isolate min-h-[calc(100vh-4rem)] overflow-hidden">
+    <section className="relative isolate min-h-screen overflow-hidden">
       <Background variant="hero" />
 
       <div className="container-page relative pt-12 sm:pt-20 pb-20 sm:pb-28">
@@ -37,7 +38,9 @@ export default async function AuthPage({
         </Reveal>
 
         <Reveal delay={1} className="mt-10 sm:mt-12">
-          <AuthForm locale={l} dict={d} />
+          <Suspense fallback={null}>
+            <AuthForm locale={l} dict={d} />
+          </Suspense>
         </Reveal>
 
         <div className="mt-10 flex justify-center">

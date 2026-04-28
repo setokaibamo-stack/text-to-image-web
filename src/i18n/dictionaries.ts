@@ -8,6 +8,9 @@ export type Dict = {
     blog: string;
     dashboard: string;
     startProject: string;
+    signIn: string;
+    signOut: string;
+    settings: string;
     menu: string;
     close: string;
   };
@@ -69,6 +72,34 @@ export type Dict = {
     backCta: string;
     forgotCta: string;
     termsNote: string;
+    pollinationsKeyTitle: string;
+    pollinationsKeyDesc: string;
+    pollinationsKeyLabel: string;
+    pollinationsKeyPlaceholder: string;
+    pollinationsKeyHelp: string;
+    pollinationsKeyContinue: string;
+    pollinationsKeyCancel: string;
+    pollinationsKeyError: string;
+    pollinationsKeyValidating: string;
+    pollinationsKeyInvalidError: string;
+    pollinationsKeyNetworkError: string;
+    pollinationsKeyTimeoutError: string;
+    keyInvalidNotice: string;
+  };
+  settings: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    apiSectionTitle: string;
+    apiSectionDesc: string;
+    apiKeyActive: string;
+    apiKeyEmpty: string;
+    replaceCta: string;
+    removeCta: string;
+    removed: string;
+    back: string;
+    googleSectionTitle: string;
+    googleSectionDesc: string;
   };
   dashboard: {
     eyebrow: string;
@@ -261,6 +292,9 @@ const en: Dict = {
     blog: "Blog",
     dashboard: "Dashboard",
     startProject: "Launch app",
+    signIn: "Sign in",
+    signOut: "Sign out",
+    settings: "Settings",
     menu: "Menu",
     close: "Close",
   },
@@ -365,6 +399,42 @@ const en: Dict = {
     backCta: "Back",
     forgotCta: "Forgot password?",
     termsNote: "By continuing you agree to our Terms and Privacy.",
+    pollinationsKeyTitle: "Connect your Pollinations API",
+    pollinationsKeyDesc:
+      "Paste your Pollinations.ai API key. We store it on this device only — you can change or remove it any time from settings.",
+    pollinationsKeyLabel: "Pollinations API key",
+    pollinationsKeyPlaceholder: "poll_…",
+    pollinationsKeyHelp: "Don’t have a key yet? Get one on pollinations.ai.",
+    pollinationsKeyContinue: "Continue",
+    pollinationsKeyCancel: "Cancel",
+    pollinationsKeyError: "Please enter a valid API key.",
+    pollinationsKeyValidating: "Validating your key…",
+    pollinationsKeyInvalidError:
+      "That key was rejected by Pollinations.ai. Double-check it and try again.",
+    pollinationsKeyNetworkError:
+      "Couldn’t reach Pollinations.ai. Check your connection and try again.",
+    pollinationsKeyTimeoutError:
+      "Pollinations.ai took too long to respond. Try again.",
+    keyInvalidNotice:
+      "Your saved Pollinations key was rejected. Please re-enter it.",
+  },
+  settings: {
+    eyebrow: "Settings",
+    title: "Your account",
+    subtitle:
+      "Manage how you sign in and the API key used to generate images on this device.",
+    apiSectionTitle: "Pollinations API key",
+    apiSectionDesc:
+      "We store your key only on this device — it never leaves your browser. You can replace or remove it at any time.",
+    apiKeyActive: "Active key",
+    apiKeyEmpty: "No Pollinations key saved on this device.",
+    replaceCta: "Replace key",
+    removeCta: "Remove key & sign out",
+    removed: "Key removed.",
+    back: "Back to dashboard",
+    googleSectionTitle: "Google account",
+    googleSectionDesc:
+      "When you sign in with Google, we use the project’s shared API for up to 4 images a day. No key needed on your device.",
   },
   dashboard: {
     eyebrow: "Workspace",
@@ -913,6 +983,9 @@ const ar: Dict = {
     blog: "المقالات",
     dashboard: "لوحة التحكم",
     startProject: "افتح التطبيق",
+    signIn: "تسجيل الدخول",
+    signOut: "تسجيل الخروج",
+    settings: "الإعدادات",
     menu: "القائمة",
     close: "إغلاق",
   },
@@ -1017,6 +1090,42 @@ const ar: Dict = {
     backCta: "رجوع",
     forgotCta: "نسيت كلمة المرور؟",
     termsNote: "بمتابعتك فإنك توافق على شروطنا وسياسة الخصوصية.",
+    pollinationsKeyTitle: "اربط مفتاح Pollinations API",
+    pollinationsKeyDesc:
+      "الصق مفتاح API الخاص بك من Pollinations.ai. نحفظه على هذا الجهاز فقط — يمكنك تغييره أو إزالته في أي وقت من الإعدادات.",
+    pollinationsKeyLabel: "مفتاح Pollinations API",
+    pollinationsKeyPlaceholder: "poll_…",
+    pollinationsKeyHelp: "لا تملك مفتاحًا بعد؟ احصل عليه من pollinations.ai.",
+    pollinationsKeyContinue: "متابعة",
+    pollinationsKeyCancel: "إلغاء",
+    pollinationsKeyError: "يرجى إدخال مفتاح API صالح.",
+    pollinationsKeyValidating: "جارٍ التحقق من مفتاحك…",
+    pollinationsKeyInvalidError:
+      "تم رفض المفتاح من قِبل Pollinations.ai. تأكّد منه ثم حاول مجددًا.",
+    pollinationsKeyNetworkError:
+      "تعذّر الوصول إلى Pollinations.ai. تحقّق من اتصالك ثم حاول مجددًا.",
+    pollinationsKeyTimeoutError:
+      "استغرق Pollinations.ai وقتًا طويلًا للرد. حاول مجددًا.",
+    keyInvalidNotice:
+      "تم رفض مفتاح Pollinations المحفوظ. يرجى إدخاله من جديد.",
+  },
+  settings: {
+    eyebrow: "الإعدادات",
+    title: "حسابك",
+    subtitle:
+      "تحكّم في طريقة تسجيل الدخول وفي مفتاح API المستخدم لتوليد الصور على هذا الجهاز.",
+    apiSectionTitle: "مفتاح Pollinations API",
+    apiSectionDesc:
+      "نحفظ مفتاحك على هذا الجهاز فقط — لا يغادر متصفحك أبدًا. يمكنك استبداله أو إزالته في أي وقت.",
+    apiKeyActive: "المفتاح المُفعّل",
+    apiKeyEmpty: "لا يوجد مفتاح Pollinations محفوظ على هذا الجهاز.",
+    replaceCta: "استبدال المفتاح",
+    removeCta: "إزالة المفتاح وتسجيل الخروج",
+    removed: "تمت إزالة المفتاح.",
+    back: "العودة إلى لوحة التحكم",
+    googleSectionTitle: "حساب Google",
+    googleSectionDesc:
+      "عند تسجيل الدخول بحساب Google، نستخدم مفتاح المشروع المشترك بحدّ ٤ صور يوميًا. لا حاجة لمفتاح على جهازك.",
   },
   dashboard: {
     eyebrow: "مساحة العمل",

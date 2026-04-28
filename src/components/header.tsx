@@ -2,23 +2,47 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dictionaries";
+import {
+  POLLINATIONS_KEY_STORAGE,
+  POLLINATIONS_VALIDATED_FLAG,
+} from "@/lib/pollinations";
 import { Button } from "./button";
 import { CloseIcon, GlobeIcon, MenuIcon } from "./icons";
 
+type Mode = "hidden" | "marketing" | "app";
+
+const CHROMELESS = new Set(["/launch", "/welcome", "/auth"]);
+
+function modeFor(pathname: string): Mode {
+  const m = pathname.match(/^\/(?:en|ar)(\/.*)?$/);
+  const rest = m ? m[1] || "/" : pathname || "/";
+  if (CHROMELESS.has(rest)) return "hidden";
+  if (
+    rest === "/dashboard" ||
+    rest.startsWith("/dashboard/") ||
+    rest === "/settings" ||
+    rest.startsWith("/settings/")
+  )
+    return "app";
+  return "marketing";
+}
+
 export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
   const pathname = usePathname();
+  const mode = useMemo(() => modeFor(pathname), [pathname]);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    if (mode === "hidden") return;
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [mode]);
 
   useEffect(() => {
     setOpen(false);
@@ -35,17 +59,27 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
     };
   }, [open]);
 
-  const links = [
-    { href: `/${locale}/about`, label: dict.nav.about },
-    { href: `/${locale}/blog`, label: dict.nav.blog },
-    { href: `/${locale}/dashboard`, label: dict.nav.dashboard },
-  ];
+  if (mode === "hidden") return null;
 
   const otherLocale: Locale = locale === "en" ? "ar" : "en";
   const localeHref = switchLocale(pathname, locale, otherLocale);
   const localeLabel = otherLocale === "ar" ? "العربية" : "English";
 
+  // App mode: hamburger always visible (no top-nav links anyway).
+  // Marketing: hamburger only on mobile.
+  const hamburgerClass =
+    mode === "app"
+      ? "inline-flex"
+      : "sm:hidden inline-flex";
+  const drawerVisibility = mode === "app" ? "" : "sm:hidden";
+  // Locale chip on header bar: marketing+desktop only. App mode hides it (locale lives in drawer).
+  const localeChipClass =
+    mode === "marketing"
+      ? "hidden sm:inline-flex"
+      : "hidden";
+
   return (
+    <>
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         scrolled
@@ -55,7 +89,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
     >
       <div className="container-page flex h-16 items-center justify-between gap-4">
         <Link
-          href={`/${locale}`}
+          href={`/${locale}${mode === "app" ? "/dashboard" : ""}`}
           className="group flex items-center gap-2.5 font-semibold tracking-tight text-[15px]"
         >
           <span
@@ -68,46 +102,28 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
           <span className="text-[var(--text-primary)]">{dict.brand.name}</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1">
-          {links.map((l) => {
-            const active =
-              pathname === l.href || pathname.startsWith(l.href + "/");
-            return (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={`text-body-sm px-3 py-2 rounded-full transition-colors ${
-                  active
-                    ? "text-[var(--text-primary)] bg-white/8"
-                    : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/5"
-                }`}
-              >
-                {l.label}
-              </Link>
-            );
-          })}
-        </nav>
-
         <div className="flex items-center gap-2">
           <a
             href={localeHref}
-            className="hidden sm:inline-flex items-center gap-1.5 text-body-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-2 rounded-full hover:bg-white/5 transition-colors"
+            className={`${localeChipClass} items-center gap-1.5 text-body-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-2 rounded-full hover:bg-white/5 transition-colors`}
             aria-label={`Switch to ${localeLabel}`}
             hrefLang={otherLocale}
           >
             <GlobeIcon width={16} height={16} />
             <span>{localeLabel}</span>
           </a>
-          <Button
-            href={`/${locale}/launch`}
-            size="md"
-            className="hidden md:inline-flex"
-          >
-            {dict.nav.startProject}
-          </Button>
+          {mode === "marketing" ? (
+            <Button
+              href={`/${locale}/auth`}
+              size="md"
+              className="hidden sm:inline-flex"
+            >
+              {dict.nav.signIn}
+            </Button>
+          ) : null}
           <button
             onClick={() => setOpen((v) => !v)}
-            className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-white/8 text-[var(--text-primary)]"
+            className={`${hamburgerClass} h-9 w-9 items-center justify-center rounded-full hover:bg-white/8 text-[var(--text-primary)]`}
             aria-label={open ? dict.nav.close : dict.nav.menu}
             aria-expanded={open}
           >
@@ -115,41 +131,70 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
           </button>
         </div>
       </div>
+    </header>
 
       {open ? (
-        <div className="md:hidden fixed inset-0 top-16 z-30 bg-[var(--bg-glass-strong)] backdrop-blur-xl backdrop-saturate-150 border-t border-[var(--border)] animate-[fadeIn_200ms_ease]">
+        <div
+          className={`${drawerVisibility} fixed inset-x-0 top-16 bottom-0 z-50 bg-[var(--bg-base)] border-t border-[var(--border)] animate-[fadeIn_200ms_ease] overflow-y-auto`}
+        >
           <div className="container-page py-6 flex flex-col gap-1">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="text-body-lg py-3 border-b border-[var(--border)] text-[var(--text-primary)]"
-                onClick={() => setOpen(false)}
-              >
-                {l.label}
-              </Link>
-            ))}
-            <div className="flex items-center justify-between pt-4">
-              <a
-                href={localeHref}
-                className="inline-flex items-center gap-1.5 text-body-sm text-[var(--text-secondary)]"
-                hrefLang={otherLocale}
-              >
-                <GlobeIcon width={16} height={16} />
-                <span>{localeLabel}</span>
-              </a>
-              <Button
-                href={`/${locale}/launch`}
-                size="md"
-                onClick={() => setOpen(false)}
-              >
-                {dict.nav.startProject}
-              </Button>
-            </div>
+            <a
+              href={localeHref}
+              hrefLang={otherLocale}
+              className="flex items-center gap-2.5 py-4 text-body-lg border-b border-[var(--border)] text-[var(--text-primary)] hover:text-[var(--brand-violet)] transition-colors"
+              onClick={() => setOpen(false)}
+            >
+              <GlobeIcon width={18} height={18} />
+              <span>{localeLabel}</span>
+            </a>
+
+            {mode === "app" ? (
+              <>
+                <Link
+                  href={`/${locale}/settings`}
+                  className="flex items-center justify-between py-4 text-body-lg border-b border-[var(--border)] text-[var(--text-primary)] hover:text-[var(--brand-violet)] transition-colors"
+                  onClick={() => setOpen(false)}
+                >
+                  <span>{dict.nav.settings}</span>
+                </Link>
+                <Link
+                  href={`/${locale}/auth`}
+                  className="flex items-center justify-between py-4 text-body-lg border-b border-[var(--border)] text-[var(--text-primary)] hover:text-[var(--brand-violet)] transition-colors"
+                  onClick={() => {
+                    if (typeof window !== "undefined") {
+                      try {
+                        window.localStorage.removeItem(
+                          POLLINATIONS_KEY_STORAGE,
+                        );
+                        window.sessionStorage.removeItem(
+                          POLLINATIONS_VALIDATED_FLAG,
+                        );
+                      } catch {
+                        // ignore
+                      }
+                    }
+                    setOpen(false);
+                  }}
+                >
+                  <span>{dict.nav.signOut}</span>
+                </Link>
+              </>
+            ) : (
+              <div className="pt-4">
+                <Button
+                  href={`/${locale}/auth`}
+                  size="md"
+                  onClick={() => setOpen(false)}
+                  className="w-full justify-center"
+                >
+                  {dict.nav.signIn}
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       ) : null}
-    </header>
+    </>
   );
 }
 

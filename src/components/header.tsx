@@ -5,6 +5,10 @@ import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import type { Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dictionaries";
+import {
+  POLLINATIONS_KEY_STORAGE,
+  POLLINATIONS_VALIDATED_FLAG,
+} from "@/lib/pollinations";
 import { Button } from "./button";
 import { CloseIcon, GlobeIcon, MenuIcon } from "./icons";
 
@@ -160,10 +164,10 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dict }) {
                     if (typeof window !== "undefined") {
                       try {
                         window.localStorage.removeItem(
-                          "tti.pollinations.api_key",
+                          POLLINATIONS_KEY_STORAGE,
                         );
                         window.sessionStorage.removeItem(
-                          "tti.pollinations.validated",
+                          POLLINATIONS_VALIDATED_FLAG,
                         );
                       } catch {
                         // ignore

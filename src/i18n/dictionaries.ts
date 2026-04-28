@@ -8,6 +8,9 @@ export type Dict = {
     blog: string;
     dashboard: string;
     startProject: string;
+    signIn: string;
+    signOut: string;
+    settings: string;
     menu: string;
     close: string;
   };
@@ -34,6 +37,70 @@ export type Dict = {
     loadingLabel: string;
     continueLabel: string;
   };
+  welcome: {
+    eyebrow: string;
+    title: string;
+    titleAccent: string;
+    subtitle: string;
+    codeLines: string[];
+    continueCta: string;
+    skipCta: string;
+    phoneCaption: string;
+    codeCaption: string;
+  };
+  auth: {
+    eyebrow: string;
+    title: string;
+    titleAccent: string;
+    subtitle: string;
+    googleCta: string;
+    pollinationsCta: string;
+    dividerOr: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    passwordLabel: string;
+    passwordPlaceholder: string;
+    submitSignIn: string;
+    submitSignUp: string;
+    toggleToSignUp: string;
+    toggleToSignIn: string;
+    quotaTitle: string;
+    quotaGoogle: string;
+    quotaPollinations: string;
+    quotaLink: string;
+    quotaLinkLabel: string;
+    backCta: string;
+    forgotCta: string;
+    termsNote: string;
+    pollinationsKeyTitle: string;
+    pollinationsKeyDesc: string;
+    pollinationsKeyLabel: string;
+    pollinationsKeyPlaceholder: string;
+    pollinationsKeyHelp: string;
+    pollinationsKeyContinue: string;
+    pollinationsKeyCancel: string;
+    pollinationsKeyError: string;
+    pollinationsKeyValidating: string;
+    pollinationsKeyInvalidError: string;
+    pollinationsKeyNetworkError: string;
+    pollinationsKeyTimeoutError: string;
+    keyInvalidNotice: string;
+  };
+  settings: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    apiSectionTitle: string;
+    apiSectionDesc: string;
+    apiKeyActive: string;
+    apiKeyEmpty: string;
+    replaceCta: string;
+    removeCta: string;
+    removed: string;
+    back: string;
+    googleSectionTitle: string;
+    googleSectionDesc: string;
+  };
   dashboard: {
     eyebrow: string;
     welcomeTitle: string;
@@ -56,6 +123,57 @@ export type Dict = {
     recentItems: { prompt: string; time: string; style: string }[];
     tipsTitle: string;
     tips: string[];
+    generationPending: string;
+    generationAlt: string;
+    downloadImage: string;
+    modePool: string;
+    modeByok: string;
+    errors: {
+      generic: string;
+      userQuotaTitle: string;
+      userQuotaBody: string;
+      userQuotaCta: string;
+      poolExhaustedTitle: string;
+      poolExhaustedBody: string;
+      poolExhaustedCta: string;
+      poolUnconfiguredTitle: string;
+      poolUnconfiguredBody: string;
+      byokInvalidTitle: string;
+      byokInvalidBody: string;
+      byokInvalidCta: string;
+      byokQuotaTitle: string;
+      byokQuotaBody: string;
+      timeoutTitle: string;
+      timeoutBody: string;
+      networkTitle: string;
+      networkBody: string;
+    };
+  };
+  admin: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    passwordLabel: string;
+    passwordPlaceholder: string;
+    signIn: string;
+    loading: string;
+    refresh: string;
+    poolTitle: string;
+    dayLabel: string;
+    imagesUsedToday: string;
+    remaining: string;
+    perKeyLimit: string;
+    perUserLimit: string;
+    poolFillLabel: string;
+    redisNotConfigured: string;
+    noKeysConfigured: string;
+    keyLabel: string;
+    healthy: string;
+    exhausted: string;
+    errorWrongPassword: string;
+    errorDisabled: string;
+    errorNetwork: string;
+    errorGeneric: string;
   };
   about: {
     eyebrow: string;
@@ -225,6 +343,9 @@ const en: Dict = {
     blog: "Blog",
     dashboard: "Dashboard",
     startProject: "Launch app",
+    signIn: "Sign in",
+    signOut: "Sign out",
+    settings: "Settings",
     menu: "Menu",
     close: "Close",
   },
@@ -287,6 +408,85 @@ const en: Dict = {
     loadingLabel: "Warming up the canvas",
     continueLabel: "Enter",
   },
+  welcome: {
+    eyebrow: "Welcome",
+    title: "Turn a sentence into",
+    titleAccent: "cinematic imagery.",
+    subtitle:
+      "A pocket studio that goes from prompt to picture in seconds. Continue to sign in and start generating.",
+    codeLines: [
+      "a cinematic wide shot of a neon-lit cyberpunk street at midnight, 35mm film grain, rain on asphalt",
+      "studio portrait of a chef in soft morning light, 50mm, editorial",
+      "isometric illustration of a tiny greenhouse, pastel palette, soft shadows",
+    ],
+    continueCta: "Continue",
+    skipCta: "Skip for now",
+    phoneCaption: "Generate",
+    codeCaption: "Prompt",
+  },
+  auth: {
+    eyebrow: "Sign in",
+    title: "Welcome to",
+    titleAccent: "text to image.",
+    subtitle:
+      "Pick a provider to start generating. Your account decides your daily image quota.",
+    googleCta: "Continue with Google",
+    pollinationsCta: "Continue with Pollinations.ai",
+    dividerOr: "or sign in with email",
+    emailLabel: "Email",
+    emailPlaceholder: "you@studio.com",
+    passwordLabel: "Password",
+    passwordPlaceholder: "At least 8 characters",
+    submitSignIn: "Sign in",
+    submitSignUp: "Create account",
+    toggleToSignUp: "Don't have an account? Sign up",
+    toggleToSignIn: "Already have an account? Sign in",
+    quotaTitle: "Daily image quota",
+    quotaGoogle: "Sign in with Google · 4 images per day",
+    quotaPollinations:
+      "Use a Pollinations API key · up to 20 images per day",
+    quotaLink: "https://pollinations.ai",
+    quotaLinkLabel: "Get a key on pollinations.ai",
+    backCta: "Back",
+    forgotCta: "Forgot password?",
+    termsNote: "By continuing you agree to our Terms and Privacy.",
+    pollinationsKeyTitle: "Connect your Pollinations API",
+    pollinationsKeyDesc:
+      "Paste your Pollinations.ai API key. We store it on this device only — you can change or remove it any time from settings.",
+    pollinationsKeyLabel: "Pollinations API key",
+    pollinationsKeyPlaceholder: "poll_…",
+    pollinationsKeyHelp: "Don’t have a key yet? Get one on pollinations.ai.",
+    pollinationsKeyContinue: "Continue",
+    pollinationsKeyCancel: "Cancel",
+    pollinationsKeyError: "Please enter a valid API key.",
+    pollinationsKeyValidating: "Validating your key…",
+    pollinationsKeyInvalidError:
+      "That key was rejected by Pollinations.ai. Double-check it and try again.",
+    pollinationsKeyNetworkError:
+      "Couldn’t reach Pollinations.ai. Check your connection and try again.",
+    pollinationsKeyTimeoutError:
+      "Pollinations.ai took too long to respond. Try again.",
+    keyInvalidNotice:
+      "Your saved Pollinations key was rejected. Please re-enter it.",
+  },
+  settings: {
+    eyebrow: "Settings",
+    title: "Your account",
+    subtitle:
+      "Manage how you sign in and the API key used to generate images on this device.",
+    apiSectionTitle: "Pollinations API key",
+    apiSectionDesc:
+      "We store your key only on this device — it never leaves your browser. You can replace or remove it at any time.",
+    apiKeyActive: "Active key",
+    apiKeyEmpty: "No Pollinations key saved on this device.",
+    replaceCta: "Replace key",
+    removeCta: "Remove key & sign out",
+    removed: "Key removed.",
+    back: "Back to dashboard",
+    googleSectionTitle: "Google account",
+    googleSectionDesc:
+      "When you sign in with Google, we use the project’s shared API for up to 4 images a day. No key needed on your device.",
+  },
   dashboard: {
     eyebrow: "Workspace",
     welcomeTitle: "Welcome back, creator.",
@@ -347,6 +547,67 @@ const en: Dict = {
       "Lighting words like 'rim light', 'golden hour', 'chiaroscuro' change the whole mood.",
       "Save strong prompts to your library so you can rerun them with variations.",
     ],
+    generationPending: "Generating your image — this usually takes 5–20 seconds.",
+    generationAlt: "Generated image",
+    downloadImage: "Download image",
+    modePool: "Generated with shared quota.",
+    modeByok: "Generated with your Pollinations key.",
+    errors: {
+      generic: "Something went wrong. Try again in a moment.",
+      userQuotaTitle: "You've used your daily images.",
+      userQuotaBody:
+        "You've reached your 5-image daily limit. Connect your own free Pollinations key to keep generating.",
+      userQuotaCta: "Connect your Pollinations key",
+      poolExhaustedTitle: "Shared quota is busy right now.",
+      poolExhaustedBody:
+        "Today's shared image budget is exhausted. Connect your own free Pollinations key for unlimited daily generations.",
+      poolExhaustedCta: "Get your free key",
+      poolUnconfiguredTitle: "Image generation isn't enabled yet.",
+      poolUnconfiguredBody:
+        "The shared image pool isn't configured on this server. Try again later or connect your own Pollinations key.",
+      byokInvalidTitle: "Your saved key was rejected.",
+      byokInvalidBody:
+        "Pollinations.ai rejected your saved API key. Re-enter a valid key to continue.",
+      byokInvalidCta: "Re-enter your key",
+      byokQuotaTitle: "Your Pollinations key hit its limit.",
+      byokQuotaBody:
+        "Your Pollinations account has hit its daily quota. Try again tomorrow.",
+      timeoutTitle: "Generation timed out.",
+      timeoutBody:
+        "The image took too long to generate. Try again with a shorter prompt or a smaller aspect.",
+      networkTitle: "Couldn't reach the image service.",
+      networkBody:
+        "Check your internet connection and try again.",
+    },
+  },
+  admin: {
+    eyebrow: "Admin",
+    title: "Image pool health",
+    subtitle:
+      "Live counters for the shared Pollinations key pool used by Google-flow users. Auto-resets at 00:00 UTC.",
+    passwordLabel: "Admin password",
+    passwordPlaceholder: "Paste the admin password",
+    signIn: "View pool",
+    loading: "Loading…",
+    refresh: "Refresh",
+    poolTitle: "Today's pool usage",
+    dayLabel: "Day",
+    imagesUsedToday: "images used today",
+    remaining: "remaining",
+    perKeyLimit: "Per-key daily limit",
+    perUserLimit: "Per-user daily limit",
+    poolFillLabel: "Pool usage",
+    redisNotConfigured:
+      "Heads up: UPSTASH_REDIS_REST_URL/TOKEN aren't set, so counters reset on every cold start. Set them in Vercel for accurate tracking.",
+    noKeysConfigured:
+      "No POLL_KEY_1..POLL_KEY_10 env vars are set. Add at least one to enable the pool.",
+    keyLabel: "Key",
+    healthy: "Healthy",
+    exhausted: "Exhausted",
+    errorWrongPassword: "Wrong password.",
+    errorDisabled: "Admin is disabled (set ADMIN_PASSWORD in Vercel env vars).",
+    errorNetwork: "Couldn't reach the admin API.",
+    errorGeneric: "Couldn't load pool health.",
   },
   about: {
     eyebrow: "About",
@@ -834,6 +1095,9 @@ const ar: Dict = {
     blog: "المقالات",
     dashboard: "لوحة التحكم",
     startProject: "افتح التطبيق",
+    signIn: "تسجيل الدخول",
+    signOut: "تسجيل الخروج",
+    settings: "الإعدادات",
     menu: "القائمة",
     close: "إغلاق",
   },
@@ -896,6 +1160,85 @@ const ar: Dict = {
     loadingLabel: "جارٍ تجهيز اللوحة",
     continueLabel: "دخول",
   },
+  welcome: {
+    eyebrow: "أهلًا بك",
+    title: "حوِّل جملةً إلى",
+    titleAccent: "صورة سينمائية.",
+    subtitle:
+      "استوديو في جيبك ينتقل من الفكرة إلى الصورة في ثوانٍ. تابع لتسجيل الدخول وبدء التوليد.",
+    codeLines: [
+      "لقطة سينمائية واسعة لشارع سايبربانك مضاء بالنيون منتصف الليل، حبيبات فيلم 35mm، مطر على الإسفلت",
+      "بورتريه استوديو لطاهٍ في إضاءة صباحية ناعمة، 50mm، تحريري",
+      "رسم آيزومتريك لبيت زجاجي صغير، ألوان باستيل، ظلال ناعمة",
+    ],
+    continueCta: "متابعة",
+    skipCta: "تخطٍ الآن",
+    phoneCaption: "توليد",
+    codeCaption: "النص الموجِّه",
+  },
+  auth: {
+    eyebrow: "تسجيل الدخول",
+    title: "أهلًا بك في",
+    titleAccent: "تكست تو إيمج.",
+    subtitle:
+      "اختر مزوِّدًا لبدء التوليد. حسابك يحدِّد رصيدك اليومي من الصور.",
+    googleCta: "متابعة عبر Google",
+    pollinationsCta: "متابعة عبر Pollinations.ai",
+    dividerOr: "أو سجِّل دخولك بالبريد الإلكتروني",
+    emailLabel: "البريد الإلكتروني",
+    emailPlaceholder: "you@studio.com",
+    passwordLabel: "كلمة المرور",
+    passwordPlaceholder: "٨ أحرف على الأقل",
+    submitSignIn: "تسجيل الدخول",
+    submitSignUp: "إنشاء حساب",
+    toggleToSignUp: "ليس لديك حساب؟ سجِّل الآن",
+    toggleToSignIn: "لديك حساب؟ سجِّل الدخول",
+    quotaTitle: "الرصيد اليومي للصور",
+    quotaGoogle: "تسجيل عبر Google · ٤ صور يوميًا",
+    quotaPollinations:
+      "باستخدام مفتاح Pollinations API · حتى ٢٠ صورة يوميًا",
+    quotaLink: "https://pollinations.ai",
+    quotaLinkLabel: "احصل على مفتاحك من pollinations.ai",
+    backCta: "رجوع",
+    forgotCta: "نسيت كلمة المرور؟",
+    termsNote: "بمتابعتك فإنك توافق على شروطنا وسياسة الخصوصية.",
+    pollinationsKeyTitle: "اربط مفتاح Pollinations API",
+    pollinationsKeyDesc:
+      "الصق مفتاح API الخاص بك من Pollinations.ai. نحفظه على هذا الجهاز فقط — يمكنك تغييره أو إزالته في أي وقت من الإعدادات.",
+    pollinationsKeyLabel: "مفتاح Pollinations API",
+    pollinationsKeyPlaceholder: "poll_…",
+    pollinationsKeyHelp: "لا تملك مفتاحًا بعد؟ احصل عليه من pollinations.ai.",
+    pollinationsKeyContinue: "متابعة",
+    pollinationsKeyCancel: "إلغاء",
+    pollinationsKeyError: "يرجى إدخال مفتاح API صالح.",
+    pollinationsKeyValidating: "جارٍ التحقق من مفتاحك…",
+    pollinationsKeyInvalidError:
+      "تم رفض المفتاح من قِبل Pollinations.ai. تأكّد منه ثم حاول مجددًا.",
+    pollinationsKeyNetworkError:
+      "تعذّر الوصول إلى Pollinations.ai. تحقّق من اتصالك ثم حاول مجددًا.",
+    pollinationsKeyTimeoutError:
+      "استغرق Pollinations.ai وقتًا طويلًا للرد. حاول مجددًا.",
+    keyInvalidNotice:
+      "تم رفض مفتاح Pollinations المحفوظ. يرجى إدخاله من جديد.",
+  },
+  settings: {
+    eyebrow: "الإعدادات",
+    title: "حسابك",
+    subtitle:
+      "تحكّم في طريقة تسجيل الدخول وفي مفتاح API المستخدم لتوليد الصور على هذا الجهاز.",
+    apiSectionTitle: "مفتاح Pollinations API",
+    apiSectionDesc:
+      "نحفظ مفتاحك على هذا الجهاز فقط — لا يغادر متصفحك أبدًا. يمكنك استبداله أو إزالته في أي وقت.",
+    apiKeyActive: "المفتاح المُفعّل",
+    apiKeyEmpty: "لا يوجد مفتاح Pollinations محفوظ على هذا الجهاز.",
+    replaceCta: "استبدال المفتاح",
+    removeCta: "إزالة المفتاح وتسجيل الخروج",
+    removed: "تمت إزالة المفتاح.",
+    back: "العودة إلى لوحة التحكم",
+    googleSectionTitle: "حساب Google",
+    googleSectionDesc:
+      "عند تسجيل الدخول بحساب Google، نستخدم مفتاح المشروع المشترك بحدّ ٤ صور يوميًا. لا حاجة لمفتاح على جهازك.",
+  },
   dashboard: {
     eyebrow: "مساحة العمل",
     welcomeTitle: "أهلًا بعودتك.",
@@ -956,6 +1299,66 @@ const ar: Dict = {
       "كلمات الإضاءة مثل «إضاءة خلفية»، «ساعة ذهبية»، «ظل وضوء»، تغيّر المزاج بالكامل.",
       "احفظ الموجهات القوية في مكتبتك لتعيد تشغيلها بتنويعات.",
     ],
+    generationPending: "جارٍ توليد صورتك — عادة تستغرق ٥ إلى ٢٠ ثانية.",
+    generationAlt: "صورة مولّدة",
+    downloadImage: "تنزيل الصورة",
+    modePool: "تم التوليد عبر الحصة المشتركة.",
+    modeByok: "تم التوليد عبر مفتاح Pollinations الخاص بك.",
+    errors: {
+      generic: "حدث خطأ. حاول مرة أخرى بعد لحظة.",
+      userQuotaTitle: "استنفدت صورك اليومية.",
+      userQuotaBody:
+        "وصلت إلى الحد اليومي وهو ٥ صور. اربط مفتاح Pollinations المجاني الخاص بك للمتابعة.",
+      userQuotaCta: "اربط مفتاح Pollinations",
+      poolExhaustedTitle: "الحصة المشتركة مشغولة الآن.",
+      poolExhaustedBody:
+        "تم استنفاد ميزانية الصور المشتركة لهذا اليوم. اربط مفتاح Pollinations المجاني الخاص بك للحصول على توليد يومي بلا حدود.",
+      poolExhaustedCta: "احصل على مفتاحك المجاني",
+      poolUnconfiguredTitle: "توليد الصور غير مفعل بعد.",
+      poolUnconfiguredBody:
+        "لم يتم إعداد مجمع الصور المشترك على هذا الخادم. حاول لاحقًا أو اربط مفتاح Pollinations الخاص بك.",
+      byokInvalidTitle: "تم رفض المفتاح المحفوظ.",
+      byokInvalidBody:
+        "رفضت Pollinations.ai مفتاح API المحفوظ. أعد إدخال مفتاح صالح للمتابعة.",
+      byokInvalidCta: "أعد إدخال مفتاحك",
+      byokQuotaTitle: "وصل مفتاح Pollinations إلى حده اليومي.",
+      byokQuotaBody:
+        "حسابك في Pollinations استنفد حصته اليومية. حاول غدًا.",
+      timeoutTitle: "انتهت مهلة التوليد.",
+      timeoutBody:
+        "استغرقت الصورة وقتًا طويلًا. جرّب موجهًا أقصر أو نسبة أصغر.",
+      networkTitle: "تعذر الوصول إلى خدمة الصور.",
+      networkBody: "تحقّق من اتصالك بالإنترنت وحاول مجددًا.",
+    },
+  },
+  admin: {
+    eyebrow: "الإدارة",
+    title: "صحة مجمع الصور",
+    subtitle:
+      "عدّادات حية لمجمع مفاتيح Pollinations المشترك المستخدم لمستخدمي مسار جوجل. يُعاد تعيينه تلقائيًا عند الساعة ٠٠:٠٠ بتوقيت UTC.",
+    passwordLabel: "كلمة مرور المسؤول",
+    passwordPlaceholder: "الصق كلمة مرور المسؤول",
+    signIn: "عرض المجمع",
+    loading: "جارٍ التحميل…",
+    refresh: "تحديث",
+    poolTitle: "استخدام المجمع اليوم",
+    dayLabel: "اليوم",
+    imagesUsedToday: "صورة مستخدمة اليوم",
+    remaining: "متبقي",
+    perKeyLimit: "الحد اليومي لكل مفتاح",
+    perUserLimit: "الحد اليومي لكل مستخدم",
+    poolFillLabel: "استخدام المجمع",
+    redisNotConfigured:
+      "تنبيه: لم يتم ضبط UPSTASH_REDIS_REST_URL/TOKEN، لذا تُعاد العدّادات عند كل بدء بارد. اضبطها في Vercel للحصول على تتبع دقيق.",
+    noKeysConfigured:
+      "لا توجد متغيرات POLL_KEY_1..POLL_KEY_10 مضبوطة. أضف واحدًا على الأقل لتفعيل المجمع.",
+    keyLabel: "مفتاح",
+    healthy: "سليم",
+    exhausted: "مستنفد",
+    errorWrongPassword: "كلمة مرور خاطئة.",
+    errorDisabled: "الإدارة معطلة (اضبط ADMIN_PASSWORD في متغيرات بيئة Vercel).",
+    errorNetwork: "تعذر الوصول إلى واجهة الإدارة.",
+    errorGeneric: "تعذر تحميل صحة المجمع.",
   },
   about: {
     eyebrow: "من نحن",

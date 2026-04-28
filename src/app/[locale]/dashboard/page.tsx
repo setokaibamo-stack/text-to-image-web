@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Background } from "@/components/background";
 import { DashboardPrompt } from "@/components/dashboard-prompt";
 import { ArrowUpRightIcon, SparkleIcon } from "@/components/icons";
+import { KeyGuard } from "@/components/key-guard";
 import { Reveal } from "@/components/reveal";
 import { Card, Section } from "@/components/section";
 import { isLocale, type Locale } from "@/i18n/config";
@@ -20,6 +21,7 @@ export default async function DashboardPage({
   return (
     <Section className="overflow-hidden">
       <Background variant="section" />
+      <KeyGuard locale={l} />
 
       <Reveal>
         <div className="flex flex-col gap-3">
@@ -84,7 +86,7 @@ export default async function DashboardPage({
               </div>
             </div>
 
-            <DashboardPrompt dict={d} />
+            <DashboardPrompt dict={d} locale={l} />
 
             <div>
               <h3 className="text-caption uppercase tracking-[0.1em] text-[var(--text-muted)]">

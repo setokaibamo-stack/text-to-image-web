@@ -70,7 +70,7 @@ export default async function HomePage({
 
             <div className="mt-2 flex items-center gap-3 flex-wrap justify-center">
               <Button
-                href={`/${l}/launch`}
+                href={`/${l}/auth`}
                 size="lg"
                 iconRight={<ArrowRightIcon width={16} height={16} />}
               >
@@ -269,7 +269,7 @@ export default async function HomePage({
         <div className="mt-12">
           <Pricing
             tiers={d.home.pricing.tiers}
-            ctaHref={`/${l}/launch`}
+            ctaHref={`/${l}/auth`}
             strings={{
               monthly: d.home.pricing.monthly,
               annual: d.home.pricing.annual,
@@ -448,7 +448,7 @@ export default async function HomePage({
                 </p>
                 <div className="mt-9 flex items-center justify-center gap-3 flex-wrap">
                   <Button
-                    href={`/${l}/launch`}
+                    href={`/${l}/auth`}
                     size="lg"
                     iconRight={<ArrowRightIcon width={16} height={16} />}
                   >

@@ -60,14 +60,14 @@ export function LaunchSplash({
         raf = requestAnimationFrame(tick);
       } else if (!redirected.current) {
         redirected.current = true;
-        router.push(`/${locale}/dashboard`);
+        router.push(`/${locale}/welcome`);
       }
     };
     raf = requestAnimationFrame(tick);
 
     const prefetchTimer = setTimeout(() => {
       try {
-        router.prefetch(`/${locale}/dashboard`);
+        router.prefetch(`/${locale}/welcome`);
       } catch {
         /* noop */
       }

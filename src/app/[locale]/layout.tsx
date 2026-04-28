@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -23,7 +22,6 @@ export default async function LocaleLayout({
     <div className="min-h-screen flex flex-col">
       <Header locale={locale as Locale} dict={dict} />
       <main className="flex-1">{children}</main>
-      <Footer locale={locale as Locale} dict={dict} />
     </div>
   );
 }

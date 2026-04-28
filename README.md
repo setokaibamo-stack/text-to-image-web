@@ -7,14 +7,25 @@ Built with **Next.js 15 (App Router)**, **TypeScript**, and **Tailwind CSS v4**.
 ## Pages
 
 - `/` — redirects to the user's preferred locale (English by default)
-- `/en` · `/ar` — home (hero, why us, portfolio, about preview, process, testimonials, FAQ, contact)
-- `/en/services` · `/en/services/[slug]` — services list + detail
-- `/en/portfolio` · `/en/portfolio/[slug]` — case studies
+- `/en` · `/ar` — marketing home (hero, features, phone showcase, process, pricing, testimonials, FAQ)
+- `/en/launch` · `/ar/launch` — animated splash with progress bar (3s → routes to `/welcome`)
+- `/en/welcome` · `/ar/welcome` — post-splash showcase: 3D phone mockup + typewriter prompt code box + Continue CTA → `/auth`
+- `/en/auth` · `/ar/auth` — sign-in / sign-up: Google + Pollinations.ai providers, email + password, daily-quota glow card → `/dashboard`
+- `/en/dashboard` · `/ar/dashboard` — workspace: stats, prompt panel, recent runs
 - `/en/about` — team, vision, mission, stats
 - `/en/blog` · `/en/blog/[slug]` — field notes
-- `/en/contact` — enquiry form
 - `/en/privacy` · `/en/terms` — legal
 - Custom 404 with on-brand error state
+
+### Capacitor (mobile) flow
+
+The app is intended to be wrapped with **Capacitor** for iOS / Android. On mobile the marketing home page is skipped — set the Capacitor launch URL to `/{locale}/launch` so users land directly on:
+
+```
+launch (3s splash) → welcome (phone + code box + Continue) → auth → dashboard
+```
+
+In `capacitor.config.ts` set `server.url` (or the bundled start URL) to `/en/launch` (or detect device locale and pick `/ar/launch`).
 
 Arabic mirrors every route under `/ar/…` with full RTL layout and Arabic numerals.
 

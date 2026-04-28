@@ -139,7 +139,7 @@ export function AdminPoolClient({ dict }: Props) {
           </div>
           <button
             type="button"
-            onClick={() => load(password)}
+            onClick={() => load(password.trim())}
             disabled={loading}
             className="rounded-[var(--radius-md)] border border-[var(--border-strong)] px-3 py-1.5 text-caption text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
           >

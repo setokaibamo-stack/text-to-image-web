@@ -149,17 +149,22 @@ export function DashboardPrompt({
     const dims = RATIO_TO_DIMS[ratio] ?? RATIO_TO_DIMS["1:1"];
     const [width, height] = dims;
     const seed = Math.floor(Math.random() * 1_000_000_000);
+    // gen.pollinations.ai is the current gateway. Tokens from enter.pollinations.ai
+    // are recognized here (the legacy image.pollinations.ai gateway does not).
     const url =
-      "https://image.pollinations.ai/prompt/" +
+      "https://gen.pollinations.ai/image/" +
       encodeURIComponent(prompt) +
-      `?width=${width}&height=${height}&seed=${seed}&nologo=true&token=` +
-      encodeURIComponent(key);
+      `?width=${width}&height=${height}&seed=${seed}&nologo=true`;
 
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 90_000);
     let res: Response;
     try {
-      res = await fetch(url, { signal: controller.signal, cache: "no-store" });
+      res = await fetch(url, {
+        signal: controller.signal,
+        cache: "no-store",
+        headers: { Authorization: `Bearer ${key}` },
+      });
     } catch (err) {
       clearTimeout(timeout);
       if (err instanceof DOMException && err.name === "AbortError") {

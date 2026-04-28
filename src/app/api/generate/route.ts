@@ -85,11 +85,13 @@ export async function POST(req: Request) {
     if (used >= POOL_PER_KEY_DAILY_LIMIT) continue;
 
     const seed = Math.floor(Math.random() * 1_000_000_000);
+    // gen.pollinations.ai is the current gateway (replaces image.pollinations.ai
+    // for authenticated requests). Tokens issued from enter.pollinations.ai are
+    // recognized here. Auth via Bearer header instead of `?token=` query param.
     const url =
-      "https://image.pollinations.ai/prompt/" +
+      "https://gen.pollinations.ai/image/" +
       encodeURIComponent(prompt) +
-      `?width=${width}&height=${height}&seed=${seed}&nologo=true&token=` +
-      encodeURIComponent(key.value);
+      `?width=${width}&height=${height}&seed=${seed}&nologo=true`;
 
     const controller = new AbortController();
     const timeout = setTimeout(
@@ -102,6 +104,9 @@ export async function POST(req: Request) {
         method: "GET",
         signal: controller.signal,
         cache: "no-store",
+        headers: {
+          Authorization: `Bearer ${key.value}`,
+        },
       });
     } catch (err) {
       clearTimeout(timeout);
@@ -138,13 +143,19 @@ export async function POST(req: Request) {
     if (
       upstream.status === 401 ||
       upstream.status === 402 ||
-      upstream.status === 403 ||
-      upstream.status === 429
+      upstream.status === 403
     ) {
-      // Mark this key exhausted for the rest of the day and try the next one.
+      // Auth-level rejection: this key is dead for the rest of the day. Mark
+      // it exhausted and try the next key.
       await redis.set(ckey, String(POOL_PER_KEY_DAILY_LIMIT), {
         ttlSeconds: 60 * 60 * 48,
       });
+      continue;
+    }
+    if (upstream.status === 429) {
+      // Transient rate limit on this key. Don't burn the slot for the rest of
+      // the day — just try the next key. The next request from the user will
+      // retry this one (counter is unchanged).
       continue;
     }
 

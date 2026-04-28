@@ -5,17 +5,22 @@ export type ValidateResult =
   | { ok: true }
   | { ok: false; reason: "invalid" | "network" | "timeout" };
 
-const VALIDATE_TIMEOUT_MS = 10_000;
-const VALIDATE_URL = "https://auth.pollinations.ai/api/user";
+const VALIDATE_TIMEOUT_MS = 15_000;
+// gen.pollinations.ai is the new (post-2025) gateway. It rejects unauthenticated
+// or bogus tokens with 401 across all generation routes, so a tiny image
+// request is a reliable, low-cost token check. Tokens issued from the legacy
+// auth.pollinations.ai service are NOT recognized here and tokens issued from
+// enter.pollinations.ai (current) ARE — which is the inverse of the previous
+// validator.
+const VALIDATE_URL =
+  "https://gen.pollinations.ai/image/x?width=16&height=16&nologo=true";
 
 /**
- * Validates a Pollinations.ai API token against the auth service.
+ * Validates a Pollinations.ai API token by issuing a tiny generation request
+ * to gen.pollinations.ai (the current API gateway).
  *
- * Pollinations' image endpoint serves anonymous traffic, so it returns 200 even
- * for bogus tokens (falling back to public quota). Their auth service does
- * gate on token validity:
- *   - 200 → token is valid (response body is the user account)
- *   - 401 → token is missing or rejected
+ *   - 200 → token is valid (image bytes returned; we discard them)
+ *   - 401/403 → token missing or rejected
  * Any other failure (network, CORS, timeout) is surfaced separately so the UI
  * can offer "try again" instead of falsely telling the user their key is bad.
  */

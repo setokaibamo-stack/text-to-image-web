@@ -6,17 +6,18 @@ export type ValidateResult =
   | { ok: false; reason: "invalid" | "network" | "timeout" };
 
 const VALIDATE_TIMEOUT_MS = 10_000;
+const VALIDATE_URL = "https://auth.pollinations.ai/api/user";
 
 /**
- * Validates a Pollinations.ai API token by issuing a tiny image generation
- * request through a model that requires authentication.
+ * Validates a Pollinations.ai API token against the auth service.
  *
- * Pollinations' free tier allows unauthenticated requests for some models, so
- * to actually exercise the token we hit a 64x64 generation with a model that
- * gates on auth. A 401/403 means the token is rejected. A 2xx response means
- * the token was accepted. Any other failure (network, CORS, timeout) is
- * surfaced separately so the UI can offer "try again" instead of falsely
- * telling the user their key is bad.
+ * Pollinations' image endpoint serves anonymous traffic, so it returns 200 even
+ * for bogus tokens (falling back to public quota). Their auth service does
+ * gate on token validity:
+ *   - 200 → token is valid (response body is the user account)
+ *   - 401 → token is missing or rejected
+ * Any other failure (network, CORS, timeout) is surfaced separately so the UI
+ * can offer "try again" instead of falsely telling the user their key is bad.
  */
 export async function validatePollinationsKey(
   key: string,
@@ -27,18 +28,14 @@ export async function validatePollinationsKey(
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), VALIDATE_TIMEOUT_MS);
 
-  // tiny 64x64 generation, no logo, fixed seed for cache-friendliness.
-  const url =
-    "https://image.pollinations.ai/prompt/" +
-    encodeURIComponent("a tiny dot") +
-    "?width=64&height=64&seed=1&nologo=true&token=" +
-    encodeURIComponent(trimmed);
-
   try {
-    const res = await fetch(url, {
+    const res = await fetch(VALIDATE_URL, {
       method: "GET",
       signal: controller.signal,
       cache: "no-store",
+      headers: {
+        Authorization: `Bearer ${trimmed}`,
+      },
     });
     if (res.status === 401 || res.status === 403) {
       return { ok: false, reason: "invalid" };

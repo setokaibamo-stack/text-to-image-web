@@ -116,8 +116,10 @@ export async function POST(req: Request) {
     clearTimeout(timeout);
 
     if (upstream.ok) {
-      // Charge this key, return image bytes to the browser.
-      await redis.incr(ckey);
+      // Charge this key, return image bytes to the browser. Swallow Redis
+      // errors here so a counter blip never costs the user the image they
+      // just successfully generated.
+      await redis.incr(ckey).catch(() => {});
       const contentType =
         upstream.headers.get("content-type") ?? "image/jpeg";
       const remaining = Math.max(0, USER_DAILY_LIMIT - userUsed);

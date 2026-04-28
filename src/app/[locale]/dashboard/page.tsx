@@ -86,7 +86,7 @@ export default async function DashboardPage({
               </div>
             </div>
 
-            <DashboardPrompt dict={d} />
+            <DashboardPrompt dict={d} locale={l} />
 
             <div>
               <h3 className="text-caption uppercase tracking-[0.1em] text-[var(--text-muted)]">

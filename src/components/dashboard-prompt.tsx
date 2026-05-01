@@ -74,7 +74,15 @@ export function DashboardPrompt({
     const styledPrompt = prompt + (STYLE_PROMPT_SUFFIX[style] ?? "");
     setGen({ kind: "loading" });
 
-    await runGenerate(styledPrompt, aspect);
+    try {
+      await runGenerate(styledPrompt, aspect);
+    } catch {
+      // Safety net: runGenerate handles its own errors, but a body-stream
+      // failure during `res.blob()` (network drop mid-download) would reject
+      // past the inner try/catch. Without this, the UI stays stuck in the
+      // loading state with the submit button disabled until page reload.
+      setGen({ kind: "error", code: "network" });
+    }
   }
 
   async function runGenerate(prompt: string, ratio: string) {

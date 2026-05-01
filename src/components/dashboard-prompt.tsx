@@ -29,13 +29,6 @@ type GenState =
       message?: string;
     };
 
-const RATIO_TO_DIMS: Record<string, [number, number]> = {
-  "1:1": [1024, 1024],
-  "3:2": [1216, 832],
-  "2:3": [832, 1216],
-  "16:9": [1280, 720],
-};
-
 const STYLE_PROMPT_SUFFIX: Record<string, string> = {
   cinematic: ", cinematic, dramatic lighting, 35mm",
   photoreal: ", photorealistic, ultra detailed, sharp focus",
@@ -81,24 +74,16 @@ export function DashboardPrompt({
     const styledPrompt = prompt + (STYLE_PROMPT_SUFFIX[style] ?? "");
     setGen({ kind: "loading" });
 
-    const byokKey =
-      typeof window !== "undefined"
-        ? window.localStorage.getItem(POLLINATIONS_KEY_STORAGE)
-        : null;
-
-    try {
-      if (byokKey && byokKey.trim()) {
-        await runByok(styledPrompt, aspect, byokKey.trim());
-      } else {
-        await runPool(styledPrompt, aspect);
-      }
-    } catch {
-      setGen({ kind: "error", code: "network" });
-    }
+    await runGenerate(styledPrompt, aspect);
   }
 
-  async function runPool(prompt: string, ratio: string) {
+  async function runGenerate(prompt: string, ratio: string) {
     const deviceId = getOrCreateDeviceId();
+    const userKey =
+      typeof window !== "undefined"
+        ? (window.localStorage.getItem(POLLINATIONS_KEY_STORAGE) ?? "").trim()
+        : "";
+
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 90_000);
     let res: Response;
@@ -106,7 +91,12 @@ export function DashboardPrompt({
       res = await fetch("/api/generate", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ prompt, ratio, deviceId }),
+        body: JSON.stringify({
+          prompt,
+          ratio,
+          deviceId,
+          ...(userKey ? { userKey } : {}),
+        }),
         cache: "no-store",
         signal: controller.signal,
       });
@@ -122,62 +112,18 @@ export function DashboardPrompt({
     clearTimeout(timeout);
 
     if (res.ok) {
+      const mode = res.headers.get("x-tti-mode") === "byok" ? "byok" : "pool";
       const blob = await res.blob();
-      setImage(URL.createObjectURL(blob), "pool");
+      setImage(URL.createObjectURL(blob), mode);
       return;
     }
 
-    if (res.status === 429) {
-      setGen({ kind: "error", code: "user_quota_exceeded" });
-      return;
-    }
-    if (res.status === 503) {
-      const body = await res.json().catch(() => ({}) as { error?: string });
-      setGen({
-        kind: "error",
-        code:
-          body?.error === "pool_unconfigured"
-            ? "pool_unconfigured"
-            : "pool_exhausted",
-      });
-      return;
-    }
-    setGen({ kind: "error", code: "generic" });
-  }
+    const body = (await res.json().catch(() => ({}))) as { error?: string };
+    const errorCode = typeof body.error === "string" ? body.error : "";
 
-  async function runByok(prompt: string, ratio: string, key: string) {
-    const dims = RATIO_TO_DIMS[ratio] ?? RATIO_TO_DIMS["1:1"];
-    const [width, height] = dims;
-    const seed = Math.floor(Math.random() * 1_000_000_000);
-    const url =
-      "https://image.pollinations.ai/prompt/" +
-      encodeURIComponent(prompt) +
-      `?width=${width}&height=${height}&seed=${seed}&nologo=true&token=` +
-      encodeURIComponent(key);
-
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 90_000);
-    let res: Response;
-    try {
-      res = await fetch(url, { signal: controller.signal, cache: "no-store" });
-    } catch (err) {
-      clearTimeout(timeout);
-      if (err instanceof DOMException && err.name === "AbortError") {
-        setGen({ kind: "error", code: "timeout" });
-        return;
-      }
-      setGen({ kind: "error", code: "network" });
-      return;
-    }
-    clearTimeout(timeout);
-
-    if (res.ok) {
-      const blob = await res.blob();
-      setImage(URL.createObjectURL(blob), "byok");
-      return;
-    }
-    if (res.status === 401 || res.status === 403) {
-      // Saved key was rejected — clear it so KeyGuard catches them on next nav.
+    if (errorCode === "byok_invalid") {
+      // Server rejected our saved key. Clear local copy so KeyGuard and
+      // future requests don't keep submitting a dead key.
       try {
         window.localStorage.removeItem(POLLINATIONS_KEY_STORAGE);
         window.sessionStorage.removeItem(POLLINATIONS_VALIDATED_FLAG);
@@ -185,10 +131,28 @@ export function DashboardPrompt({
       setGen({ kind: "error", code: "byok_invalid" });
       return;
     }
-    if (res.status === 429 || res.status === 402) {
-      setGen({ kind: "error", code: "byok_quota" });
+
+    if (res.status === 429 || errorCode === "user_quota_exceeded") {
+      setGen({ kind: "error", code: "user_quota_exceeded" });
       return;
     }
+
+    if (res.status === 503) {
+      setGen({
+        kind: "error",
+        code:
+          errorCode === "pool_unconfigured"
+            ? "pool_unconfigured"
+            : "pool_exhausted",
+      });
+      return;
+    }
+
+    if (res.status === 504 || errorCode === "upstream_timeout") {
+      setGen({ kind: "error", code: "timeout" });
+      return;
+    }
+
     setGen({ kind: "error", code: "generic" });
   }
 
@@ -344,12 +308,12 @@ function GenerationResult({
     case "user_quota_exceeded":
       title = errors.userQuotaTitle;
       body = errors.userQuotaBody;
-      cta = { href: `/${locale}/auth`, label: errors.userQuotaCta };
+      cta = { href: `/${locale}/settings`, label: errors.userQuotaCta };
       break;
     case "pool_exhausted":
       title = errors.poolExhaustedTitle;
       body = errors.poolExhaustedBody;
-      cta = { href: `/${locale}/auth`, label: errors.poolExhaustedCta };
+      cta = { href: `/${locale}/settings`, label: errors.poolExhaustedCta };
       break;
     case "pool_unconfigured":
       title = errors.poolUnconfiguredTitle;
@@ -358,7 +322,10 @@ function GenerationResult({
     case "byok_invalid":
       title = errors.byokInvalidTitle;
       body = errors.byokInvalidBody;
-      cta = { href: `/${locale}/auth?keyInvalid=1`, label: errors.byokInvalidCta };
+      cta = {
+        href: `/${locale}/settings?keyInvalid=1`,
+        label: errors.byokInvalidCta,
+      };
       break;
     case "byok_quota":
       title = errors.byokQuotaTitle;

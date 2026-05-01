@@ -1,0 +1,24 @@
+# Cloudflare Worker that proxies image generation requests to Pollinations.ai
+# while keeping the rotating POLL_KEY_* pool server-side.
+#
+# Required setup (one time):
+#   1. Run `npx wrangler login` to auth with Cloudflare.
+#   2. Populate secrets with `wrangler secret put <NAME>`:
+#        POLL_KEY_1 .. POLL_KEY_10            (pool tokens from 10 Pollinations accounts)
+#        UPSTASH_REDIS_REST_URL               (daily counters — recommended)
+#        UPSTASH_REDIS_REST_TOKEN             (paired with URL above)
+#   3. Edit `vars.ALLOWED_ORIGINS` below to include the domains that will call
+#      this Worker (your web deployment + the Capacitor WebView origin if any).
+#   4. Deploy with `npm run deploy` or `wrangler deploy`.
+
+name = "tti-api"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# Comma-separated list of origins allowed to call this Worker. The Capacitor
+# Android WebView typically sends `Origin: https://localhost` or
+# `capacitor://localhost`; iOS sends `capacitor://localhost`. Include both if
+# you'll ship to both platforms.
+ALLOWED_ORIGINS = "https://tti.example.com,capacitor://localhost,https://localhost,http://localhost"

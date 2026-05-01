@@ -9,6 +9,7 @@ import {
   POLLINATIONS_VALIDATED_FLAG,
 } from "@/lib/pollinations";
 import { getOrCreateDeviceId } from "@/lib/device-id";
+import { generateEndpoint } from "@/lib/api-base";
 import { ArrowRightIcon, PaperclipIcon } from "./icons";
 
 type GenState =
@@ -74,7 +75,14 @@ export function DashboardPrompt({
     const styledPrompt = prompt + (STYLE_PROMPT_SUFFIX[style] ?? "");
     setGen({ kind: "loading" });
 
-    await runGenerate(styledPrompt, aspect);
+    try {
+      await runGenerate(styledPrompt, aspect);
+    } catch {
+      // Safety net for unexpected rejections (e.g., body-stream failures
+      // during `res.blob()`) that escape runGenerate's inner try/catch and
+      // would otherwise leave the UI stuck in `loading`.
+      setGen({ kind: "error", code: "network" });
+    }
   }
 
   async function runGenerate(prompt: string, ratio: string) {
@@ -88,7 +96,7 @@ export function DashboardPrompt({
     const timeout = setTimeout(() => controller.abort(), 90_000);
     let res: Response;
     try {
-      res = await fetch("/api/generate", {
+      res = await fetch(generateEndpoint(), {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({

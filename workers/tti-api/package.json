@@ -1,0 +1,16 @@
+{
+  "name": "tti-api-worker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cloudflare Worker that fronts Pollinations.ai for the text-to-image app. Holds the rotating pool of POLL_KEY_* secrets so they never ship to any client (APK, browser, etc.).",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240924.0",
+    "typescript": "^5.6.2",
+    "wrangler": "^3.78.0"
+  }
+}

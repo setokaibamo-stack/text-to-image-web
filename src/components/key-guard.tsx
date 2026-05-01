@@ -13,8 +13,9 @@ import {
  * Mounts on the dashboard. If a Pollinations key is saved on this device but
  * has not yet been validated this session, runs a background validation. If
  * the saved key is rejected by Pollinations.ai, clears it and bounces the user
- * back to /auth with a notice. Network/timeout errors are ignored — we don't
- * lock the user out just because their connection is flaky.
+ * to /settings with a notice so they can re-enter it. Network/timeout errors
+ * are ignored — we don't interrupt the user just because their connection is
+ * flaky, the pool path still works.
  */
 export function KeyGuard({ locale }: { locale: Locale }) {
   const router = useRouter();
@@ -47,9 +48,9 @@ export function KeyGuard({ locale }: { locale: Locale }) {
         } catch {
           // ignore
         }
-        router.replace(`/${locale}/auth?keyInvalid=1`);
+        router.replace(`/${locale}/settings?keyInvalid=1`);
       }
-      // network/timeout: stay on dashboard; user can re-auth via Settings.
+      // network/timeout: stay on dashboard; the pool path still works.
     })();
 
     return () => {

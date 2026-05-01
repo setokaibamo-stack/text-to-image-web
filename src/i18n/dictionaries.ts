@@ -54,7 +54,6 @@ export type Dict = {
     titleAccent: string;
     subtitle: string;
     googleCta: string;
-    pollinationsCta: string;
     dividerOr: string;
     emailLabel: string;
     emailPlaceholder: string;
@@ -66,25 +65,12 @@ export type Dict = {
     toggleToSignIn: string;
     quotaTitle: string;
     quotaGoogle: string;
-    quotaPollinations: string;
+    quotaByokHint: string;
     quotaLink: string;
     quotaLinkLabel: string;
     backCta: string;
     forgotCta: string;
     termsNote: string;
-    pollinationsKeyTitle: string;
-    pollinationsKeyDesc: string;
-    pollinationsKeyLabel: string;
-    pollinationsKeyPlaceholder: string;
-    pollinationsKeyHelp: string;
-    pollinationsKeyContinue: string;
-    pollinationsKeyCancel: string;
-    pollinationsKeyError: string;
-    pollinationsKeyValidating: string;
-    pollinationsKeyInvalidError: string;
-    pollinationsKeyNetworkError: string;
-    pollinationsKeyTimeoutError: string;
-    keyInvalidNotice: string;
   };
   settings: {
     eyebrow: string;
@@ -94,12 +80,25 @@ export type Dict = {
     apiSectionDesc: string;
     apiKeyActive: string;
     apiKeyEmpty: string;
+    addCta: string;
     replaceCta: string;
     removeCta: string;
     removed: string;
     back: string;
     googleSectionTitle: string;
     googleSectionDesc: string;
+    keyInputLabel: string;
+    keyInputPlaceholder: string;
+    keyFormatError: string;
+    keyInvalidError: string;
+    keyNetworkError: string;
+    keyTimeoutError: string;
+    keyHelpCta: string;
+    keyHelpHref: string;
+    saveCta: string;
+    savingCta: string;
+    cancelCta: string;
+    keyInvalidNotice: string;
   };
   dashboard: {
     eyebrow: string;
@@ -429,9 +428,8 @@ const en: Dict = {
     title: "Welcome to",
     titleAccent: "text to image.",
     subtitle:
-      "Pick a provider to start generating. Your account decides your daily image quota.",
+      "Sign in with Google or email to start generating. You get a free daily quota out of the box — no API key needed.",
     googleCta: "Continue with Google",
-    pollinationsCta: "Continue with Pollinations.ai",
     dividerOr: "or sign in with email",
     emailLabel: "Email",
     emailPlaceholder: "you@studio.com",
@@ -442,50 +440,48 @@ const en: Dict = {
     toggleToSignUp: "Don't have an account? Sign up",
     toggleToSignIn: "Already have an account? Sign in",
     quotaTitle: "Daily image quota",
-    quotaGoogle: "Sign in with Google · 4 images per day",
-    quotaPollinations:
-      "Use a Pollinations API key · up to 20 images per day",
+    quotaGoogle: "Free tier · 5 images per day, no key required",
+    quotaByokHint:
+      "Need more? Add your own Pollinations key later from Settings for unlimited daily generations.",
     quotaLink: "https://pollinations.ai",
-    quotaLinkLabel: "Get a key on pollinations.ai",
+    quotaLinkLabel: "Learn about Pollinations.ai",
     backCta: "Back",
     forgotCta: "Forgot password?",
     termsNote: "By continuing you agree to our Terms and Privacy.",
-    pollinationsKeyTitle: "Connect your Pollinations API",
-    pollinationsKeyDesc:
-      "Paste your Pollinations.ai API key. We store it on this device only — you can change or remove it any time from settings.",
-    pollinationsKeyLabel: "Pollinations API key",
-    pollinationsKeyPlaceholder: "poll_…",
-    pollinationsKeyHelp: "Don’t have a key yet? Get one on pollinations.ai.",
-    pollinationsKeyContinue: "Continue",
-    pollinationsKeyCancel: "Cancel",
-    pollinationsKeyError: "Please enter a valid API key.",
-    pollinationsKeyValidating: "Validating your key…",
-    pollinationsKeyInvalidError:
-      "That key was rejected by Pollinations.ai. Double-check it and try again.",
-    pollinationsKeyNetworkError:
-      "Couldn’t reach Pollinations.ai. Check your connection and try again.",
-    pollinationsKeyTimeoutError:
-      "Pollinations.ai took too long to respond. Try again.",
-    keyInvalidNotice:
-      "Your saved Pollinations key was rejected. Please re-enter it.",
   },
   settings: {
     eyebrow: "Settings",
     title: "Your account",
     subtitle:
-      "Manage how you sign in and the API key used to generate images on this device.",
-    apiSectionTitle: "Pollinations API key",
+      "Manage how you sign in, and optionally add your own Pollinations API key to bypass the shared daily quota.",
+    apiSectionTitle: "Bring your own Pollinations key",
     apiSectionDesc:
-      "We store your key only on this device — it never leaves your browser. You can replace or remove it at any time.",
+      "Optional. Add a personal Pollinations.ai key to skip the shared 5-image daily limit. Your key stays on this device and is sent only to our image endpoint — never to any third party.",
     apiKeyActive: "Active key",
-    apiKeyEmpty: "No Pollinations key saved on this device.",
+    apiKeyEmpty: "No personal key saved — you're on the free shared quota (5/day).",
+    addCta: "Add your key",
     replaceCta: "Replace key",
-    removeCta: "Remove key & sign out",
+    removeCta: "Remove key",
     removed: "Key removed.",
     back: "Back to dashboard",
     googleSectionTitle: "Google account",
     googleSectionDesc:
-      "When you sign in with Google, we use the project’s shared API for up to 4 images a day. No key needed on your device.",
+      "Signed in with Google. The shared API pool gives you 5 free images per day by default.",
+    keyInputLabel: "Pollinations API key",
+    keyInputPlaceholder: "poll_…",
+    keyFormatError: "Please enter a valid API key.",
+    keyInvalidError:
+      "That key was rejected by Pollinations.ai. Double-check it and try again.",
+    keyNetworkError:
+      "Couldn’t reach Pollinations.ai. Check your connection and try again.",
+    keyTimeoutError: "Pollinations.ai took too long to respond. Try again.",
+    keyHelpCta: "Get a key on pollinations.ai",
+    keyHelpHref: "https://pollinations.ai",
+    saveCta: "Save key",
+    savingCta: "Validating…",
+    cancelCta: "Cancel",
+    keyInvalidNotice:
+      "Your saved Pollinations key was rejected. Please re-enter it.",
   },
   dashboard: {
     eyebrow: "Workspace",
@@ -1181,9 +1177,8 @@ const ar: Dict = {
     title: "أهلًا بك في",
     titleAccent: "تكست تو إيمج.",
     subtitle:
-      "اختر مزوِّدًا لبدء التوليد. حسابك يحدِّد رصيدك اليومي من الصور.",
+      "سجّل دخولك بحساب Google أو بالبريد لتبدأ التوليد. تحصل على رصيد يومي مجاني مباشرة — دون حاجة لمفتاح API.",
     googleCta: "متابعة عبر Google",
-    pollinationsCta: "متابعة عبر Pollinations.ai",
     dividerOr: "أو سجِّل دخولك بالبريد الإلكتروني",
     emailLabel: "البريد الإلكتروني",
     emailPlaceholder: "you@studio.com",
@@ -1194,50 +1189,48 @@ const ar: Dict = {
     toggleToSignUp: "ليس لديك حساب؟ سجِّل الآن",
     toggleToSignIn: "لديك حساب؟ سجِّل الدخول",
     quotaTitle: "الرصيد اليومي للصور",
-    quotaGoogle: "تسجيل عبر Google · ٤ صور يوميًا",
-    quotaPollinations:
-      "باستخدام مفتاح Pollinations API · حتى ٢٠ صورة يوميًا",
+    quotaGoogle: "الطبقة المجانية · ٥ صور يوميًا، دون حاجة لمفتاح",
+    quotaByokHint:
+      "تحتاج أكثر؟ أضف مفتاح Pollinations الخاص بك لاحقًا من الإعدادات للحصول على توليد يومي بلا حدود.",
     quotaLink: "https://pollinations.ai",
-    quotaLinkLabel: "احصل على مفتاحك من pollinations.ai",
+    quotaLinkLabel: "تعرّف على Pollinations.ai",
     backCta: "رجوع",
     forgotCta: "نسيت كلمة المرور؟",
     termsNote: "بمتابعتك فإنك توافق على شروطنا وسياسة الخصوصية.",
-    pollinationsKeyTitle: "اربط مفتاح Pollinations API",
-    pollinationsKeyDesc:
-      "الصق مفتاح API الخاص بك من Pollinations.ai. نحفظه على هذا الجهاز فقط — يمكنك تغييره أو إزالته في أي وقت من الإعدادات.",
-    pollinationsKeyLabel: "مفتاح Pollinations API",
-    pollinationsKeyPlaceholder: "poll_…",
-    pollinationsKeyHelp: "لا تملك مفتاحًا بعد؟ احصل عليه من pollinations.ai.",
-    pollinationsKeyContinue: "متابعة",
-    pollinationsKeyCancel: "إلغاء",
-    pollinationsKeyError: "يرجى إدخال مفتاح API صالح.",
-    pollinationsKeyValidating: "جارٍ التحقق من مفتاحك…",
-    pollinationsKeyInvalidError:
-      "تم رفض المفتاح من قِبل Pollinations.ai. تأكّد منه ثم حاول مجددًا.",
-    pollinationsKeyNetworkError:
-      "تعذّر الوصول إلى Pollinations.ai. تحقّق من اتصالك ثم حاول مجددًا.",
-    pollinationsKeyTimeoutError:
-      "استغرق Pollinations.ai وقتًا طويلًا للرد. حاول مجددًا.",
-    keyInvalidNotice:
-      "تم رفض مفتاح Pollinations المحفوظ. يرجى إدخاله من جديد.",
   },
   settings: {
     eyebrow: "الإعدادات",
     title: "حسابك",
     subtitle:
-      "تحكّم في طريقة تسجيل الدخول وفي مفتاح API المستخدم لتوليد الصور على هذا الجهاز.",
-    apiSectionTitle: "مفتاح Pollinations API",
+      "تحكّم في طريقة تسجيل الدخول، واختياريًا أضف مفتاح Pollinations API الخاص بك لتجاوز الحصة اليومية المشتركة.",
+    apiSectionTitle: "أحضر مفتاح Pollinations الخاص بك",
     apiSectionDesc:
-      "نحفظ مفتاحك على هذا الجهاز فقط — لا يغادر متصفحك أبدًا. يمكنك استبداله أو إزالته في أي وقت.",
+      "اختياري. أضف مفتاحًا شخصيًا من Pollinations.ai لتتجاوز حد الـ٥ صور اليومي المشترك. مفتاحك يبقى على هذا الجهاز ويُرسل فقط إلى نقطة التوليد لدينا — لا يغادر إلى أي جهة خارجية.",
     apiKeyActive: "المفتاح المُفعّل",
-    apiKeyEmpty: "لا يوجد مفتاح Pollinations محفوظ على هذا الجهاز.",
+    apiKeyEmpty: "لا يوجد مفتاح شخصي — أنت على الحصة المجانية المشتركة (٥ يوميًا).",
+    addCta: "أضف مفتاحك",
     replaceCta: "استبدال المفتاح",
-    removeCta: "إزالة المفتاح وتسجيل الخروج",
+    removeCta: "إزالة المفتاح",
     removed: "تمت إزالة المفتاح.",
     back: "العودة إلى لوحة التحكم",
     googleSectionTitle: "حساب Google",
     googleSectionDesc:
-      "عند تسجيل الدخول بحساب Google، نستخدم مفتاح المشروع المشترك بحدّ ٤ صور يوميًا. لا حاجة لمفتاح على جهازك.",
+      "سجّلت الدخول بحساب Google. مجموعة API المشتركة تمنحك ٥ صور مجانية يوميًا بشكل افتراضي.",
+    keyInputLabel: "مفتاح Pollinations API",
+    keyInputPlaceholder: "poll_…",
+    keyFormatError: "يرجى إدخال مفتاح API صالح.",
+    keyInvalidError:
+      "تم رفض المفتاح من قِبل Pollinations.ai. تأكّد منه ثم حاول مجددًا.",
+    keyNetworkError:
+      "تعذّر الوصول إلى Pollinations.ai. تحقّق من اتصالك ثم حاول مجددًا.",
+    keyTimeoutError: "استغرق Pollinations.ai وقتًا طويلًا للرد. حاول مجددًا.",
+    keyHelpCta: "احصل على مفتاحك من pollinations.ai",
+    keyHelpHref: "https://pollinations.ai",
+    saveCta: "حفظ المفتاح",
+    savingCta: "جارٍ التحقق…",
+    cancelCta: "إلغاء",
+    keyInvalidNotice:
+      "تم رفض مفتاح Pollinations المحفوظ. يرجى إدخاله من جديد.",
   },
   dashboard: {
     eyebrow: "مساحة العمل",

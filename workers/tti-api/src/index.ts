@@ -84,6 +84,11 @@ function corsHeaders(request: Request, env: Env): HeadersInit {
     headers["access-control-allow-origin"] = allowOrigin;
     headers["access-control-allow-methods"] = "POST, OPTIONS";
     headers["access-control-allow-headers"] = "content-type";
+    // Custom response headers aren't readable by cross-origin JS unless
+    // explicitly exposed. The client reads x-tti-mode to label BYOK vs pool
+    // results and the user-remaining/limit pair to render quota hints.
+    headers["access-control-expose-headers"] =
+      "x-tti-mode, x-tti-user-remaining, x-tti-user-limit";
     headers["access-control-max-age"] = "86400";
   }
   return headers;
